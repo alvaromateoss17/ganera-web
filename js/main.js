@@ -251,6 +251,62 @@
     matchMedia('(min-width: 861px)').addEventListener('change', (e) => { if (e.matches) set(false); });
   }
 
+  /* ── Current page in menus ─────────────────────────── */
+  function initCurrent() {
+    const clean = (path) => path.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
+    const here = clean(location.pathname);
+    $$('.main-nav a, .mnav nav a, .foot-links a, .subnav a').forEach((a) => {
+      const url = new URL(a.getAttribute('href'), location.href);
+      if (url.hash || url.origin !== location.origin) return;
+      const target = clean(url.pathname);
+      const exact = target === here;
+      // In the main menus, a section stays highlighted on its subpages (Nosotros → Equipo).
+      const section = target !== '/' && here.startsWith(target + '/') && !a.closest('.subnav, .foot-links');
+      if (exact || section) a.setAttribute('aria-current', 'page');
+    });
+  }
+
+  /* ── Forms (trial request, contact) ─────────────────── */
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function initForms() {
+    $$('form[data-endpoint]').forEach((form) => {
+      const status = $('[data-status]', form);
+      const plan = new URLSearchParams(location.search).get('plan');
+      if (plan && form.plan && form.plan.querySelector(`option[value="${CSS.escape(plan)}"]`)) form.plan.value = plan;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.className = 'form-status';
+        const invalid = $$('[required]', form).find((el) => !el.value.trim() || (el.type === 'email' && !EMAIL.test(el.value.trim())));
+        if (invalid) {
+          status.classList.add('err');
+          status.textContent = form.dataset.invalid;
+          invalid.focus();
+          return;
+        }
+        const btn = $('button[type="submit"]', form);
+        btn.disabled = true;
+        status.textContent = 'Enviando…';
+        try {
+          const res = await fetch(form.dataset.endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          });
+          if (!res.ok) throw new Error(String(res.status));
+          form.reset();
+          status.classList.add('ok');
+          status.textContent = form.dataset.success;
+        } catch {
+          status.classList.add('err');
+          status.textContent = 'No se ha podido enviar. Escríbenos a agroganera@gmail.com o llámanos al 645 56 29 42.';
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    });
+  }
+
   /* ── Newsletter ─────────────────────────────────────── */
   function initNewsletter() {
     const form = $('[data-newsletter]');
@@ -275,7 +331,7 @@
         status.textContent = 'Listo. Te escribiremos una vez al mes.';
         form.reset();
       } catch {
-        status.textContent = 'No se ha podido enviar. Prueba de nuevo o escríbenos a hola@ganera.es.';
+        status.textContent = 'No se ha podido enviar. Prueba de nuevo o escríbenos a agroganera@gmail.com.';
       }
     });
   }
@@ -285,6 +341,8 @@
   initAccordions();
   initNewsletter();
   initMenu();
+  initCurrent();
+  initForms();
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
   tick();

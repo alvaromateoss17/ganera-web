@@ -20,17 +20,20 @@
 <body>
 <div class="page" id="root">
 
+<!-- partial:header -->
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="#top"><img src="/assets/img/ganera-logo-rojo.png" alt="" width="30" height="30">GANERA</a>
+    <a class="brand" href="/#top"><img src="/assets/img/ganera-logo-rojo.png" alt="" width="30" height="30">GANERA</a>
     <nav class="main-nav" aria-label="Principal">
-      <a href="#app">La app</a>
-      <a href="#recorrido">Cómo funciona</a>
-      <a href="#comparativa">Ahorro</a>
-      <a href="#comunidades">Comunidades</a>
-      <a href="#tramites">Trámites</a>
-      <a href="#planes">Planes</a>
-      <a href="#servicios">Servicios</a>
+      <a href="/#app">La app</a>
+      <a href="/#recorrido">Cómo funciona</a>
+      <a href="/#comparativa">Ahorro</a>
+      <a href="/#comunidades">Comunidades</a>
+      <a href="/#tramites">Trámites</a>
+      <a href="/#planes">Planes</a>
+      <a href="/#servicios">Servicios</a>
+      <a href="/nosotros">Nosotros</a>
+      <a href="/contacto">Contacto</a>
     </nav>
     <a class="btn btn-primary header-cta" href="/demo">Probar 15 días</a>
     <button class="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mnav" data-menu-btn><span></span><span></span></button>
@@ -39,17 +42,18 @@
 </header>
 <div class="mnav" id="mnav" data-menu>
   <nav aria-label="Menú móvil">
-    <a href="#app" style="--i:0">La app</a>
-    <a href="#recorrido" style="--i:1">Cómo funciona</a>
-    <a href="#comparativa" style="--i:2">Ahorro</a>
-    <a href="#comunidades" style="--i:3">Comunidades</a>
-    <a href="#tramites" style="--i:4">Trámites</a>
-    <a href="#planes" style="--i:5">Planes</a>
-    <a href="#servicios" style="--i:6">Servicios</a>
-    <a href="#faq" style="--i:7">Preguntas frecuentes</a>
+    <a href="/#app" style="--i:0">La app</a>
+    <a href="/#recorrido" style="--i:1">Cómo funciona</a>
+    <a href="/#comunidades" style="--i:2">Comunidades</a>
+    <a href="/#planes" style="--i:3">Planes</a>
+    <a href="/#servicios" style="--i:4">Servicios</a>
+    <a href="/nosotros" style="--i:5">Nosotros</a>
+    <a href="/nosotros/equipo" style="--i:6">Equipo</a>
+    <a href="/contacto" style="--i:7">Contacto</a>
   </nav>
   <a class="btn btn-primary btn-lg btn-split" href="/demo" style="--i:8">Empezar prueba gratuita<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </div>
+<!-- /partial:header -->
 
 <main>
 <section id="top" class="wrap hero">
@@ -411,10 +415,17 @@
 
 <section id="nosotros" class="section">
   <div class="wrap split">
-    <h2 class="h-section" data-reveal="up">Quiénes somos</h2>
+    <div data-reveal="up" style="display: flex; flex-direction: column; gap: 20px; align-self: start;">
+      <h2 class="h-section">Quiénes somos</h2>
+      <a class="btn btn-secondary btn-lg btn-split" href="/nosotros" style="align-self: flex-start; min-width: 220px;">Conoce Ganera<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
     <div class="about-text">
-      <p data-reveal="up">Ganera nace en Salamanca, entre una gestoría ganadera y un equipo de software. Vimos a administrativos pasar la mañana copiando crotales de WhatsApp a la sede electrónica y decidimos automatizar ese trabajo.</p>
-      <p class="muted" data-reveal="up" data-delay="100">Construimos el producto con gestorías que lo usan cada día. Cada nueva comunidad autónoma se integra con una gestoría local que valida los trámites antes de abrirla al resto.</p>
+      <p data-reveal="up">Ganera nace en Extremadura. Empezó como el Trabajo de Fin de Grado de Antonio Menor y se convirtió en una herramienta para que las gestorías ganaderas dejen de perder horas en trámites manuales.</p>
+      <p class="muted" data-reveal="up" data-delay="100">Automatizamos altas, bajas, crotales y guías de circulación a partir de los WhatsApp de tus ganaderos, con integración directa con OVZ.net, REGA y SIMOGAN. Construimos desde dentro del sector, junto a las gestorías extremeñas.</p>
+      <div class="founders" data-reveal="up" data-delay="200">
+        <a class="founder" href="/nosotros/equipo#alvaro"><span class="portrait portrait-sm portrait-ink" aria-hidden="true">ÁM</span><span><b>Álvaro Mateos González</b><small>Cofundador · Marketing y crecimiento</small></span></a>
+        <a class="founder" href="/nosotros/equipo#antonio"><span class="portrait portrait-sm" aria-hidden="true">AM</span><span><b>Antonio Menor</b><small>Cofundador · CEO</small></span></a>
+      </div>
     </div>
   </div>
 </section>
@@ -444,6 +455,7 @@
 </section>
 </main>
 
+<!-- partial:footer -->
 <footer class="site-footer">
   <div class="wrap foot-grid">
     <div class="newsletter" data-reveal="up">
@@ -457,21 +469,23 @@
       <p class="nl-status" data-nl-status role="status"></p>
     </div>
     <div class="foot-contact" data-reveal="up" data-delay="100">
-      <div><strong>Consultas generales</strong><a href="mailto:hola@ganera.es">hola@ganera.es</a></div>
-      <div><strong>Gestorías interesadas</strong><a href="mailto:gestorias@ganera.es">gestorias@ganera.es</a></div>
-      <div><strong>Oficina</strong><span>Calle Toro 42<br>37002 Salamanca<br>España</span></div>
-      <a class="btn btn-ink" href="/demo">Contacto</a>
+      <div><strong>Escríbenos</strong><a href="mailto:agroganera@gmail.com">agroganera@gmail.com</a></div>
+      <div><strong>Álvaro Mateos · Marketing y crecimiento</strong><a href="tel:+34645562942">645 56 29 42</a></div>
+      <div><strong>Antonio Menor · CEO</strong><a href="tel:+34695381496">695 38 14 96</a></div>
+      <div><strong>Dónde estamos</strong><span>Extremadura, España</span></div>
+      <a class="btn btn-ink" href="/contacto">Contacto</a>
     </div>
     <nav class="foot-links" data-reveal="up" data-delay="200" aria-label="Páginas">
       <strong>Páginas</strong>
-      <a href="#top">Inicio</a>
-      <a href="#recorrido">Cómo funciona</a>
-      <a href="#tramites">Trámites</a>
-      <a href="#planes">Planes</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#nosotros">Quiénes somos</a>
-      <a href="#faq">Preguntas frecuentes</a>
-      <a href="#">Acceso gestorías</a>
+      <a href="/">Inicio</a>
+      <a href="/#recorrido">Cómo funciona</a>
+      <a href="/#planes">Planes</a>
+      <a href="/nosotros">Nosotros</a>
+      <a href="/nosotros/equipo">Equipo</a>
+      <a href="/nosotros/valores">Misión y valores</a>
+      <a href="/contacto">Contacto</a>
+      <a href="/#faq">Preguntas frecuentes</a>
+      <a href="/demo">Prueba gratuita</a>
     </nav>
   </div>
   <div class="wordmark" aria-hidden="true">
@@ -481,9 +495,10 @@
     <a href="#">Política de privacidad</a>
     <a href="#">Aviso legal</a>
     <a href="#">Cookies</a>
-    <span>© 2026 Ganera</span>
+    <span>© 2026 Ganera · Hecho en Extremadura</span>
   </div>
 </footer>
+<!-- /partial:footer -->
 </div>
 </body>
 </html>

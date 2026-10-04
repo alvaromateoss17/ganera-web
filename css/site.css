@@ -270,6 +270,119 @@ a:hover { color: var(--color-accent-600); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ══════════════════════════════════════════════════════════
+   Páginas interiores (Nosotros, Equipo, Valores, Contacto, Prueba)
+   ══════════════════════════════════════════════════════════ */
+.main-nav a[aria-current="page"], .foot-links a[aria-current="page"] { color: var(--color-accent-700); }
+.site-footer .foot-links a[aria-current="page"] { color: var(--color-text); }
+
+.page-hero { padding-top: clamp(40px, 7vw, 96px); padding-bottom: clamp(48px, 7vw, 96px); }
+.page-hero h1 { font-size: clamp(40px, 6vw, 84px); line-height: 0.98; letter-spacing: -0.03em; margin: 0; max-width: 18ch; text-wrap: balance; }
+.page-hero h1 .accent { color: var(--color-accent); }
+.page-hero .lead { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.5; max-width: 52ch; margin-top: clamp(24px, 3vw, 36px); }
+.crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: var(--color-neutral-700); margin-bottom: clamp(20px, 3vw, 32px); }
+.crumbs a { color: var(--color-neutral-700); text-decoration: none; }
+.crumbs a:hover { color: var(--color-accent-700); }
+.crumbs span[aria-current] { color: var(--color-text); font-weight: 600; }
+.subnav { border-top: 2px solid var(--color-divider); border-bottom: 2px solid var(--color-divider); }
+.subnav .wrap { display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none; white-space: nowrap; }
+.subnav .wrap::-webkit-scrollbar { display: none; }
+.subnav a { padding: 16px 0 14px; font-size: 15px; font-weight: 600; color: var(--color-text); text-decoration: none; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.subnav a:hover { color: var(--color-accent-700); }
+.subnav a[aria-current="page"] { color: var(--color-accent-700); border-bottom-color: var(--color-accent); }
+
+/* Historia */
+.story { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); border-top: 2px solid var(--color-text); }
+.story > div { padding: 28px 28px 32px 0; display: flex; flex-direction: column; gap: 12px; }
+.story > div + div { padding-left: 28px; border-left: 2px solid var(--color-divider); }
+.story b { font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-accent); }
+.story h3 { font-size: clamp(20px, 2vw, 26px); margin: 0; }
+.story p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--color-neutral-800); }
+
+/* Misión / visión */
+.mv { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); border-top: 2px solid var(--color-text); border-bottom: 2px solid var(--color-text); }
+.mv > div { padding: 36px 36px 40px 0; display: flex; flex-direction: column; gap: 16px; }
+.mv > div + div { padding-left: 36px; border-left: 2px solid var(--color-divider); }
+.mv span { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: var(--color-accent-700); }
+.mv p { margin: 0; font-family: var(--font-heading); font-weight: 800; font-size: clamp(20px, 1.9vw, 27px); line-height: 1.18; letter-spacing: -0.015em; text-wrap: pretty; }
+
+/* Valores */
+.values { border-top: 2px solid var(--color-text); }
+.value { display: grid; grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px 32px; padding: 28px 0; border-bottom: 1px solid var(--color-divider); align-items: baseline; }
+.value b { font-family: var(--font-heading); font-weight: 800; font-size: 14px; color: var(--color-accent); }
+.value h3 { font-size: clamp(20px, 2.2vw, 28px); margin: 0; }
+.value p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--color-neutral-800); }
+
+/* Equipo */
+.portrait { display: grid; place-items: center; aspect-ratio: 4 / 5; background: var(--color-accent); color: var(--color-bg); font-family: var(--font-heading); font-weight: 800; font-size: clamp(64px, 9vw, 128px); letter-spacing: -0.04em; line-height: 1; overflow: hidden; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.portrait-ink { background: var(--color-text); }
+.portrait-sm { width: 56px; height: 56px; aspect-ratio: auto; font-size: 20px; flex: none; }
+.founders { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; margin-top: 8px; }
+.founder { display: flex; align-items: center; gap: 14px; padding: 12px; background: var(--color-surface); color: var(--color-text); text-decoration: none; font-size: 15px; line-height: 1.3; }
+.founder:hover { color: var(--color-text); background: var(--color-neutral-200); }
+.founder b { display: block; font-weight: 700; }
+.founder small { display: block; font-size: 13px; color: var(--color-neutral-700); }
+.team { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 48px; }
+.team-card { display: flex; flex-direction: column; gap: 20px; }
+.team-card .portrait { max-width: 340px; aspect-ratio: 1; font-size: clamp(64px, 8vw, 112px); }
+.team-card h2, .team-card h3 { font-size: clamp(26px, 2.8vw, 36px); margin: 0; letter-spacing: -0.02em; }
+.team-card .role { font-size: 15px; font-weight: 600; color: var(--color-accent-700); }
+.team-card p { margin: 0; font-size: 17px; line-height: 1.55; color: var(--color-neutral-800); max-width: 52ch; }
+.contact-lines { display: flex; flex-direction: column; border-top: 2px solid var(--color-text); }
+.contact-lines a { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--color-divider); color: var(--color-text); text-decoration: none; font-size: 16px; }
+.contact-lines a span { color: var(--color-neutral-700); font-size: 14px; }
+.contact-lines a:hover { color: var(--color-accent-700); }
+.contact-lines a:hover span { color: var(--color-accent-700); }
+
+/* Contacto */
+.contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); border-top: 2px solid var(--color-text); border-bottom: 2px solid var(--color-text); }
+.contact-card { padding: 32px 32px 36px 0; display: flex; flex-direction: column; gap: 16px; }
+.contact-card + .contact-card { padding-left: 32px; border-left: 2px solid var(--color-divider); }
+.contact-card .who { display: flex; align-items: center; gap: 14px; }
+.contact-card .who b { display: block; font-family: var(--font-heading); font-weight: 800; font-size: 22px; line-height: 1.15; }
+.contact-card .who small { display: block; font-size: 14px; color: var(--color-neutral-700); }
+.contact-card .big { font-family: var(--font-heading); font-weight: 800; font-size: clamp(26px, 2.6vw, 34px); letter-spacing: -0.02em; color: var(--color-text); text-decoration: none; }
+.contact-card .big:hover { color: var(--color-accent-700); }
+.contact-card .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+
+/* Banda CTA */
+.cta-band { background: var(--color-text); color: var(--color-bg); border-top: 2px solid var(--color-text); }
+.cta-band .wrap { padding-top: clamp(56px, 8vw, 110px); padding-bottom: clamp(56px, 8vw, 110px); display: flex; flex-wrap: wrap; gap: 32px; align-items: end; justify-content: space-between; }
+.cta-band h2 { font-size: clamp(32px, 4.6vw, 64px); letter-spacing: -0.03em; line-height: 1; margin: 0; max-width: 16ch; }
+.cta-band h2 span { color: var(--color-accent); }
+.cta-band .cta-row { flex: none; }
+.cta-band .btn-secondary { color: var(--color-bg); border-color: rgba(243, 242, 242, 0.5); }
+.cta-band .btn-secondary:hover { background: rgba(243, 242, 242, 0.1); color: var(--color-bg); }
+
+/* Formularios */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 16px; align-content: start; border-top: 2px solid var(--color-text); padding-top: 28px; }
+.form-grid .field { display: flex; flex-direction: column; }
+.form-grid .full { grid-column: 1 / -1; }
+.form-grid .field > label { font-size: 13px; }
+.form-grid .input { min-height: 48px; font-size: 16px; padding: 10px 14px; }
+.form-grid .btn { padding: 16px 18px; font-size: 16px; justify-content: space-between; }
+.form-grid small { font-size: 13px; color: var(--color-neutral-700); }
+.form-status { grid-column: 1 / -1; margin: 0; font-size: 15px; min-height: 1.5em; }
+.form-status.ok { color: var(--color-text); font-weight: 600; }
+.form-status.err { color: var(--color-accent-700); }
+.hp { position: absolute; left: -9999px; }
+.check-list { border-top: 2px solid var(--color-text); }
+.check-list div { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--color-divider); font-size: 16px; }
+.check-list svg { flex: none; margin-top: 3px; }
+
+@media (max-width: 700px) {
+  .story > div, .story > div + div, .mv > div, .mv > div + div, .contact-card, .contact-card + .contact-card { padding: 24px 0 28px; border-left: 0; }
+  .story > div + div, .mv > div + div, .contact-card + .contact-card { border-top: 2px solid var(--color-divider); }
+  .value { grid-template-columns: 40px minmax(0, 1fr); padding: 22px 0; }
+  .value p { grid-column: 2; }
+  .team { gap: 56px; }
+  .team-card .portrait { max-width: none; aspect-ratio: 1; font-size: 96px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .cta-band .cta-row { width: 100%; }
+  .cta-band .cta-row > .btn { flex: 1 1 100%; }
+}
+
+/* ══════════════════════════════════════════════════════════
    Responsive — tablet and mobile.
    Every scroll animation stays the same; only the layout adapts
    so the pinned scenes always fit inside one phone screen.
