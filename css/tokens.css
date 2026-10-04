@@ -36,7 +36,7 @@
   --color-text: #201e1d;
   --color-accent: #ec3013;
   --color-accent-2: #e15b47;
-  --color-divider: color-mix(in srgb, #201e1d 40%, transparent);
+  --color-divider: rgba(32, 30, 29, 0.4); /* = #201e1d at 40% (works on older iOS without color-mix) */
 
   --color-neutral-100: #f8f4f4;
   --color-neutral-200: #eae7e7;

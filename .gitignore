@@ -5,3 +5,7 @@ node_modules/
 
 # Material de referencia local (capturas de la app, vídeos, logo original)
 /reference/
+
+# Vídeos y material pesado
+*.mp4
+*.mov

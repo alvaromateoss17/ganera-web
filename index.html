@@ -33,9 +33,23 @@
       <a href="#servicios">Servicios</a>
     </nav>
     <a class="btn btn-primary header-cta" href="/demo">Probar 15 días</a>
+    <button class="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mnav" data-menu-btn><span></span><span></span></button>
   </div>
   <div class="progress" data-progress></div>
 </header>
+<div class="mnav" id="mnav" data-menu>
+  <nav aria-label="Menú móvil">
+    <a href="#app" style="--i:0">La app</a>
+    <a href="#recorrido" style="--i:1">Cómo funciona</a>
+    <a href="#comparativa" style="--i:2">Ahorro</a>
+    <a href="#comunidades" style="--i:3">Comunidades</a>
+    <a href="#tramites" style="--i:4">Trámites</a>
+    <a href="#planes" style="--i:5">Planes</a>
+    <a href="#servicios" style="--i:6">Servicios</a>
+    <a href="#faq" style="--i:7">Preguntas frecuentes</a>
+  </nav>
+  <a class="btn btn-primary btn-lg btn-split" href="/demo" style="--i:8">Empezar prueba gratuita<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
 
 <main>
 <section id="top" class="wrap hero">
@@ -143,8 +157,12 @@
     <div class="wrap">
       <div class="rec-left">
         <h2>El recorrido completo de un trámite</h2>
+        <div class="rec-mob" aria-hidden="true">
+          <div class="rec-nums"><span data-rec-num>01</span><span data-rec-num>02</span><span data-rec-num>03</span><span data-rec-num>04</span><span data-rec-num>05</span></div>
+          <div class="rec-track"><div></div></div>
+        </div>
         <div class="rec-steps">
-          <div class="rail"><div data-rail></div></div>
+          <div class="rail"><div></div></div>
           <div class="step-list">
             <div class="step" data-step><div class="step-head"><span class="step-num">01</span><span class="step-title">Mensaje</span></div><p>El ganadero escribe por WhatsApp a un número de Ganera, igual que hoy te escribe a ti.</p></div>
             <div class="step" data-step><div class="step-head"><span class="step-num">02</span><span class="step-title">Extracción</span></div><p>Ganera detecta el tipo de trámite, la explotación, los crotales y la fecha, y los cruza con tu inventario.</p></div>
@@ -273,10 +291,10 @@
 </g>
 <rect x="20" y="660" width="290" height="140" style="fill: var(--color-bg); stroke: var(--color-text); stroke-width: 2"/>
 <path d="M135.3,741.1L130.7,755.4L126.3,761.1L123.7,762.9L117.3,764.4L109.7,755.5L106,746.4L103.8,743.6L107.2,741.3L112.1,741.6L122.9,739.7L125.1,739L136.1,729.8L147.1,728.7L147.3,731.6L135.3,741.1ZM280.7,707.4L276.9,711.5L272.7,710.1L274.7,701L276.5,698.2L284.3,694.3L290.7,692.6L292.5,688.4L294.7,686.8L296.9,689.3L295.1,692.2L293.9,701.4L289.5,704.3L280.7,707.4ZM253.9,754.3L246.4,761.4L238.8,759.7L237.6,758.5L245.2,756.8L251.9,751.3L256.3,739.3L263.3,726L264.7,720.3L267.3,718.1L271.1,717.9L272.7,718.4L274.5,721.3L274.5,728L272.5,739.2L268.9,748.9L253.9,754.3ZM187.2,755.6L186.8,760.5L188,765.3L187.8,772.8L185.2,776.8L178.2,780.8L173.1,780.1L170.1,778.5L164.7,772L164.5,765.3L169.5,760.8L171.5,755.3L184.2,756.3L185.4,755.3L186.2,754.9L187.2,755.6ZM88.2,763.6L86,764.1L83.2,762.5L80.4,757.6L82.4,753.9L84,752.1L86.6,752.4L91.2,755.2L92.8,757.9L92.8,759.6L88.2,763.6ZM49.2,776.9L43.8,787.1L37.1,783.3L35.5,782L34.1,779.9L40.7,779.5L47.2,774.4L49.2,776.9ZM52.2,733.8L50.8,734.4L49.4,729.3L42.8,717.2L46.8,711.7L54.2,711.5L57.2,715.3L58.2,719.2L56.8,721.5L57.2,726.2L56.4,729.1L52.2,733.8Z" clip-path="url(#gnCan)" style="fill: var(--color-neutral-200); stroke: var(--color-text); stroke-width: 1.5"/>
-<g transform="translate(352.0 263.5)"><g class="dot" data-dot="d"><title>Castilla y León · OVZ.net</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text x="22" y="-4" text-anchor="start" style="font: 700 20px var(--font-body); fill: var(--color-text); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">Castilla y León</text><text x="22" y="18" text-anchor="start" style="font: 500 15px var(--font-body); fill: var(--color-accent-700); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">OVZ.net</text></g></g>
-<g transform="translate(244.0 502.2)"><g class="dot" data-dot="d"><title>Extremadura · Arado</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text x="-22" y="-4" text-anchor="end" style="font: 700 20px var(--font-body); fill: var(--color-text); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">Extremadura</text><text x="-22" y="18" text-anchor="end" style="font: 500 15px var(--font-body); fill: var(--color-accent-700); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">Arado</text></g></g>
-<g transform="translate(420.0 372.3)"><g class="dot" data-dot="d"><title>Madrid · SIGEGAN</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text x="22" y="-4" text-anchor="start" style="font: 700 20px var(--font-body); fill: var(--color-text); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">Madrid</text><text x="22" y="18" text-anchor="start" style="font: 500 15px var(--font-body); fill: var(--color-accent-700); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">SIGEGAN</text></g></g>
-<g transform="translate(398.7 421.1)"><g class="dot" data-dot="d"><title>Castilla-La Mancha · REGA-CLM</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text x="22" y="-4" text-anchor="start" style="font: 700 20px var(--font-body); fill: var(--color-text); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">Castilla-La Mancha</text><text x="22" y="18" text-anchor="start" style="font: 500 15px var(--font-body); fill: var(--color-accent-700); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">REGA-CLM</text></g></g>
+<g transform="translate(352.0 263.5)"><g class="dot" data-dot="d"><title>Castilla y León · OVZ.net</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text class="map-lbl" x="22" y="-4" text-anchor="start">Castilla y León</text><text class="map-lbl map-lbl-sub" x="22" y="18" text-anchor="start">OVZ.net</text></g></g>
+<g transform="translate(244.0 502.2)"><g class="dot" data-dot="d"><title>Extremadura · Arado</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text class="map-lbl" x="-22" y="-4" text-anchor="end">Extremadura</text><text class="map-lbl map-lbl-sub" x="-22" y="18" text-anchor="end">Arado</text></g></g>
+<g transform="translate(420.0 372.3)"><g class="dot" data-dot="d"><title>Madrid · SIGEGAN</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text class="map-lbl" x="22" y="-4" text-anchor="start">Madrid</text><text class="map-lbl map-lbl-sub" x="22" y="18" text-anchor="start">SIGEGAN</text></g></g>
+<g transform="translate(398.7 421.1)"><g class="dot" data-dot="d"><title>Castilla-La Mancha · REGA-CLM</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text class="map-lbl" x="22" y="-4" text-anchor="start">Castilla-La Mancha</text><text class="map-lbl map-lbl-sub" x="22" y="18" text-anchor="start">REGA-CLM</text></g></g>
 <g transform="translate(97.3 152.7)"><g class="dot" data-dot="i"><title>Galicia</title><circle r="9" style="fill: var(--color-bg); stroke: var(--color-accent); stroke-width: 3.5"/></g></g>
 <g transform="translate(276.7 108.9)"><g class="dot" data-dot="i"><title>Asturias</title><circle r="9" style="fill: var(--color-bg); stroke: var(--color-accent); stroke-width: 3.5"/></g></g>
 <g transform="translate(413.3 99.7)"><g class="dot" data-dot="i"><title>Cantabria</title><circle r="9" style="fill: var(--color-bg); stroke: var(--color-accent); stroke-width: 3.5"/></g></g>
@@ -292,6 +310,12 @@
 <g transform="translate(140.0 736.0)"><g class="dot" data-dot="p"><title>Canarias</title><circle r="7" style="fill: var(--color-bg); stroke: var(--color-neutral-400); stroke-width: 3"/></g></g>
 </svg>
     </div>
+    <ul class="map-list" data-reveal="up">
+      <li><i></i><span>Castilla y León</span><small>OVZ.net</small></li>
+      <li><i></i><span>Extremadura</span><small>Arado</small></li>
+      <li><i></i><span>Madrid</span><small>SIGEGAN</small></li>
+      <li><i></i><span>Castilla-La Mancha</span><small>REGA-CLM</small></li>
+    </ul>
   </div>
 </section>
 

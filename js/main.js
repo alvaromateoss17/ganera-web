@@ -69,7 +69,6 @@
   const appScene = $('[data-app]');
   const appBar = $('[data-app-bar]');
   const rec = $('[data-rec]');
-  const rail = $('[data-rail]');
 
   // Split the statement into words so each one can light up.
   let words = [];
@@ -134,6 +133,7 @@
   /* Recorrido: 5 steps, each with its own panel. */
   const steps = rec ? $$('[data-step]', rec) : [];
   const panels = rec ? $$('[data-panel]', rec) : [];
+  const recNums = rec ? $$('[data-rec-num]', rec) : [];
   let recStep = -1;
   function renderRec(step) {
     if (step === recStep) return;
@@ -141,6 +141,10 @@
     steps.forEach((s, i) => {
       s.classList.toggle('on', i === step);
       s.classList.toggle('is-past', i < step);
+    });
+    recNums.forEach((n, i) => {
+      n.classList.toggle('on', i === step);
+      n.classList.toggle('is-past', i < step);
     });
     panels.forEach((p, i) => {
       p.classList.toggle('on', i === step);
@@ -188,7 +192,8 @@
     if (rec) {
       const r = rec.getBoundingClientRect();
       const p = clamp(-r.top / (r.height - vh));
-      if (rail) rail.style.height = `${p * 100}%`;
+      // Drives the vertical rail (desktop) and the horizontal track (mobile).
+      rec.style.setProperty('--rec-p', p.toFixed(4));
       renderRec(Math.min(4, Math.floor(p * 5)));
     }
   }
@@ -230,6 +235,22 @@
     });
   }
 
+  /* ── Mobile menu ────────────────────────────────────── */
+  function initMenu() {
+    const btn = $('[data-menu-btn]');
+    const menu = $('[data-menu]');
+    if (!btn || !menu) return;
+    const set = (open) => {
+      document.body.classList.toggle('menu-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    $$('a', menu).forEach((a) => a.addEventListener('click', () => set(false)));
+    addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+    matchMedia('(min-width: 861px)').addEventListener('change', (e) => { if (e.matches) set(false); });
+  }
+
   /* ── Newsletter ─────────────────────────────────────── */
   function initNewsletter() {
     const form = $('[data-newsletter]');
@@ -263,6 +284,7 @@
   initPricing();
   initAccordions();
   initNewsletter();
+  initMenu();
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
   tick();
