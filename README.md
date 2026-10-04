@@ -10,9 +10,7 @@ Es un sitio estático sin dependencias ni paso de build, más dos funciones serv
 index.html          Landing completa (hero, app, recorrido, trámites, comparativa, mapa, planes, servicios, FAQ, footer)
 demo.html           Formulario "Prueba 15 días" (destino de todos los botones Probar)
 contacto.html       Teléfonos, WhatsApp, email y formulario de contacto
-nosotros/index.html /nosotros: historia, misión y visión, valores, equipo
-nosotros/equipo.html   /nosotros/equipo: fichas de los cofundadores
-nosotros/valores.html  /nosotros/valores: misión, visión y valores
+nosotros/index.html /nosotros ("Misión" en el menú): historia, misión y visión, valores, equipo
 _partials/          Cabecera y footer compartidos (fuente única)
 _partials/precios.json    Planes y servicios adicionales (fuente única de precios)
 scripts/sync-partials.py  Copia _partials/ a todas las páginas y genera planes/servicios
