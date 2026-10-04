@@ -1,0 +1,61 @@
+{
+  "_ayuda": "Fuente única de planes y servicios. Tras editar, ejecuta: python3 scripts/sync-partials.py (regenera la sección Planes y Servicios de index.html y el selector de plan de demo.html). Precios en euros, IVA no incluido.",
+
+  "ahorro_anual": "2 meses gratis",
+
+  "planes": [
+    { "id": "base",    "nombre": "Base",    "ganaderos": 25,  "mensual": 69,  "anual": 690 },
+    { "id": "gestion", "nombre": "Gestión", "ganaderos": 75,  "mensual": 169, "anual": 1690, "destacado": "Recomendado" },
+    { "id": "plus",    "nombre": "Plus",    "ganaderos": 200, "mensual": 329, "anual": 3290 }
+  ],
+
+  "a_medida": {
+    "id": "a-medida",
+    "nombre": "A medida",
+    "desde_ganaderos": 200,
+    "whatsapp": "34645562942",
+    "whatsapp_texto": "Hola, me interesa el plan A medida de Ganera para mi gestoría."
+  },
+
+  "incluido": [
+    "Trámites desde el WhatsApp de tus ganaderos: altas, bajas, crotales y guías de circulación",
+    "Integración con OVZnet/Cañada, REGA y SIMOGAN",
+    "Nada se presenta sin la aprobación de tu equipo",
+    "15 días de prueba en todos los planes"
+  ],
+
+  "servicios": [
+    {
+      "nombre": "Implantación + Onboarding",
+      "precio": "De 349 € a 590 €",
+      "etiqueta": "Gratis con plan anual",
+      "detalle": "Ponemos Ganera en marcha en tu gestoría: configuramos la cuenta, cargamos tus datos y acompañamos a tu equipo en el arranque. El precio depende del plan (Base, Gestión o Plus) y es gratis si contratas la suscripción anual.",
+      "provisional": true
+    },
+    {
+      "nombre": "GaneraAI",
+      "precio": "49 € / mes",
+      "detalle": "Modelo de IA entrenado para simplificar el trabajo de las gestorías ganaderas. Se contrata aparte de la suscripción, con cualquier plan."
+    },
+    {
+      "nombre": "Formación del equipo",
+      "precio": "Consultar",
+      "detalle": "Sesiones con tu personal administrativo para enseñarle a usar Ganera en el día a día."
+    },
+    {
+      "nombre": "Alta de ganaderos por WhatsApp",
+      "precio": "Consultar",
+      "detalle": "Contactamos con cada uno de tus ganaderos y verificamos que todo funciona correctamente antes de que empiecen a escribir."
+    },
+    {
+      "nombre": "Mantenimiento y soporte prioritario",
+      "precio": "Consultar",
+      "detalle": "Soporte con prioridad alta para tu gestoría."
+    },
+    {
+      "nombre": "Desarrollo a medida",
+      "precio": "Consultar",
+      "detalle": "Funcionalidad específica para tu gestoría, desarrollada bajo petición."
+    }
+  ]
+}

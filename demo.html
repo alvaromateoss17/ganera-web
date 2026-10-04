@@ -83,10 +83,13 @@
     <div class="field">
       <label for="d-plan">Plan</label>
       <select class="input" id="d-plan" name="plan">
-        <option value="rebano">Rebaño · hasta 25 explotaciones</option>
-        <option value="cabana" selected>Cabaña · hasta 100 explotaciones</option>
-        <option value="comarca">Comarca · hasta 300 explotaciones</option>
-        <option value="no-se">Aún no lo sé</option>
+<!-- partial:plan-options -->
+<option value="base">Base · hasta 25 ganaderos</option>
+<option value="gestion" selected>Gestión · hasta 75 ganaderos</option>
+<option value="plus">Plus · hasta 200 ganaderos</option>
+<option value="a-medida">A medida · más de 200 ganaderos</option>
+<option value="no-se">Aún no lo sé</option>
+<!-- /partial:plan-options -->
       </select>
     </div>
     <div class="field full"><label for="d-msg">¿Algo que debamos saber? <span class="text-muted">(opcional)</span></label><textarea class="input" id="d-msg" name="message" rows="4"></textarea></div>

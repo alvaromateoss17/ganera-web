@@ -4,12 +4,17 @@
 Cada página marca dónde van con comentarios:
     <!-- partial:header --> ... <!-- /partial:header -->
     <!-- partial:footer --> ... <!-- /partial:footer -->
-Edita el parcial y ejecuta:  python3 scripts/sync-partials.py
+Además genera los bloques plans, services y plan-options a partir de
+_partials/precios.json (ver scripts/precios.py).
+Edita el parcial o precios.json y ejecuta:  python3 scripts/sync-partials.py
 """
 import pathlib, re
 
+import precios
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 partials = {p.stem: p.read_text().rstrip('\n') for p in (ROOT / '_partials').glob('*.html')}
+partials.update(precios.generated(ROOT))
 pages = [p for p in ROOT.rglob('*.html') if '_partials' not in p.parts and 'reference' not in p.parts]
 
 for page in pages:

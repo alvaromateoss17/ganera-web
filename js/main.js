@@ -206,12 +206,14 @@
 
   /* ── Pricing toggle ─────────────────────────────────── */
   function initPricing() {
-    const plans = $$('[data-plan]');
-    const update = (annual) => plans.forEach((p) => {
-      const m = +p.dataset.plan;
-      $('[data-price]', p).textContent = `${annual ? Math.round((m * 10) / 12) : m} €`;
-      $('[data-note]', p).textContent = annual ? `${m * 10} € al año, IVA no incluido` : 'IVA no incluido';
-    });
+    // Texts for both billing modes are generated from _partials/precios.json
+    // into data-monthly / data-annual; this only swaps them.
+    const swaps = $$('[data-plans] [data-monthly]');
+    const plans = $('[data-plans]');
+    const update = (annual) => {
+      swaps.forEach((el) => { el.textContent = annual ? el.dataset.annual : el.dataset.monthly; });
+      if (plans) plans.classList.toggle('is-annual', annual);
+    };
     $$('input[name="billing"]').forEach((input) => {
       input.addEventListener('change', () => update(input.value === 'annual' && input.checked));
     });

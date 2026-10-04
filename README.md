@@ -14,7 +14,9 @@ nosotros/index.html /nosotros: historia, misión y visión, valores, equipo
 nosotros/equipo.html   /nosotros/equipo: fichas de los cofundadores
 nosotros/valores.html  /nosotros/valores: misión, visión y valores
 _partials/          Cabecera y footer compartidos (fuente única)
-scripts/sync-partials.py  Copia _partials/ a todas las páginas
+_partials/precios.json    Planes y servicios adicionales (fuente única de precios)
+scripts/sync-partials.py  Copia _partials/ a todas las páginas y genera planes/servicios
+scripts/precios.py        Plantillas HTML de planes y servicios
 css/tokens.css      Sistema de diseño: colores, tipografía Archivo, botones, tags, formularios
 css/site.css        Maquetación de cada sección
 js/main.js          Animaciones y scroll (reveals, escenas fijadas, marquee, mapa, precios, acordeones, newsletter)
@@ -60,5 +62,5 @@ Sin ellas, los formularios responden OK y los datos se quedan en Vercel → Logs
 ## Ajustes rápidos
 
 - Intensidad de animación: añade `data-motion="Sutil"` o `data-motion="Sin animación"` a `<html>`.
-- Precios: atributo `data-plan` (precio mensual) de cada plan en `index.html`; el anual se calcula como 10 meses.
-- Facturación anual marcada por defecto: atributo `checked` del radio `annual`.
+- Planes y servicios (nombres, ganaderos, precios mensual/anual, servicios adicionales): solo en `_partials/precios.json`. Después ejecuta `python3 scripts/sync-partials.py`, que regenera la sección Planes y Servicios de `index.html` y el selector de plan de `demo.html`.
+- Facturación anual marcada por defecto: atributo `checked` del radio `annual` en `index.html`.
