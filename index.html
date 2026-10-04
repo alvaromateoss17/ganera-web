@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ganera · Trámites ganaderos automáticos para gestorías</title>
+<meta name="description" content="Ganera convierte cada mensaje de tus ganaderos en un trámite listo para revisar y enviar a la plataforma oficial de tu comunidad. Altas, bajas, muertes, movimientos y censo, sin teclear.">
+<meta name="theme-color" content="#ec3013">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ganera · Tramita el doble. Con el mismo equipo.">
+<meta property="og:description" content="Cada mensaje de tus ganaderos, convertido en un trámite listo para enviar a OVZ.net o a la plataforma de tu comunidad.">
+<meta property="og:image" content="/assets/img/ganera-logo-rojo.png">
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/site.css">
+<script src="/js/main.js" defer></script>
+</head>
+<body>
+<div class="page" id="root">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="/assets/img/ganera-logo-rojo.png" alt="" width="30" height="30">GANERA</a>
+    <nav class="main-nav" aria-label="Principal">
+      <a href="#app">La app</a>
+      <a href="#recorrido">Cómo funciona</a>
+      <a href="#comparativa">Ahorro</a>
+      <a href="#comunidades">Comunidades</a>
+      <a href="#tramites">Trámites</a>
+      <a href="#planes">Planes</a>
+      <a href="#servicios">Servicios</a>
+    </nav>
+    <a class="btn btn-primary header-cta" href="/demo">Probar 15 días</a>
+  </div>
+  <div class="progress" data-progress></div>
+</header>
+
+<main>
+<section id="top" class="wrap hero">
+  <div data-intro>
+    <h1>
+      <span class="line-mask"><span data-reveal="rise">Tramita el doble.</span></span>
+      <span class="line-mask"><span data-reveal="rise" data-delay="90">Con el mismo equipo.</span></span>
+      <span class="line-mask"><span data-reveal="rise" data-delay="180" class="accent">En cualquier comunidad.</span></span>
+    </h1>
+  </div>
+  <div class="hero-grid">
+    <div class="hero-col" data-reveal="up">
+      <p class="hero-intro">Ganera convierte cada mensaje de tus ganaderos en un trámite listo para revisar y enviar a la plataforma oficial de tu comunidad. Altas, bajas, muertes, movimientos y censo, sin teclear.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg btn-split" href="/demo" style="min-width: 220px;">Empezar prueba gratuita<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-secondary btn-lg" href="#recorrido">Ver el recorrido</a>
+      </div>
+    </div>
+    <div class="hero-col" data-reveal="up" data-delay="120">
+      <div class="chat-meta"><span>WhatsApp · José Luis, Valdelosa</span><span>08:14</span></div>
+      <div class="bubble">Buenas. Esta mañana se me ha muerto la vaca acabada en 4521. La de la finca de arriba.</div>
+      <div class="bubble short">Y apúntame la ternera que nació ayer de la 3307.</div>
+      <div class="detected"><span class="sq"></span>2 trámites detectados</div>
+    </div>
+    <div class="hero-col card-col" data-reveal="up" data-delay="240">
+      <div class="card-head"><strong>Baja por muerte</strong><span class="tag tag-accent">Pendiente de revisión</span></div>
+      <div class="kv">
+        <span>Crotal</span><span>ES04 1234 5674 521</span>
+        <span>Explotación</span><span>REGA ES370450000123</span>
+        <span>Fecha</span><span>01/10/2026</span>
+      </div>
+      <button class="btn btn-primary" type="button">Aprobar trámite<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" data-marquee>
+    <span>Altas<i></i></span><span>Bajas<i></i></span><span>Muertes<i></i></span><span>Movimientos<i></i></span><span>Censo<i></i></span><span>Demoras<i></i></span>
+    <span>Altas<i></i></span><span>Bajas<i></i></span><span>Muertes<i></i></span><span>Movimientos<i></i></span><span>Censo<i></i></span><span>Demoras<i></i></span>
+    <span>Altas<i></i></span><span>Bajas<i></i></span><span>Muertes<i></i></span><span>Movimientos<i></i></span><span>Censo<i></i></span><span>Demoras<i></i></span>
+  </div>
+</div>
+
+<section id="app" class="app-scene" data-app>
+  <div class="pin">
+    <div class="wrap">
+      <div class="app-copy">
+        <span class="eyebrow">LA APP POR DENTRO</span>
+        <div class="counter"><b data-app-num>01</b><span>/ 04</span></div>
+        <div class="caps">
+          <div class="cap" data-cap><h2>Llega el WhatsApp</h2><p>Paco escribe como siempre. Ganera crea el trámite #1043 y lo pone el primero de la cola.</p></div>
+          <div class="cap" data-cap><h2>Revisas lo extraído</h2><p>Crotal, explotación y fecha, con el mensaje original al lado.</p></div>
+          <div class="cap" data-cap><h2>Apruebas</h2><p>Un clic. Sin tu aprobación no se envía nada.</p></div>
+          <div class="cap" data-cap><h2>Se presenta solo</h2><p>Ganera lo envía a la plataforma de tu comunidad y guarda el justificante.</p></div>
+        </div>
+        <div class="bar"><div data-app-bar></div></div>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="mock-top">
+          <span class="mock-logo"><i></i>GANERA</span>
+          <span class="tab">Ganaderos</span><span class="tab">Explotaciones</span>
+          <span class="tab on">Trámites</span>
+          <span class="tab">Facturación</span>
+          <span class="user">ana@gestoriavaldelacasa.es</span>
+        </div>
+        <div class="mock-body">
+          <div><div class="mock-title">Cola de trámites</div><div class="mock-sub" data-app-count>128 trámites</div></div>
+          <div class="mtable">
+            <div class="mrow head"><span>ID</span><span>Tipo</span><span>Estado</span><span>Explotación</span></div>
+            <div class="mrow-new" data-app-row>
+              <div class="mrow"><span>#1043</span><span>BAJA</span><span><span class="pill pill-pend" data-app-pill>Pendiente de revisión</span></span><span>#87</span></div>
+            </div>
+            <div class="mrow"><span>#1042</span><span>ALTA</span><span><span class="pill pill-pend">Pendiente de revisión</span></span><span>#87</span></div>
+            <div class="mrow"><span>#1041</span><span>MOVIMIENTO</span><span><span class="pill pill-ok">Ejecutado en OVZ</span></span><span>#52</span></div>
+            <div class="mrow"><span>#1040</span><span>BAJA</span><span><span class="pill pill-ko">Rechazado</span></span><span>#19</span></div>
+            <div class="mrow"><span>#1039</span><span>CENSO</span><span><span class="pill pill-ok">Aprobado</span></span><span>#64</span></div>
+          </div>
+        </div>
+        <div class="toast" data-app-toast>
+          <small>WhatsApp · Paco, Dehesa Las Encinas · 08:14</small>
+          <span>Buenas Ana, esta mañana se me ha muerto la vaca acabada en 4521.</span>
+          <b>Trámite #1043 creado</b>
+        </div>
+        <div class="overlay" data-app-overlay></div>
+        <div class="modal" data-app-modal>
+          <div><div class="modal-title">Revisión de trámite</div><div class="modal-sub">Trámite #1043</div></div>
+          <div class="modal-state"><strong>Estado:</strong><span class="pill pill-pend" data-app-mpill>Pendiente de revisión</span></div>
+          <div class="modal-kv"><strong>Tipo</strong><span>BAJA POR MUERTE</span><strong>Crotal</strong><span>ES100412344521</span><strong>Explotación</strong><span>Dehesa Las Encinas (ES100400023891)</span><strong>Fecha</strong><span>03/10/2026</span></div>
+          <div class="modal-msg">Buenas Ana, esta mañana se me ha muerto la vaca acabada en 4521. Un saludo, Paco.</div>
+          <div class="modal-actions"><span class="ghost">Rechazar</span><span class="ok" data-app-btn>Aprobar</span></div>
+        </div>
+        <div class="mock-done" data-app-done>Presentado · justificante guardado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="producto" class="wrap statement">
+  <p data-statement>Una gestoría ganadera pasa horas al día copiando mensajes a la plataforma de su comunidad: crotales, códigos REGA, fechas y motivos de baja. Ganera hace esa parte. Tu equipo revisa, aprueba y atiende a más ganaderos con las mismas personas.</p>
+</section>
+
+<section id="recorrido" class="rec-scene" data-rec>
+  <div class="pin">
+    <div class="wrap">
+      <div class="rec-left">
+        <h2>El recorrido completo de un trámite</h2>
+        <div class="rec-steps">
+          <div class="rail"><div data-rail></div></div>
+          <div class="step-list">
+            <div class="step" data-step><div class="step-head"><span class="step-num">01</span><span class="step-title">Mensaje</span></div><p>El ganadero escribe por WhatsApp a un número de Ganera, igual que hoy te escribe a ti.</p></div>
+            <div class="step" data-step><div class="step-head"><span class="step-num">02</span><span class="step-title">Extracción</span></div><p>Ganera detecta el tipo de trámite, la explotación, los crotales y la fecha, y los cruza con tu inventario.</p></div>
+            <div class="step" data-step><div class="step-head"><span class="step-num">03</span><span class="step-title">Revisión</span></div><p>Si algo es ambiguo, el trámite llega marcado con el dato vacío y el mensaje original al lado.</p></div>
+            <div class="step" data-step><div class="step-head"><span class="step-num">04</span><span class="step-title">Aprobación</span></div><p>Tu equipo aprueba con un clic, desde la oficina o desde el móvil. Sin ese clic no sale nada.</p></div>
+            <div class="step" data-step><div class="step-head"><span class="step-num">05</span><span class="step-title">Envío</span></div><p>El trámite se presenta en OVZ.net o en la plataforma de tu comunidad, y el justificante queda guardado en la ficha del ganadero.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <div class="panel" data-panel>
+          <small>WhatsApp · +34 600 •• •• 18</small>
+          <div class="msg">Buenas, mañana saco 6 terneros de la 0098 al cebadero de Ledesma.</div>
+          <div class="msg">Son los acabados en 112, 113, 140, 141, 155 y 160.</div>
+          <small>Recibido 19:42 · el ganadero no instala nada</small>
+        </div>
+        <div class="panel" data-panel style="gap: 10px;">
+          <strong class="t">Movimiento · salida</strong>
+          <div class="kv2">
+            <span>Origen</span><span>ES370980000098</span>
+            <span>Destino</span><span>Cebadero Ledesma · ES371650000402</span>
+            <span>Animales</span><span>6 crotales encontrados</span>
+            <span>Fecha</span><span>02/10/2026</span>
+          </div>
+        </div>
+        <div class="panel" data-panel>
+          <div class="card-head" style="margin: 0;"><strong class="t">Necesita tu revisión</strong><span class="tag tag-accent">1 dato por completar</span></div>
+          <div class="compare2">
+            <div><small>Mensaje original</small>«…los acabados en 112, 113, 140, 141, 155 y 160»</div>
+            <div><small>Extraído</small>5 crotales únicos. «140» coincide con 2 animales.</div>
+          </div>
+          <div class="pick"><span>Elige el crotal ES…6140</span><b>2 opciones</b></div>
+        </div>
+        <div class="panel" data-panel style="gap: 18px;">
+          <span style="font-size: 14px; color: var(--color-neutral-800);">Nada llega a la Administración sin la firma de tu gestoría.</span>
+          <div class="approve">
+            <span class="btn btn-primary">Aprobar<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="btn btn-secondary">Rechazar</span>
+          </div>
+          <small>Aprobado por Marta S. · 08:31 · desde el móvil</small>
+        </div>
+        <div class="panel" data-panel style="gap: 0;">
+          <strong class="t" style="margin-bottom: 14px;">Presentado en la plataforma oficial</strong>
+          <div class="timeline-row"><span>Aprobado</span><span>08:31</span></div>
+          <div class="timeline-row"><span>En proceso</span><span>08:31</span></div>
+          <div class="timeline-row final"><span>Ejecutado · justificante guardado</span><span class="tag tag-accent">08:32</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tramites" class="section">
+  <div class="wrap">
+    <div class="split-head">
+      <h2 class="h-section" data-reveal="up" style="max-width: 15ch; text-wrap: balance;">Los trámites que hoy tecleas a mano</h2>
+      <p class="lead" data-reveal="up" data-delay="100" style="max-width: 46ch;">El ganadero los escribe como habla, con los últimos dígitos del crotal. Ganera los cruza con tu inventario y te los deja preparados.</p>
+    </div>
+    <div class="rule" data-reveal="line"></div>
+    <div class="tram-row" data-reveal="up"><span class="n">Baja por muerte</span><span class="m">«Se me ha muerto la acabada en 4521»</span><span class="o">Crotal completo, explotación y fecha de la baja</span></div>
+    <div class="tram-row" data-reveal="up"><span class="n">Alta por nacimiento</span><span class="m">«Ternera nueva de la 3307, nació ayer»</span><span class="o">Madre identificada, fecha de nacimiento y sexo</span></div>
+    <div class="tram-row" data-reveal="up"><span class="n">Movimiento</span><span class="m">«Saco 6 terneros al cebadero de Ledesma»</span><span class="o">Origen, destino con su REGA y lista de crotales</span></div>
+    <div class="tram-row" data-reveal="up"><span class="n">Baja por venta</span><span class="m">«Vendidas la 0871 y la 0874 al tratante»</span><span class="o">Animales, comprador y fecha de salida</span></div>
+    <div class="tram-row" data-reveal="up"><span class="n">Censo</span><span class="m">«Tengo 84 vacas y 31 terneros a día de hoy»</span><span class="o">Recuento contrastado con el inventario de la explotación</span></div>
+    <div class="tram-row" data-reveal="up"><span class="n">Comunicación con demora</span><span class="m">«La muerte fue el día 12, se me pasó avisar»</span><span class="o">Trámite marcado fuera de plazo para que lo revises primero</span></div>
+  </div>
+</section>
+
+<section id="comparativa" class="section surface">
+  <div class="wrap">
+    <div class="split-head">
+      <h2 class="h-section" data-reveal="up" style="max-width: 14ch;">A mano o con Ganera</h2>
+      <div data-reveal="up" data-delay="100" style="display: flex; flex-direction: column; gap: 14px;">
+        <p class="lead" style="max-width: 46ch;">Una gestoría con 600 trámites al mes.</p>
+        <div class="legend"><span><i style="background: var(--color-neutral-400);"></i>A mano</span><span><i style="background: var(--color-accent);"></i>Con Ganera</span></div>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-row" data-reveal="up">
+        <span>Minutos por trámite</span>
+        <div class="bars">
+          <div><div class="track"><div class="fill" data-reveal="line" style="width: 100%; background: var(--color-neutral-400);"></div></div><span class="v">9 min</span></div>
+          <div><div class="track"><div class="fill" data-reveal="line" data-delay="200" style="width: 11.11%; background: var(--color-accent);"></div></div><span class="v b">1 min</span></div>
+        </div>
+      </div>
+      <div class="cmp-row" data-reveal="up">
+        <span>Horas al mes de tu equipo</span>
+        <div class="bars">
+          <div><div class="track"><div class="fill" data-reveal="line" style="width: 100%; background: var(--color-neutral-400);"></div></div><span class="v">90 h</span></div>
+          <div><div class="track"><div class="fill" data-reveal="line" data-delay="200" style="width: 11.11%; background: var(--color-accent);"></div></div><span class="v b">10 h</span></div>
+        </div>
+      </div>
+      <div class="cmp-row" data-reveal="up">
+        <span>Trámites que revisa una persona al día</span>
+        <div class="bars">
+          <div><div class="track"><div class="fill" data-reveal="line" style="width: 21.875%; background: var(--color-neutral-400);"></div></div><span class="v">35</span></div>
+          <div><div class="track"><div class="fill" data-reveal="line" data-delay="200" style="width: 100%; background: var(--color-accent);"></div></div><span class="v b">160</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="comunidades" class="section" data-map-section>
+  <div class="wrap map-grid">
+    <div class="map-copy" data-reveal="up">
+      <h2 class="h-section" style="max-width: 13ch;">Funciona en tu comunidad</h2>
+      <p class="lead" style="max-width: 40ch;">Ganera presenta cada trámite en la plataforma oficial de la comunidad de la explotación: OVZ.net u otra.</p>
+      <div class="big-count"><b data-lit-count>0</b><span>de 17 comunidades ya conectadas o en integración</span></div>
+      <div class="map-legend">
+        <span><i style="width: 14px; height: 14px; background: var(--color-accent);"></i>Disponible</span>
+        <span><i style="width: 10px; height: 10px; border: 2px solid var(--color-accent); background: var(--color-bg);"></i>En integración</span>
+        <span><i style="width: 10px; height: 10px; border: 2px solid var(--color-neutral-400);"></i>Bajo petición</span>
+      </div>
+    </div>
+    <div class="map-box" data-reveal="up" data-delay="120">
+<svg viewBox="0 0 1000 820" role="img" aria-label="Mapa de España con las comunidades donde funciona Ganera">
+<defs><clipPath id="gnMain"><rect x="0" y="0" width="1000" height="820"/></clipPath><clipPath id="gnCan"><rect x="20" y="660" width="290" height="140"/></clipPath></defs>
+<g clip-path="url(#gnMain)">
+<path d="M-479.5,1000.7L-470.3,1004.8L-461.9,1002.9L-451.6,1008.2L-446.1,1009.5L-450.9,1013.2L-455.9,1018.1L-467.9,1016.9L-478,1012.2L-481.6,1008.7L-482.8,1005.5L-479.5,1000.7ZM81.4,237.5L87.9,231.5L94.1,227.4L97.5,226L111.9,222L115.5,219.9L119.1,220.2L119.8,222.1L121.7,226L124.1,228.7L124.6,230.5L119.1,238.8L118.4,241.6L121.3,246.9L121.7,248.4L123.2,249L127,248.9L134,245.5L138.5,242.7L140.2,243.8L153.9,242.2L157,243.5L159.2,245L165.9,246.9L173.1,247.2L182,244.4L186.1,241.6L186.8,238.6L187,236.3L188.2,234.7L190.1,234L193.5,235.4L198.1,236.6L208.9,237.1L211,235.5L214.9,236L219.7,238.2L225.4,237.4L228.3,240L229.5,243.5L229.7,251.1L229.5,258.7L230.5,261.6L234.3,262.2L240.5,262.2L246.1,264.2L250.4,267.8L251.8,271.5L252.5,274L250.4,275.5L247.3,280.9L239.8,288L229,294.4L220.6,302.2L214.9,311.7L207.9,315.7L205.7,317.9L204.8,320.5L209.6,332L211,340.9L212.2,351.7L211.3,354.8L211,366.8L209.8,370.3L210.1,373L212,376.1L212.7,378.9L209.3,382.7L203.3,387L199,390.8L197.8,394.3L198.1,396.5L205.5,403.9L206.9,407L206,414.4L201.7,426.4L197.6,433.8L196.9,434.6L192.1,436.5L169.7,436.7L164.2,438.3L164.9,439.8L170.2,449.1L175.7,454.1L177.7,455.3L179.6,466.2L188.5,483.7L197.1,486.1L200.2,490.4L199.5,496.5L196.9,503.4L191.6,510.2L185.3,515L181.3,519.7L181,525.3L179.6,532.3L177.7,537.9L177.2,541.8L193,565.2L201.7,564L202.9,564.6L201.2,570.2L198.5,576.7L195.2,578L187.7,579.9L180.5,588.4L174.8,598.5L170.5,603.5L166.4,615.5L166.9,620.6L168.8,628.6L172.9,649.6L167.1,650.5L144.3,664.1L137.3,664.1L124.1,658.2L101.1,656.1L93.4,654.4L84.1,658.3L76.9,658.2L70.9,663.2L66.8,661.8L71.6,650.6L79,628.5L78.8,614.9L80.5,603.1L78.5,591.4L74.7,584L79.7,564.9L79.3,555L74.7,542.6L88.9,544.6L84.3,539.5L80,536.6L75.9,537.2L72.3,537L60.3,541.9L54.3,543.4L52.4,542.5L53.1,534.8L50,524.7L54.8,522.1L60.5,521.3L65.3,517L68.2,512.1L66.5,503.7L70.9,495.5L80.5,488.6L75.4,489.7L69.7,494L60.5,509.5L57.7,517.3L49.7,519.9L42.8,521.2L39.4,520.3L35.1,518.4L34.6,512.6L35.1,508L38,498.8L38.9,485.6L43.3,474L42.8,470.9L41.6,466.2L45.4,461.7L50,458.7L56.7,448.5L66.3,424.5L77.6,398.8L76.6,395.6L74.2,393.4L75.2,386.4L81.9,356L84.5,352L87.7,343L88.4,328.6L89.6,318.7L89.3,313.6L88.4,307.6L84.1,296.1L79.7,271.5L79.3,263.3L82.9,259.3L76.9,258.7L74.2,253.2L74.7,247.3L81.4,237.5ZM-1001.7,667.9L-1002.2,669.5L-1005.8,668.7L-1010.6,669.3L-1013.2,664.8L-1010.8,662.9L-1005.6,662.5L-1002.9,664.5L-1001.7,667.9ZM-1409.2,460.4L-1412.1,464.4L-1417.2,462.9L-1418.8,461.4L-1417.4,452.6L-1413.3,450.5L-1409.2,454.1L-1409.2,460.4ZM-1138.3,525.8L-1139.7,526.7L-1153.6,524.3L-1157.5,521.2L-1159.2,515.4L-1156.8,513.5L-1150.8,512.3L-1141.9,513.3L-1136.1,517.5L-1136.1,522.8L-1138.3,525.8ZM-1185.3,533.3L-1188.4,534.4L-1206.2,527.9L-1212.4,524.7L-1220.6,517.2L-1197.6,526.4L-1185.3,533.3ZM-1242.7,536L-1249.6,536.1L-1256.1,529.6L-1246.5,526.2L-1243.6,528.3L-1241.7,530.7L-1240.3,533.8L-1242.7,536ZM-1209.8,542.1L-1204.3,545.5L-1212.7,546.2L-1215.3,547.8L-1222.3,545.5L-1230.2,545.9L-1235.5,541.3L-1236.7,536.4L-1234,533.5L-1226.8,533.5L-1209.8,542.1ZM-1043.2,594L-1039.2,594.6L-1017.8,593.3L-1012,594.2L-1012.8,600.5L-1016.8,602.9L-1029.3,604.6L-1049,600.6L-1055.5,595.2L-1056.4,591.2L-1056.4,589.5L-1052.4,588L-1043.2,594Z" style="fill: var(--color-surface); stroke: var(--color-bg); stroke-width: 1.5"/>
+<path d="M1298.7,159.5L1297,172.8L1298.2,176.7L1300.6,179.5L1301.8,182.5L1303.8,217.8L1303.3,220.6L1295.1,234.7L1293.4,238.8L1293,256.3L1291.5,261L1288.6,265.6L1283.6,280.5L1279,287.1L1266.8,278.9L1259.6,275.5L1256.2,271.7L1253.8,269L1255.3,265.5L1258.6,261.9L1259.1,259L1251.4,255.7L1247.8,253.5L1247.8,249.8L1250.5,243.9L1249.3,238.9L1245,239.3L1241.4,238.5L1241.1,235.8L1243.5,232.6L1246.9,228.4L1246.6,223.7L1242.8,221.7L1239.2,217.8L1237.8,212.6L1240.6,209L1245,206.7L1241.8,201.3L1239.4,201.2L1237.8,200.1L1239.2,197.6L1242.6,193.8L1247.6,182.7L1254.3,177.5L1266.3,174L1269.7,172.6L1272.6,168.7L1275.9,166.2L1279.8,166.5L1283.6,167.9L1285.8,169.6L1287.7,167.9L1289.1,163L1288.2,158.7L1288.6,146.9L1290.8,140.3L1294.4,139.8L1297.5,143.6L1297.3,146.7L1298.5,154.5L1298.7,159.5ZM1174.4,-293.9L1166.2,-289.4L1164.6,-285.5L1161.4,-280.3L1156.2,-278.1L1151.1,-277.4L1146.8,-278.1L1144.4,-280.1L1144.6,-282L1142.5,-283.6L1137,-283.6L1131.2,-280L1126.6,-274.2L1128.1,-270.9L1132.4,-270.1L1133.4,-268.9L1133.4,-267.2L1131.9,-265.1L1130.2,-261.7L1121.4,-251.5L1112.5,-241.3L1111,-238.2L1108.4,-236L1097.1,-230.6L1095.9,-228.4L1095.2,-219.2L1094,-211.6L1085.6,-204.7L1077.4,-197.6L1075.3,-193.4L1073.8,-188.5L1071.2,-182.8L1070.7,-180L1074.8,-175.1L1074.3,-171.2L1073.1,-165.5L1069,-161.5L1064.7,-159.3L1064.7,-153.2L1067.1,-152.3L1072.4,-152.8L1080.1,-157.2L1084.9,-163L1082,-168.4L1081.5,-169.4L1082.2,-170.7L1088.2,-176.6L1095.2,-180.1L1105.3,-180.8L1117.3,-178.8L1118.5,-177.9L1117.8,-174.3L1119,-168.9L1121.1,-165.2L1118.2,-154.5L1120.4,-151.3L1123.8,-147.3L1126.4,-143.6L1130.2,-140.3L1133.6,-134.8L1134.8,-131.7L1129.3,-126L1120.4,-120.9L1119.2,-117.7L1119.4,-113.9L1120.4,-110.9L1125.4,-107.1L1130.7,-98.6L1134.3,-91L1141.8,-83.6L1143.7,-81.5L1143.2,-79.7L1141,-76.5L1138.6,-66.2L1135.5,-64.5L1132.2,-63.9L1122.8,-56.3L1118.7,-57.3L1112.7,-57.1L1108.6,-54.7L1108.9,-50.1L1112.7,-45.7L1114.9,-41.1L1115.8,-36.2L1120.2,-32.6L1125.9,-30.5L1129.3,-30.3L1131.4,-29L1132.9,-27.4L1135.3,-16.9L1133.8,-14.3L1130.7,-13.2L1128.8,-8.9L1125,-2.6L1122.8,2.4L1125.2,6.8L1126.2,10L1125,13.4L1126.6,18.6L1131.2,23.8L1143.2,31.2L1154.5,37L1158.1,38L1173.2,34.3L1175.8,34.6L1177.8,39.1L1178.5,42.2L1176.8,46.7L1172.7,53.1L1168.2,58.1L1165.5,62.5L1166,66.3L1166.2,71.4L1162.6,73L1162.4,71.9L1161,71.1L1159.8,71.6L1158.8,72.7L1158.6,74.7L1150.9,78L1145.4,81.4L1124.2,101.7L1114.4,107.7L1112.5,111.2L1110.6,117.9L1104.8,123.6L1099.5,126.3L1087,129.2L1074.3,135.2L1068.8,132.6L1053.9,132.8L1044.8,125.5L1027,120.9L1021.3,110.3L1013.4,109.6L1008.1,109.9L1005,108.3L1004,104.7L1004,101.2L998.5,102.8L994.1,102.8L991.5,104.2L989.6,105.8L987.2,104.7L985.7,105.2L986,107.2L980.7,107.7L975.2,106.4L960.5,100.9L958.4,100.1L948.3,98L944.2,95.8L940.9,90.2L938.2,88.6L936.8,87.4L927.4,90.2L924.1,94.5L919,99.6L884,124.2L877.5,134.4L870.1,149.6L869.6,156.5L872.7,178.9L879.9,190.7L880.9,193.5L876.8,193.5L870.1,191.9L864.5,190.2L859.5,191.1L854.5,193.7L849.9,195.1L846.8,195.5L844.6,196.8L843.7,199.6L843.4,201.6L837.9,201.2L824.9,197.1L813.4,194.3L806.5,197.4L802.1,200.4L799,199.9L796.9,196.9L795.2,193.8L790.6,191.1L780.3,186.9L781,184.9L782.7,182L782.7,180.3L780.5,177.8L771.2,175L766.9,174.3L764,176.2L761.8,178.6L756.5,169.9L752.9,168.2L747.2,167.9L740.7,165.2L734,161.9L717.7,156.5L713.1,155.9L711.4,156.7L710.2,160L709.5,169L708.8,170.1L701.1,170.4L691.7,169.1L687.4,169.8L683.6,169.8L680,167.3L663.9,170.1L661.3,168.7L657.4,164.6L652.9,161.3L649.5,159.7L646.6,157.6L644,157.3L640.1,159.2L634.6,160L630.1,159.8L627.7,160.2L617.3,150.1L615.9,147.4L610.6,146.6L604.4,146.4L588.3,139.9L580.9,136.3L579.9,134.2L579.9,132.6L578.7,133L576.5,136L575.3,138.4L573.7,138.8L571.5,138.5L569.3,137.1L567.9,135.3L569.3,132.2L571.7,128.2L572.9,123.8L572.7,120L568.6,117.4L562.6,116.3L558.3,116L552.5,113.8L549.7,112.2L547.3,107.7L547,104.5L557.8,101.8L567.7,90.2L577,48L583.7,-2.3L588.5,-11.7L594.8,-14.5L589.7,-21.3L586.6,-17.9L585.4,-14.2L583.7,-12.2L587.3,-58.8L590,-76L594.5,-94L603.9,-86.9L611.6,-79.7L615.7,-73.2L620.7,-52.4L624.3,-48L630.1,-43.7L627.9,-48.4L623.8,-52.1L617.8,-80L614,-87.9L608,-94.5L588.8,-108.6L586.9,-111.4L585.9,-116.7L592.4,-116.5L597.9,-113.9L597.2,-116.9L595.5,-120L593.1,-131.5L590.9,-158.3L591.2,-163L590.2,-168.7L584,-169.9L579.2,-170.2L573.9,-172.4L547.5,-188.4L538.6,-204.9L529.3,-217L527.1,-222.4L527.3,-227.9L532.1,-239.2L527.8,-246.5L523.7,-247.9L520.1,-251.5L523.5,-257.4L526.1,-261.4L531.4,-262.4L538.6,-261L545.3,-257.6L550.4,-256.7L535,-266L509.8,-262.9L504.3,-264.1L499.7,-266.1L498.1,-273L501.7,-276L504.8,-281.9L501.2,-285.8L496.4,-287.3L488.9,-287.2L482,-286L480.3,-288.4L484.4,-294.7L480.8,-297.1L476,-295.9L469,-294.7L462.3,-296.6L456.1,-303.8L452,-303.8L449.1,-303L444.8,-305.7L440.2,-306.4L437.1,-305.5L432.8,-309.7L406.6,-318.1L395.3,-319.1L385,-315.4L379.3,-316.6L374.9,-322.1L371.6,-331.1L354.8,-338.1L358.1,-342.8L365.8,-343.9L374.7,-347.2L378.1,-351.1L371.1,-356L365.8,-357.2L363.7,-359L361.5,-363.1L364.6,-365.2L366.8,-364.2L373,-363.5L383.8,-364.5L380,-368.9L375.7,-369.9L373.7,-371L365.1,-371.5L361,-369.9L352.1,-370.6L350,-375.3L349.3,-379.3L351.9,-388.2L364.6,-396.3L396.1,-405.2L409.5,-404L419.1,-405.6L430.4,-411L435.2,-415.9L451.3,-418.8L466.4,-413.7L480.5,-394.5L487.3,-388.1L503.6,-399.3L528.1,-398.9L533.1,-392.6L535,-397.9L539.6,-404.2L543.2,-401.4L545.1,-397.5L570.8,-398.6L574.9,-399.6L567.9,-404.2L562.4,-415.1L561.2,-455.5L554,-466.8L545.8,-484.9L542,-495.7L541.7,-499.4L542.9,-504.8L553,-504.6L560.7,-503.2L575.6,-507.3L582.8,-504.4L582.3,-496L584.5,-485.3L587.1,-480.3L590.7,-474.4L602.7,-475L615.7,-471.6L632,-471.1L655.7,-465L665.8,-468.6L675.7,-475.9L694.4,-480.7L696.1,-483.2L685.3,-482.1L675.2,-486.7L674,-491.9L675.2,-496.4L679,-506.7L707.8,-523.2L728.2,-528.3L749.6,-537.2L760.4,-546.6L767.6,-558.9L770,-561.4L772.9,-563.8L770,-568.1L771.9,-614.7L774.1,-623.1L778.1,-630.1L784.6,-635.4L794.2,-641.3L829.7,-649.4L835,-652.5L835.7,-647.6L838.4,-641.1L840.1,-637.6L838.6,-633L839.8,-629.2L844.6,-622.4L850.6,-616L855.9,-611.8L857.6,-612.3L861.4,-613.4L868.1,-617.7L873.9,-618.9L877,-615.8L878.7,-614L882.3,-606.7L883.3,-599.2L884.9,-593L887.8,-590.5L898.4,-589.6L906.3,-587.2L908.5,-585.2L911.1,-571.4L912.5,-569.4L914.7,-571L916.6,-573.2L919.3,-573.6L923.8,-572.7L930.1,-572.5L936.3,-571L944.9,-563.1L944.7,-560.5L943,-556L942.3,-552.4L943.7,-550.9L946.1,-547.3L945.7,-543L943.3,-539.9L942.5,-537.4L942.5,-535.8L943.3,-534.5L945.2,-533.5L957.9,-531.8L969.7,-533.5L977.1,-537.8L978.3,-542.3L980.5,-547.5L984.8,-552L987.9,-553.5L990.8,-551.7L986,-533.3L989.3,-528.6L989.8,-521.6L991.3,-515.5L995.3,-515.7L1000.4,-514.6L1004,-512.3L1008.3,-508.7L1014.3,-505.3L1018.6,-504.2L1020.1,-501.4L1023.7,-498.2L1029,-491.5L1033.8,-487.1L1036.2,-487.1L1040.7,-488.9L1047.4,-489.9L1052.7,-489.8L1054.9,-486.4L1060.2,-484.9L1061.8,-483.5L1064,-481.2L1067.4,-480.3L1071.7,-481.2L1074.6,-484.4L1078.6,-485.8L1082.7,-485.3L1085.1,-483.5L1089.7,-481L1092.1,-481.6L1097.1,-480L1102.4,-475.2L1104.3,-470.2L1105,-467.5L1107.2,-464.5L1115.6,-451.2L1118.5,-450.5L1121.4,-452.6L1123.3,-455.5L1126.2,-456L1130.5,-454.8L1133.4,-453.2L1134.8,-447.3L1135.8,-446.3L1137.7,-447.5L1141.3,-447.8L1146.6,-446.4L1154.2,-448L1160.2,-450.5L1163.4,-450.3L1168.4,-443.6L1174.2,-441.1L1186.6,-439.2L1200.1,-436L1205.4,-433.4L1209,-432.1L1209.4,-423.3L1208.2,-421.9L1194.8,-404.4L1189.3,-398L1186.4,-388.9L1184.2,-375.3L1180.4,-362.3L1174.4,-349.9L1172.2,-340.6L1173.9,-334.5L1173,-324.8L1169.4,-311.7L1168.6,-301.8L1171,-295.2L1174.4,-293.9ZM588.1,-129.5L585.7,-121.2L581.3,-128.8L575.3,-135.6L574.1,-141.8L574.1,-143.5L581.1,-139L588.1,-129.5ZM3678.6,4195.6L3674.5,4196.2L3672.6,4194.4L3671.4,4190.1L3672.6,4186L3672.8,4182.6L3669.5,4176.8L3672.8,4173.5L3675.7,4177.3L3677.1,4177.5L3681.5,4180.3L3680.3,4185.3L3680.5,4186.8L3678.6,4191.8L3678.6,4195.6ZM4386.6,4779.8L4377,4781.9L4370.5,4781.1L4357.5,4775.1L4353.9,4771L4348.9,4759.7L4350.1,4755.7L4354.2,4748.6L4363.3,4745.8L4373.1,4746.9L4377.5,4748.8L4382.5,4756.9L4389.2,4765.4L4388.3,4775.3L4386.6,4779.8ZM-3388.5,2346.2L-3389,2350.2L-3390.7,2350.9L-3393.3,2347.7L-3404.1,2348.2L-3405.8,2345.2L-3406.1,2343.9L-3400.8,2338.8L-3407,2337.5L-3409.4,2335.4L-3414.7,2325L-3414.2,2321.8L-3412.1,2320.3L-3408.5,2320L-3401.7,2323.4L-3396.9,2328.2L-3395.3,2328.3L-3394.5,2329.6L-3395.5,2333.1L-3392.6,2336L-3391.4,2338L-3388.5,2346.2ZM-3421.9,2226.2L-3429.6,2226.9L-3434.9,2226.3L-3436.1,2221.4L-3433.4,2217.2L-3435.3,2212.1L-3434.1,2209.1L-3431.5,2207L-3427.2,2209.7L-3426.5,2213.6L-3423.8,2217.1L-3411.6,2224.4L-3421.9,2226.2ZM-3439.4,2241.8L-3444.7,2244.9L-3447.3,2243.9L-3450.7,2237.9L-3452.9,2221.3L-3451.2,2218.6L-3450,2217.5L-3442.8,2219.6L-3439.9,2221.9L-3436.8,2223.4L-3438.5,2226.5L-3437.5,2238.9L-3439.4,2241.8ZM-3415.4,2249.8L-3419,2250.1L-3420.7,2249.5L-3421.2,2245.4L-3418.3,2242.5L-3416.6,2241.8L-3414.2,2245L-3413.5,2247.7L-3415.4,2249.8ZM-2974.5,3167.9L-2973.6,3167.3L-2971.2,3166.8L-2969,3166.8L-2965.6,3161.9L-2960.1,3158.8L-2950.5,3142L-2946.4,3135.1L-2946,3131.2L-2944.8,3123.4L-2946.9,3113.7L-2946,3111L-2937.6,3099.4L-2934,3093L-2933.7,3087.5L-2932.8,3083.6L-2933.7,3081.5L-2935.6,3080.9L-2938.8,3075.8L-2940.9,3071.5L-2946.4,3067.3L-2950.3,3062.7L-2956.8,3052.5L-2956,3046.8L-2958,3044.7L-2959.9,3042.7L-2959.6,3040L-2961.1,3033.6L-2962.8,3027.6L-2963.2,3023.7L-2961.8,3017.1L-2962.8,3009.9L-2964.7,3006.1L-2965.4,3000.2L-2964.9,2994.9L-2963,2992L-2963.5,2988.3L-2955.3,2976.7L-2949.3,2970L-2943.8,2965.2L-2939,2961.7L-2932.5,2944L-2928,2937.7L-2923.2,2936.9L-2897,2951.6L-2884.8,2952.9L-2860,2960.8L-2850.9,2971L-2830.3,2987.9L-2819.5,2993.1L-2819.2,2997.6L-2821.6,3004.6L-2814.7,2998.4L-2803.9,3008.2L-2800.8,3012.9L-2797.4,3021.8L-2798.6,3027.5L-2800,3030.4L-2800.3,3032.6L-2796.9,3029.4L-2795.2,3027L-2794.5,3021.1L-2792.1,3013.8L-2788.5,3013.6L-2785.6,3018L-2779.9,3037L-2777.7,3040.8L-2776.8,3046.8L-2777.2,3049.5L-2776.8,3052.1L-2778.9,3053.4L-2784.4,3056.6L-2787.1,3060.9L-2788.5,3064.8L-2791.9,3067.6L-2795.2,3071.1L-2796.2,3073.9L-2799.3,3076.1L-2800,3079.8L-2807.7,3092.8L-2810.8,3098.6L-2815.4,3104.8L-2818,3107.1L-2821.9,3110.8L-2823.8,3115L-2823.8,3119.5L-2826.4,3124.8L-2827.9,3129.4L-2830.3,3132.1L-2837,3146.4L-2837.2,3151.4L-2838.9,3154.4L-2843.5,3161.3L-2846.6,3165.4L-2852.1,3168.6L-2858.1,3171.9L-2860.3,3175.5L-2864.4,3177.5L-2867.2,3177.6L-2872,3176.2L-2878.8,3175.6L-2881.9,3176L-2883.6,3174.1L-2885.7,3169.9L-2888.8,3167L-2891,3168.1L-2895.6,3171L-2900.6,3172.7L-2904.2,3172.1L-2912.1,3170.2L-2915.7,3169.1L-2916.7,3167.3L-2917.9,3166L-2919.6,3166.6L-2922,3168.8L-2925.1,3171.1L-2929.6,3174.1L-2939.2,3179.7L-2941.9,3181.6L-2944.5,3180.5L-2948.6,3179.4L-2952.9,3179.3L-2962.3,3175.8L-2967.6,3173.3L-2970,3170.1L-2972.8,3168.8L-2974.5,3167.9Z" style="fill: var(--color-surface); stroke: var(--color-bg); stroke-width: 1.5"/>
+<path d="M518.7,820.9L520.6,827L524.5,831.8L538.6,842.8L547,849.5L547.3,851.9L544.4,857.4L543.4,861.2L545.6,865.3L550.6,870.2L551.1,872.6L549.9,875.4L547.3,880.6L552.8,896.1L553.7,911.1L552.3,921.7L552.3,927.8L553,933L557.8,945.1L554.7,964.9L558.3,975.7L563.3,984.4L566,1000L570.1,1007.3L576.5,1013.7L580.1,1015.9L587.3,1021.3L592.6,1025.7L595.7,1032.3L589.3,1037.8L584,1042.7L582.5,1047.9L584.9,1056.3L584.9,1060.8L581.6,1062.3L568.1,1061.9L557.6,1061.5L545.6,1061L528.5,1060.2L518,1059.7L503.3,1059L498.5,1059.4L485.1,1061.7L475.7,1063.4L474.3,1063.9L471.2,1066L469.3,1072.1L467.3,1079.2L465.4,1082.3L437.3,1092.4L426.3,1093.9L420.1,1092.8L415.5,1093.6L411.7,1095.8L410.2,1099.1L410,1103.3L410.9,1107.5L413.6,1113.3L414.1,1119.3L412.4,1123.3L411.9,1127.5L411.2,1132L412.6,1134.4L415.3,1134.9L417.9,1136.9L421.7,1138.8L425.1,1142.3L424.9,1147.4L422.2,1150.3L419.8,1151.7L409.3,1153.1L400.9,1154.2L390.1,1162.3L378.5,1170.9L364.6,1176.5L358.6,1178.1L348.1,1182.2L335.3,1188.9L329.1,1199.6L321.4,1212.1L313.7,1220.4L303.4,1228.1L293.8,1231.2L281.6,1234.9L266.5,1237.7L255.7,1238.8L252.3,1239.3L242.9,1239.6L238.1,1238.9L234.8,1238.7L233.3,1239.5L232.9,1241.5L232.6,1245.9L231.9,1250.9L229,1255.2L226.9,1257.2L224.2,1258L216.3,1256.8L209.6,1255.5L193.7,1253.6L190.6,1254L189.4,1254.5L184.4,1257.5L176.7,1263.6L171.4,1269L167.6,1271.4L158.5,1272.7L154.4,1274.7L137.1,1288.1L133.5,1291.3L115.7,1303L110.7,1306.8L106.6,1310.5L96.1,1319.1L89.3,1322.8L88.1,1325L87.7,1330.3L87.7,1341.8L87.7,1352.8L87.7,1368.8L87.7,1384.8L87.7,1403.2L78.8,1403.2L78.8,1403.3L79,1406.4L80.9,1412.7L81.7,1417.9L80.7,1421.2L79.7,1425.3L80.2,1429.4L81.7,1433.7L83.1,1438.1L83.1,1441.1L80.5,1443.4L74,1444.6L66.5,1445.6L61,1445.6L52.9,1445L47.6,1445.1L43,1445.1L39.2,1445.8L34.1,1448.6L28.6,1453.2L21.7,1459.1L17.6,1462.9L12.1,1463.7L6.5,1463.7L1.3,1460.7L-2.1,1459.1L-4.5,1459.3L-8.1,1461.4L-12.7,1462.9L-16.7,1462.9L-23.7,1459.8L-31.9,1455.4L-36.7,1453.2L-43.6,1452.4L-50.6,1451L-55.4,1451.6L-61.6,1451.6L-69.8,1454.6L-76.7,1456.8L-84.2,1459.1L-92.8,1461.2L-90.7,1467.8L-87.8,1471.5L-87.8,1476L-89.2,1479.9L-93.3,1483.5L-98.1,1488.3L-100.7,1492.1L-103.6,1497.1L-105.5,1500.2L-109.1,1505L-112.3,1511L-113.2,1514.9L-114.7,1519.2L-117.1,1520.6L-125.5,1521.7L-130.7,1523.2L-135.3,1524.7L-137.2,1527.3L-137.5,1527.7L-138.7,1532.8L-138.7,1536.5L-140.1,1539.5L-142,1546.8L-144.7,1553.6L-146.8,1562.5L-148.7,1569.8L-151.4,1581.7L-154,1592.7L-157.4,1603L-160,1609.6L-162.2,1613.3L-166.7,1617.7L-170.8,1620.5L-175.4,1624.3L-180.7,1627.9L-188.1,1632.4L-194.1,1636.1L-196.5,1637.7L-199.4,1639.7L-204.2,1644.8L-208,1652.1L-210.7,1658L-215.5,1667.4L-218.8,1672.6L-220.7,1675.4L-226,1678.3L-232,1680.6L-238.7,1683.5L-244,1686.4L-251.5,1689.3L-256,1692.2L-259.4,1696.5L-262,1701.7L-265.4,1709L-268,1717L-269.5,1722L-273.3,1739.5L-274.7,1749.6L-276.2,1756.1L-278.1,1764.2L-279.3,1776.3L-279.3,1786.5L-280.7,1792.2L-281.5,1796.6L-284.8,1801.6L-287.5,1805.2L-292,1810.2L-296.1,1813.1L-297.3,1816L-301.4,1819.6L-305.5,1825.3L-308.8,1829L-308.1,1831.8L-307.4,1836.8L-309.3,1841.9L-311.5,1847.7L-316.7,1854.7L-322.7,1858.4L-331.4,1859.1L-343.4,1859.1L-352.7,1858.4L-364,1858.4L-374.1,1857L-383.5,1855.5L-394.7,1854.7L-402.7,1854.7L-412.7,1856.2L-438.7,1856.2L-448.7,1857L-463.4,1859.8L-467,1860.5L-461.9,1826.1L-452.8,1807.5L-445.6,1799.2L-434.3,1794.9L-424,1776.1L-420.2,1758.8L-413.5,1750.7L-411.3,1744.4L-413.9,1739.7L-407.5,1730.2L-399.8,1715.8L-396.2,1706.6L-387.1,1692.4L-385.9,1689.2L-386.8,1685.5L-390.4,1688.7L-394.3,1693.9L-398.8,1698L-396.9,1693L-393.3,1685.4L-385.1,1677.6L-372.4,1668.8L-346,1639.1L-335.9,1633.9L-327.1,1621.4L-323.7,1610.2L-322.7,1584.6L-319.6,1571.1L-313.9,1560.4L-306.9,1541.2L-301.6,1532.4L-298,1514.9L-294.2,1508.1L-287.5,1505L-277.9,1496.1L-263.5,1490.6L-246.4,1479.1L-238.5,1472.2L-233,1462L-227.2,1441.5L-217.1,1419.9L-211.9,1403.5L-211.6,1403.3L-202.7,1394.7L-196.5,1383.8L-186.2,1378.9L-164.6,1376.6L-132.4,1367.5L-103.6,1353.9L-95.5,1348.4L-86.6,1337.4L-72.2,1323.2L-44.8,1306L-32.3,1296.5L-13.4,1272.4L-0.7,1252.4L9.9,1239.5L17.1,1228L22.1,1216.4L25,1197.6L23.1,1190.2L15.2,1178.3L9.7,1175L8.2,1169.4L11.1,1159.3L11.1,1142L12.8,1114.4L21.7,1092L43.5,1062.4L47.6,1050.4L50,1030.9L50.2,1024.1L77.6,996.5L93.7,975.3L99.2,970.2L113.3,960.5L162.5,939.1L190.4,923.9L206.7,912.8L216.3,899.6L243.2,847.6L269.6,773.7L271.7,765L283.5,762.6L291.9,761.6L298.6,758.9L306.8,753.2L314.7,755.5L310.9,759.3L310.9,768.5L316.4,779.2L326.2,791.2L344.2,806.4L358.1,812.5L378.1,816.2L401.1,809.5L414.1,809.4L420.5,806.6L427.3,810.8L440.5,812.1L452.9,809.8L462.5,803.4L468.5,796.2L469.5,799.8L469.7,803.7L471.7,806L475.3,815.4L477.4,818.9L484.6,818.3L490.9,820.2L505,819.3L518.7,820.9Z" style="fill: var(--color-surface); stroke: var(--color-bg); stroke-width: 1.5"/>
+<path d="M780.3,186.9L778.6,187.5L772.4,191.1L769,192.4L765.7,193.2L763.3,192.9L761.8,190.7L762.1,187.4L761.3,184.4L761.1,182.8L761.8,178.6L764,176.2L766.9,174.3L771.2,175L780.5,177.8L782.7,180.3L782.7,182L781,184.9L780.3,186.9Z" style="fill: var(--color-surface); stroke: var(--color-bg); stroke-width: 1.5"/>
+<path d="M1238.5,669.8L1239.9,674.2L1240.2,678.4L1233.7,682.2L1229.6,684.5L1224.6,695.2L1215.4,702.4L1213.8,704.6L1214,706.6L1220.2,709.9L1222.2,712.9L1223.4,717.1L1220.5,731.9L1218.8,743.3L1216.4,758.2L1216.4,763.8L1218.8,770.6L1221.2,775.9L1221.9,781.9L1221.2,796.5L1224.1,805L1226.2,812.8L1220.7,822.4L1218.6,831.1L1216.9,843.3L1216.4,850.9L1212.8,858.1L1208.2,864.7L1203,868.9L1196.7,872.4L1189.3,877.2L1183.3,889.8L1170.3,900.2L1167.7,903.8L1166.5,912.2L1166.7,923.8L1168.9,933L1175.1,946.4L1180.6,961.3L1182.1,968.9L1184.2,971.7L1191.9,976.5L1205.1,983.1L1207.5,985.8L1214,996L1220.2,1014.3L1222.2,1026.4L1234.4,1036L1245.4,1044.8L1256.2,1052.6L1268,1061L1269.7,1063.6L1273.5,1081.4L1277.4,1098.9L1281.7,1118.3L1285.8,1137.7L1290.8,1160.5L1293.7,1173.3L1297.3,1188.9L1301.4,1207.1L1294.6,1211L1287.4,1216L1292.7,1225.3L1303,1240.5L1309.3,1252.8L1311.4,1258.1L1316.5,1273.3L1320.3,1287.9L1321.3,1292.6L1323,1303.9L1321,1334.9L1323.9,1374L1327.8,1393.5L1321.8,1411L1316.5,1427.7L1317,1436L1319.6,1449.1L1322.5,1458.8L1326.3,1463.8L1325.6,1480L1323.9,1485.8L1312.4,1494.4L1299.4,1502.1L1295.8,1508.7L1294.9,1516.1L1296.6,1522L1305.4,1535.1L1318.6,1554.8L1333.3,1576.3L1334.7,1581.8L1335.2,1597L1341.2,1616.2L1347.9,1624.6L1350.3,1630.8L1355.1,1635.3L1359.7,1638.6L1362.6,1639L1379.1,1633.8L1407.2,1642.3L1433.8,1651L1435.8,1652.8L1441.5,1663.9L1451.1,1681.9L1458.3,1696.3L1464.6,1709.2L1430,1731.3L1395.4,1753.5L1360.9,1775.6L1326.3,1797.6L1292,1819.6L1257.4,1841.4L1222.9,1863.3L1188.3,1885.2L1165.5,1899.7L1150.9,1912.4L1132.6,1928.4L1115.4,1944.2L1101.9,1956.6L1084.2,1972.6L1075.3,1980.8L1055.8,1998.7L1049.8,2001.9L1023.9,2007.2L1000.2,2011.9L978.1,2016.4L962.9,2019.4L948.5,2022.4L927.4,2026.5L912.3,2029.6L896,2032.8L893.3,2033.3L890.5,2033.4L888.3,2033.3L883.7,2031.5L878.2,2027.4L874.6,2025.2L873.7,2021.9L875.8,2017.5L878.5,2013.5L879.4,2010.5L881.3,2008.1L883.5,2006.2L883.7,2003.5L881.8,1999.1L880.1,1992.9L880.1,1981.7L880.1,1978L880.1,1976.7L875.3,1972.4L866.2,1967.7L857.8,1964.9L853.7,1963.9L844.6,1962.3L831.7,1959.2L827.1,1957.2L818.7,1946.9L814.6,1944.2L795.2,1942.4L788.9,1940.7L783.7,1938.3L779.1,1934.9L776.5,1929.1L775.7,1924.5L774.1,1922.3L752.7,1911.1L747.2,1907.2L744.3,1903.6L744.3,1898.3L744.8,1891.9L743.8,1886.2L743.1,1883.3L733.3,1876.5L711.4,1861.1L689.6,1845.8L667.7,1830.5L645.9,1815L624.1,1799.6L602.2,1784.2L580.4,1768.7L558.5,1753.2L536.7,1737.8L514.9,1722.2L493,1706.6L471.4,1691.1L449.6,1675.4L427.7,1659.8L405.9,1644.2L384.1,1628.4L365.6,1615.2L345.2,1601.1L330.1,1590.8L314.9,1580.5L298.9,1569.5L288.3,1562.7L275.8,1554.5L263.3,1546.4L250.9,1538.2L238.1,1530L225.7,1521.7L213.2,1513.6L200.7,1505.4L188,1497.1L175.5,1488.9L163,1480.7L150.5,1472.4L137.8,1464.2L125.3,1455.9L112.9,1447.6L100.4,1439.3L87.7,1431.1L87.7,1415.7L87.7,1403.2L87.7,1384.8L87.7,1368.8L87.7,1352.8L87.7,1341.8L87.7,1330.3L88.1,1325L89.3,1322.8L96.1,1319.1L106.6,1310.5L110.7,1306.8L115.7,1303L133.5,1291.3L137.1,1288.1L154.4,1274.7L158.5,1272.7L167.6,1271.4L171.4,1269L176.7,1263.6L184.4,1257.5L189.4,1254.5L190.6,1254L193.7,1253.6L209.6,1255.5L216.3,1256.8L224.2,1258L226.9,1257.2L229,1255.2L231.9,1250.9L232.6,1245.9L232.9,1241.5L233.3,1239.5L234.8,1238.7L238.1,1238.9L242.9,1239.6L252.3,1239.3L255.7,1238.8L266.5,1237.7L281.6,1234.9L293.8,1231.2L303.4,1228.1L313.7,1220.4L321.4,1212.1L329.1,1199.6L335.3,1188.9L348.1,1182.2L358.6,1178.1L364.6,1176.5L378.5,1170.9L390.1,1162.3L400.9,1154.2L409.3,1153.1L419.8,1151.7L422.2,1150.3L424.9,1147.4L425.1,1142.3L421.7,1138.8L417.9,1136.9L415.3,1134.9L412.6,1134.4L411.2,1132L411.9,1127.5L412.4,1123.3L414.1,1119.3L413.6,1113.3L410.9,1107.5L410,1103.3L410.2,1099.1L411.7,1095.8L415.5,1093.6L420.1,1092.8L426.3,1093.9L437.3,1092.4L465.4,1082.3L467.3,1079.2L469.3,1072.1L471.2,1066L474.3,1063.9L475.7,1063.4L485.1,1061.7L498.5,1059.4L503.3,1059L518,1059.7L528.5,1060.2L545.6,1061L557.6,1061.5L568.1,1061.9L581.6,1062.3L584.9,1060.8L584.9,1056.3L582.5,1047.9L584,1042.7L589.3,1037.8L595.7,1032.3L592.6,1025.7L587.3,1021.3L580.1,1015.9L576.5,1013.7L570.1,1007.3L566,1000L563.3,984.4L558.3,975.7L554.7,964.9L557.8,945.1L553,933L552.3,927.8L552.3,921.7L553.7,911.1L552.8,896.1L547.3,880.6L549.9,875.4L551.1,872.6L550.6,870.2L545.6,865.3L543.4,861.2L544.4,857.4L547.3,851.9L547,849.5L538.6,842.8L524.5,831.8L520.6,827L518.7,820.9L532.1,822.4L539.1,821.7L555.2,814.5L567.7,804.7L577.5,799.6L586.4,789L594.1,782.1L605.6,774.7L638.2,758.9L643.3,758.8L654.1,762.3L663.4,761.2L669.9,755.6L676.9,742.3L687.4,734.2L701.1,725.8L719.3,718.1L731.3,710.7L750.5,704.6L798.3,700.5L822.8,697.1L839.6,697.8L856.4,686.2L864.8,682.5L901.3,681.6L918.5,673.2L983.8,673.2L991.7,676L999.7,680.6L1013.1,691.4L1019.6,693.9L1028.2,691.6L1048.4,681.2L1071,675.8L1083.2,669.8L1088.5,660.8L1099,657.4L1105,664.2L1128.6,671.2L1143,669.3L1149.2,667.1L1147,656.9L1162.2,659.6L1173.9,664.5L1186.2,674.5L1194.1,676.6L1208.5,672.1L1238.5,669.8Z" style="fill: var(--color-surface); stroke: var(--color-bg); stroke-width: 1.5"/>
+<path d="M772.9,523.4L771.4,524.4L767.1,523.4L760.4,523.4L760.1,520L761.1,517.6L762.3,515.1L766.4,520L772.9,520.9L772.9,523.4ZM876.3,427.2L882.8,430L889.5,427.5L893.1,428.2L896.7,429.6L897.4,435.2L894.3,441.3L890,447.5L886.1,454.2L883,462L877,466.7L871.5,469.4L860,463.7L853.3,462.2L851.3,460.1L849.7,451.4L846.8,448.7L842.2,447.5L838.4,449.6L833.3,454.2L830.5,449.6L826.4,448.8L824.7,446L824.7,442.5L852.3,421.6L860.2,416.9L877.3,411.5L879.9,412.3L877.7,415.6L877.7,416.9L879.9,418.4L879.4,421L877.3,423.1L876.3,427.2ZM952.9,422.7L951.7,423.7L931.3,413.6L924.5,412.6L922.9,411L923.1,405.8L923.6,403.5L937.3,402.4L948.3,406.1L954.3,416.2L954.8,417.8L952.9,422.7ZM763,502.3L760.6,507.5L750.5,505.7L748.1,503.5L750.3,497.6L753.4,496.8L753.4,492.6L756.5,488.3L770.9,484.9L774.3,487.9L775,492.1L766.4,501.1L763,502.3ZM547,104.5L547.3,107.7L549.7,112.2L552.5,113.8L558.3,116L562.6,116.3L568.6,117.4L572.7,120L572.9,123.8L571.7,128.2L569.3,132.2L567.9,135.3L569.3,137.1L571.5,138.5L573.7,138.8L575.3,138.4L576.5,136L578.7,133L579.9,132.6L579.9,134.2L580.9,136.3L588.3,139.9L604.4,146.4L610.6,146.6L615.9,147.4L617.3,150.1L627.7,160.2L630.1,159.8L634.6,160L640.1,159.2L644,157.3L646.6,157.6L649.5,159.7L652.9,161.3L657.4,164.6L661.3,168.7L663.9,170.1L680,167.3L683.6,169.8L687.4,169.8L691.7,169.1L701.1,170.4L708.8,170.1L709.5,169L710.2,160L711.4,156.7L713.1,155.9L717.7,156.5L734,161.9L740.7,165.2L747.2,167.9L752.9,168.2L756.5,169.9L761.8,178.6L761.1,182.8L761.3,184.4L762.1,187.4L761.8,190.7L763.3,192.9L765.7,193.2L769,192.4L772.4,191.1L778.6,187.5L780.3,186.9L790.6,191.1L795.2,193.8L796.9,196.9L799,199.9L802.1,200.4L806.5,197.4L813.4,194.3L824.9,197.1L837.9,201.2L843.4,201.6L843.7,199.6L844.6,196.8L846.8,195.5L849.9,195.1L854.5,193.7L859.5,191.1L864.5,190.2L870.1,191.9L876.8,193.5L880.9,193.5L882.5,199.1L885.9,201.3L887.1,206.2L881.3,208.8L877.7,209.2L876.8,217.6L878.2,220.1L881.6,222.3L882.5,224.8L883.3,237.2L876.5,244.7L866.9,253.1L820.6,279.9L809.6,292.8L805.5,295.8L771.2,303.9L746.9,312.7L735.4,315.7L721,330.8L714.3,336.9L719.8,338.6L726.1,345.7L723.9,349L714.8,353.8L710.7,355.4L708.5,354.6L706.4,355.2L691,381.1L677.1,399.7L669.4,407.7L661.7,419.7L644.9,450.6L644.7,459.5L653.1,490L657.7,498L664.4,504.7L677.1,510.4L680,516L675.7,521.3L663.2,530.8L641.3,543.5L632,553.6L630.1,563.3L623.6,567.7L621.2,581.2L617.3,590.2L616.4,593.1L612.3,600L611.8,604.8L618.5,611.7L615.2,614.6L611.8,616L604.1,616.7L578.2,617.6L557.3,632.1L546.8,645.1L537.4,669L525.9,683.2L520.9,685.8L512.9,679.6L503.1,678.6L493.5,680.7L488.7,685.5L480.8,688.3L473.1,686L456.8,684.7L449.3,684.9L437.8,688.8L428,686.2L411.4,684.9L375.4,688L371.1,689.6L366.5,695.5L355,705.6L337.7,706L321.9,712.5L318.1,716.6L311.3,728L309.2,736.3L308,736.4L306.3,734.4L303.7,735L302.5,741.5L296.5,744.3L291.7,745.3L279.4,740.2L269.3,732.4L264.1,732L255.4,719.9L251.6,712.2L248.9,704L249.4,700.8L248.7,698.1L241,694.8L239.1,687.1L244.9,677.3L249.4,672.9L252.3,671.8L245.3,672.2L240.3,678.6L233.8,668.3L207.7,648.3L209.3,643.8L209.1,641.2L204.8,646.5L201.7,648L188.2,647.1L172.9,649.6L168.8,628.6L166.9,620.6L166.4,615.5L170.5,603.5L174.8,598.5L180.5,588.4L187.7,579.9L195.2,578L198.5,576.7L201.2,570.2L202.9,564.6L201.7,564L193,565.2L177.2,541.8L177.7,537.9L179.6,532.3L181,525.3L181.3,519.7L185.3,515L191.6,510.2L196.9,503.4L199.5,496.5L200.2,490.4L197.1,486.1L188.5,483.7L179.6,466.2L177.7,455.3L175.7,454.1L170.2,449.1L164.9,439.8L164.2,438.3L169.7,436.7L192.1,436.5L196.9,434.6L197.6,433.8L201.7,426.4L206,414.4L206.9,407L205.5,403.9L198.1,396.5L197.8,394.3L199,390.8L203.3,387L209.3,382.7L212.7,378.9L212,376.1L210.1,373L209.8,370.3L211,366.8L211.3,354.8L212.2,351.7L211,340.9L209.6,332L204.8,320.5L205.7,317.9L207.9,315.7L214.9,311.7L220.6,302.2L229,294.4L239.8,288L247.3,280.9L250.4,275.5L252.5,274L251.8,271.5L250.4,267.8L246.1,264.2L240.5,262.2L234.3,262.2L230.5,261.6L229.5,258.7L229.7,251.1L229.5,243.5L228.3,240L225.4,237.4L219.7,238.2L214.9,236L211,235.5L208.9,237.1L198.1,236.6L193.5,235.4L190.1,234L188.2,234.7L187,236.3L186.8,238.6L186.1,241.6L182,244.4L173.1,247.2L165.9,246.9L159.2,245L157,243.5L153.9,242.2L140.2,243.8L138.5,242.7L134,245.5L127,248.9L123.2,249L121.7,248.4L121.3,246.9L118.4,241.6L119.1,238.8L124.6,230.5L124.1,228.7L121.7,226L119.8,222.1L119.1,220.2L115.5,219.9L111.9,222L97.5,226L94.1,227.4L87.9,231.5L81.4,237.5L76.6,238.8L74.7,236.9L74.2,222.7L81.9,213.4L87.2,207.6L84.8,206.5L79,206.7L79.3,202.1L82.1,200.1L84.8,195.2L81.7,193L79.3,189.9L79.3,181.6L80,178.1L79.3,174.5L67.5,179.5L64.4,178.7L64.4,172.4L70.9,163L71.6,160.2L63.9,158.7L58.1,154L54.8,149.9L50.9,143.9L50.9,138.5L54.8,126L60.3,122.2L65.1,120L75.2,111.2L88.9,112.8L97.5,111L105.2,106.6L109.7,105.5L116.7,101.7L116.5,96.4L114.1,92.4L116.2,88.7L124.1,84.1L133,78.2L143.1,77.1L153.4,71.6L160.4,75.1L166.4,74L173.3,78L182.5,87.3L195.9,91.1L206.7,88.1L225.4,87.6L235,88.7L251.8,86.5L261.4,87.3L276.8,82.7L289,88.4L312.3,91.1L326.2,95.9L365.1,103.7L379.3,103.9L398.9,99.4L407.3,96.1L415,98.1L426.3,94.3L431.8,95L438.8,100.5L463.7,107.9L470.2,101.7L475,100.2L492.8,104L510.8,111.8L520.1,112.3L533.8,110.3L544.9,105.2L547,104.5Z" style="fill: var(--color-neutral-200); stroke: var(--color-text); stroke-width: 2; stroke-linejoin: round"/>
+</g>
+<rect x="20" y="660" width="290" height="140" style="fill: var(--color-bg); stroke: var(--color-text); stroke-width: 2"/>
+<path d="M135.3,741.1L130.7,755.4L126.3,761.1L123.7,762.9L117.3,764.4L109.7,755.5L106,746.4L103.8,743.6L107.2,741.3L112.1,741.6L122.9,739.7L125.1,739L136.1,729.8L147.1,728.7L147.3,731.6L135.3,741.1ZM280.7,707.4L276.9,711.5L272.7,710.1L274.7,701L276.5,698.2L284.3,694.3L290.7,692.6L292.5,688.4L294.7,686.8L296.9,689.3L295.1,692.2L293.9,701.4L289.5,704.3L280.7,707.4ZM253.9,754.3L246.4,761.4L238.8,759.7L237.6,758.5L245.2,756.8L251.9,751.3L256.3,739.3L263.3,726L264.7,720.3L267.3,718.1L271.1,717.9L272.7,718.4L274.5,721.3L274.5,728L272.5,739.2L268.9,748.9L253.9,754.3ZM187.2,755.6L186.8,760.5L188,765.3L187.8,772.8L185.2,776.8L178.2,780.8L173.1,780.1L170.1,778.5L164.7,772L164.5,765.3L169.5,760.8L171.5,755.3L184.2,756.3L185.4,755.3L186.2,754.9L187.2,755.6ZM88.2,763.6L86,764.1L83.2,762.5L80.4,757.6L82.4,753.9L84,752.1L86.6,752.4L91.2,755.2L92.8,757.9L92.8,759.6L88.2,763.6ZM49.2,776.9L43.8,787.1L37.1,783.3L35.5,782L34.1,779.9L40.7,779.5L47.2,774.4L49.2,776.9ZM52.2,733.8L50.8,734.4L49.4,729.3L42.8,717.2L46.8,711.7L54.2,711.5L57.2,715.3L58.2,719.2L56.8,721.5L57.2,726.2L56.4,729.1L52.2,733.8Z" clip-path="url(#gnCan)" style="fill: var(--color-neutral-200); stroke: var(--color-text); stroke-width: 1.5"/>
+<g transform="translate(352.0 263.5)"><g class="dot" data-dot="d"><title>Castilla y León · OVZ.net</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text x="22" y="-4" text-anchor="start" style="font: 700 20px var(--font-body); fill: var(--color-text); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">Castilla y León</text><text x="22" y="18" text-anchor="start" style="font: 500 15px var(--font-body); fill: var(--color-accent-700); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">OVZ.net</text></g></g>
+<g transform="translate(244.0 502.2)"><g class="dot" data-dot="d"><title>Extremadura · Arado</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text x="-22" y="-4" text-anchor="end" style="font: 700 20px var(--font-body); fill: var(--color-text); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">Extremadura</text><text x="-22" y="18" text-anchor="end" style="font: 500 15px var(--font-body); fill: var(--color-accent-700); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">Arado</text></g></g>
+<g transform="translate(420.0 372.3)"><g class="dot" data-dot="d"><title>Madrid · SIGEGAN</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text x="22" y="-4" text-anchor="start" style="font: 700 20px var(--font-body); fill: var(--color-text); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">Madrid</text><text x="22" y="18" text-anchor="start" style="font: 500 15px var(--font-body); fill: var(--color-accent-700); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">SIGEGAN</text></g></g>
+<g transform="translate(398.7 421.1)"><g class="dot" data-dot="d"><title>Castilla-La Mancha · REGA-CLM</title><circle r="26" style="fill: var(--color-accent); opacity: .18"/><circle r="12" style="fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3"/><text x="22" y="-4" text-anchor="start" style="font: 700 20px var(--font-body); fill: var(--color-text); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">Castilla-La Mancha</text><text x="22" y="18" text-anchor="start" style="font: 500 15px var(--font-body); fill: var(--color-accent-700); paint-order: stroke; stroke: var(--color-bg); stroke-width: 5">REGA-CLM</text></g></g>
+<g transform="translate(97.3 152.7)"><g class="dot" data-dot="i"><title>Galicia</title><circle r="9" style="fill: var(--color-bg); stroke: var(--color-accent); stroke-width: 3.5"/></g></g>
+<g transform="translate(276.7 108.9)"><g class="dot" data-dot="i"><title>Asturias</title><circle r="9" style="fill: var(--color-bg); stroke: var(--color-accent); stroke-width: 3.5"/></g></g>
+<g transform="translate(413.3 99.7)"><g class="dot" data-dot="i"><title>Cantabria</title><circle r="9" style="fill: var(--color-bg); stroke: var(--color-accent); stroke-width: 3.5"/></g></g>
+<g transform="translate(608.0 263.5)"><g class="dot" data-dot="i"><title>Aragón</title><circle r="9" style="fill: var(--color-bg); stroke: var(--color-accent); stroke-width: 3.5"/></g></g>
+<g transform="translate(268.0 631.9)"><g class="dot" data-dot="i"><title>Andalucía</title><circle r="9" style="fill: var(--color-bg); stroke: var(--color-accent); stroke-width: 3.5"/></g></g>
+<g transform="translate(488.7 155.5)"><g class="dot" data-dot="p"><title>País Vasco</title><circle r="7" style="fill: var(--color-bg); stroke: var(--color-neutral-400); stroke-width: 3"/></g></g>
+<g transform="translate(557.3 159.1)"><g class="dot" data-dot="p"><title>Navarra</title><circle r="7" style="fill: var(--color-bg); stroke: var(--color-neutral-400); stroke-width: 3"/></g></g>
+<g transform="translate(503.3 189.9)"><g class="dot" data-dot="p"><title>La Rioja</title><circle r="7" style="fill: var(--color-bg); stroke: var(--color-neutral-400); stroke-width: 3"/></g></g>
+<g transform="translate(811.3 286.7)"><g class="dot" data-dot="p"><title>Cataluña</title><circle r="7" style="fill: var(--color-bg); stroke: var(--color-neutral-400); stroke-width: 3"/></g></g>
+<g transform="translate(641.3 454.9)"><g class="dot" data-dot="p"><title>C. Valenciana</title><circle r="7" style="fill: var(--color-bg); stroke: var(--color-neutral-400); stroke-width: 3"/></g></g>
+<g transform="translate(843.3 446.2)"><g class="dot" data-dot="p"><title>Baleares</title><circle r="7" style="fill: var(--color-bg); stroke: var(--color-neutral-400); stroke-width: 3"/></g></g>
+<g transform="translate(591.3 581.4)"><g class="dot" data-dot="p"><title>Murcia</title><circle r="7" style="fill: var(--color-bg); stroke: var(--color-neutral-400); stroke-width: 3"/></g></g>
+<g transform="translate(140.0 736.0)"><g class="dot" data-dot="p"><title>Canarias</title><circle r="7" style="fill: var(--color-bg); stroke: var(--color-neutral-400); stroke-width: 3"/></g></g>
+</svg>
+    </div>
+  </div>
+</section>
+
+<section id="planes" class="section">
+  <div class="wrap">
+    <div class="plans-head">
+      <div data-reveal="up" style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 class="h-section">Planes</h2>
+        <p class="lead" style="max-width: 48ch;">Pagas por explotaciones activas. 15 días de prueba en todos los planes.</p>
+      </div>
+      <div class="seg" data-reveal="up" data-delay="100" role="radiogroup" aria-label="Facturación">
+        <label class="seg-opt"><input type="radio" name="billing" value="monthly">Mensual</label>
+        <label class="seg-opt"><input type="radio" name="billing" value="annual" checked>Anual · 2 meses gratis</label>
+      </div>
+    </div>
+    <div class="plans">
+      <div class="plan" data-reveal="up" data-plan="79">
+        <div class="plan-top"><span class="plan-name">Rebaño</span></div>
+        <span class="muted" style="font-size: 15px;">Hasta 25 explotaciones activas</span>
+        <div class="plan-price"><b data-price>66 €</b><span>/ mes</span></div>
+        <span class="plan-note" data-note>790 € al año, IVA no incluido</span>
+        <a class="btn btn-secondary" href="/demo?plan=rebano">Probar Rebaño<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="feats">
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Cola de trámites con revisión</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Número de WhatsApp para tus ganaderos</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Importación de inventario desde Excel</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>3 usuarios</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Soporte por email</div>
+        </div>
+      </div>
+      <div class="plan featured" data-reveal="up" data-delay="110" data-plan="189">
+        <div class="plan-top"><span class="plan-name">Cabaña</span><span class="tag tag-accent">El más elegido</span></div>
+        <span class="muted" style="font-size: 15px;">Hasta 100 explotaciones activas</span>
+        <div class="plan-price"><b data-price>158 €</b><span>/ mes</span></div>
+        <span class="plan-note" data-note>1890 € al año, IVA no incluido</span>
+        <a class="btn btn-primary" href="/demo?plan=cabana">Probar Cabaña<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="feats">
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Todo lo de Rebaño</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Usuarios ilimitados</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Aprobación desde el móvil</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Resumen mensual por ganadero</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Soporte por chat en horario de oficina</div>
+        </div>
+      </div>
+      <div class="plan" data-reveal="up" data-delay="220" data-plan="449">
+        <div class="plan-top"><span class="plan-name">Comarca</span></div>
+        <span class="muted" style="font-size: 15px;">Hasta 300 explotaciones activas</span>
+        <div class="plan-price"><b data-price>374 €</b><span>/ mes</span></div>
+        <span class="plan-note" data-note>4490 € al año, IVA no incluido</span>
+        <a class="btn btn-secondary" href="/demo?plan=comarca">Probar Comarca<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="feats">
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Todo lo de Cabaña</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Varias oficinas y cartera por empleado</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Registro de auditoría completo</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Gestor de cuenta asignado</div>
+          <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Respuesta de soporte en 4 horas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios" class="section">
+  <div class="wrap split">
+    <div data-reveal="up" style="display: flex; flex-direction: column; gap: 16px; align-self: start;">
+      <h2 class="h-section" style="max-width: 12ch;">Servicios para arrancar</h2>
+      <p class="lead" style="max-width: 40ch;">Lo contratas una vez, con cualquier plan. Lo hacemos con tu equipo, en tu oficina o en remoto.</p>
+    </div>
+    <div class="acc" data-accordion>
+      <div class="acc-item" data-reveal="up">
+        <button class="acc-btn" type="button" aria-expanded="true" aria-controls="svc-0"><span class="name">Puesta en marcha</span><span class="price">490 € pago único</span><span class="sign" aria-hidden="true">−</span></button>
+        <p class="acc-panel" id="svc-0">Importamos tu Excel de ganaderos, explotaciones y animales, limpiamos duplicados y crotales mal escritos, y dejamos el inventario listo para recibir mensajes.</p>
+      </div>
+      <div class="acc-item" data-reveal="up">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="svc-1"><span class="name">Formación del equipo</span><span class="price">290 € · 2 sesiones</span><span class="sign" aria-hidden="true">+</span></button>
+        <p class="acc-panel" id="svc-1" hidden>Dos sesiones de hora y media con tus administrativos: cola de trámites, revisión de casos ambiguos y aprobación desde el móvil.</p>
+      </div>
+      <div class="acc-item" data-reveal="up">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="svc-2"><span class="name">Alta de ganaderos en WhatsApp</span><span class="price">3 € por ganadero</span><span class="sign" aria-hidden="true">+</span></button>
+        <p class="acc-panel" id="svc-2" hidden>Avisamos a tus ganaderos del nuevo número, les mandamos un ejemplo de mensaje y comprobamos que cada contacto queda asociado a su explotación.</p>
+      </div>
+      <div class="acc-item" data-reveal="up">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="svc-3"><span class="name">Soporte prioritario</span><span class="price">49 € / mes</span><span class="sign" aria-hidden="true">+</span></button>
+        <p class="acc-panel" id="svc-3" hidden>Línea directa con respuesta en menos de dos horas en días laborables, pensada para campañas de saneamiento y cierres de censo.</p>
+      </div>
+      <div class="acc-item" data-reveal="up">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="svc-4"><span class="name">Desarrollo a medida</span><span class="price">Bajo presupuesto</span><span class="sign" aria-hidden="true">+</span></button>
+        <p class="acc-panel" id="svc-4" hidden>Informes propios, exportaciones a tu programa de contabilidad o conexión con otras plataformas autonómicas además de OVZ.net.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros" class="section">
+  <div class="wrap split">
+    <h2 class="h-section" data-reveal="up">Quiénes somos</h2>
+    <div class="about-text">
+      <p data-reveal="up">Ganera nace en Salamanca, entre una gestoría ganadera y un equipo de software. Vimos a administrativos pasar la mañana copiando crotales de WhatsApp a la sede electrónica y decidimos automatizar ese trabajo.</p>
+      <p class="muted" data-reveal="up" data-delay="100">Construimos el producto con gestorías que lo usan cada día. Cada nueva comunidad autónoma se integra con una gestoría local que valida los trámites antes de abrirla al resto.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="section">
+  <div class="wrap split">
+    <h2 class="h-section" data-reveal="up" style="max-width: 12ch;">Lo que nos preguntan las gestorías</h2>
+    <div class="acc faq" data-accordion>
+      <div class="acc-item" data-reveal="up">
+        <button class="acc-btn" type="button" aria-expanded="true" aria-controls="faq-0"><span>¿Ganera presenta trámites sin nuestro permiso?</span><span class="sign" aria-hidden="true">−</span></button>
+        <p class="acc-panel" id="faq-0">No. Cada trámite espera en la cola hasta que alguien de tu gestoría pulsa Aprobar, sea cual sea la confianza de la extracción.</p>
+      </div>
+      <div class="acc-item" data-reveal="up">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-1"><span>¿Mis ganaderos tienen que instalar algo?</span><span class="sign" aria-hidden="true">+</span></button>
+        <p class="acc-panel" id="faq-1" hidden>No. Escriben por WhatsApp a un número de Ganera, con sus palabras y con los últimos dígitos del crotal, como ya hacen contigo.</p>
+      </div>
+      <div class="acc-item" data-reveal="up">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-2"><span>¿Cómo cargamos las explotaciones?</span><span class="sign" aria-hidden="true">+</span></button>
+        <p class="acc-panel" id="faq-2" hidden>Con el Excel que ya usas. Si lo prefieres, el servicio de puesta en marcha lo hace por ti y revisa los datos antes de importarlos.</p>
+      </div>
+      <div class="acc-item" data-reveal="up">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-3"><span>¿Qué pasa si la extracción se equivoca?</span><span class="sign" aria-hidden="true">+</span></button>
+        <p class="acc-panel" id="faq-3" hidden>El trámite llega en revisión con el mensaje original al lado. Corriges la explotación o el crotal y apruebas, o lo rechazas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <div class="newsletter" data-reveal="up">
+      <strong>Novedades para gestorías ganaderas</strong>
+      <p>Cambios en OVZ.net, plazos de censo y lo nuevo de Ganera. Un correo al mes.</p>
+      <form class="nl-form" data-newsletter novalidate>
+        <label class="visually-hidden" for="nl-email">Email</label>
+        <input id="nl-email" type="email" name="email" placeholder="Email" autocomplete="email" required>
+        <button type="submit" aria-label="Suscribirme"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </form>
+      <p class="nl-status" data-nl-status role="status"></p>
+    </div>
+    <div class="foot-contact" data-reveal="up" data-delay="100">
+      <div><strong>Consultas generales</strong><a href="mailto:hola@ganera.es">hola@ganera.es</a></div>
+      <div><strong>Gestorías interesadas</strong><a href="mailto:gestorias@ganera.es">gestorias@ganera.es</a></div>
+      <div><strong>Oficina</strong><span>Calle Toro 42<br>37002 Salamanca<br>España</span></div>
+      <a class="btn btn-ink" href="/demo">Contacto</a>
+    </div>
+    <nav class="foot-links" data-reveal="up" data-delay="200" aria-label="Páginas">
+      <strong>Páginas</strong>
+      <a href="#top">Inicio</a>
+      <a href="#recorrido">Cómo funciona</a>
+      <a href="#tramites">Trámites</a>
+      <a href="#planes">Planes</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#nosotros">Quiénes somos</a>
+      <a href="#faq">Preguntas frecuentes</a>
+      <a href="#">Acceso gestorías</a>
+    </nav>
+  </div>
+  <div class="wordmark" aria-hidden="true">
+    <span data-reveal="rise"><img src="/assets/img/ganera-logo-blanco.png" alt="">GANERA</span>
+  </div>
+  <div class="legal">
+    <a href="#">Política de privacidad</a>
+    <a href="#">Aviso legal</a>
+    <a href="#">Cookies</a>
+    <span>© 2026 Ganera</span>
+  </div>
+</footer>
+</div>
+</body>
+</html>

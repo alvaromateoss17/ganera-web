@@ -1,0 +1,7 @@
+.DS_Store
+.vercel
+.env*
+node_modules/
+
+# Material de referencia local (capturas de la app, vídeos, logo original)
+/reference/

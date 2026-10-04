@@ -1,0 +1,7 @@
+{
+  "name": "ganera-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing de Ganera: trámites ganaderos automáticos para gestorías.",
+  "engines": { "node": ">=18" }
+}
