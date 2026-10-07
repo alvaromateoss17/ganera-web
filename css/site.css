@@ -18,8 +18,6 @@ a:hover { color: var(--color-accent-600); }
 .lead { font-size: 17px; line-height: 1.55; margin: 0; color: var(--color-neutral-800); }
 .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 48px; }
 .split-head { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px; align-items: end; margin-bottom: 48px; }
-.link-plain { color: var(--color-text); text-decoration: none; }
-.link-plain:hover { color: var(--color-accent-700); }
 
 /* ── Header ───────────────────────────────────────────── */
 .site-header { position: sticky; top: 0; z-index: 20; background: var(--color-bg); border-bottom: 2px solid var(--color-divider); }
@@ -240,9 +238,6 @@ a:hover { color: var(--color-accent-600); }
 .plan-price span { font-size: 15px; color: var(--color-neutral-800); }
 .plan-note { font-size: 13px; color: var(--color-neutral-700); min-height: 20px; }
 .plan .btn { justify-content: space-between; padding: 13px 16px; font-size: 15px; }
-.feats { display: flex; flex-direction: column; border-top: 1px solid var(--color-divider); }
-.feats div { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--color-divider); font-size: 14px; }
-.feats svg { flex: none; margin-top: 2px; }
 
 /* ── Acordeones (servicios / faq) ─────────────────────── */
 .acc { border-top: 2px solid var(--color-text); }
@@ -257,10 +252,6 @@ a:hover { color: var(--color-accent-600); }
 .acc-panel[hidden] { display: none; }
 .faq .acc-btn { display: flex; justify-content: space-between; gap: 20px; font-size: 18px; font-weight: 600; }
 .faq .acc-panel { line-height: 1.6; max-width: 60ch; }
-
-/* ── Nosotros ─────────────────────────────────────────── */
-.about-text { display: flex; flex-direction: column; gap: 24px; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; }
-.about-text p { margin: 0; text-wrap: pretty; }
 
 /* ── Footer ───────────────────────────────────────────── */
 .site-footer { background: var(--color-accent); color: var(--color-bg); overflow: hidden; border-top: 2px solid var(--color-text); }
@@ -652,4 +643,30 @@ a:hover { color: var(--color-accent-600); }
   .post-item .go { padding-top: 8px; }
   .post-cta { flex-direction: column; align-items: stretch; }
   .post-cta .btn { justify-content: space-between; }
+}
+
+/* ── Aviso de cookies ─────────────────────────────────── */
+/* La web no instala cookies; este aviso es informativo y solo guarda en
+   localStorage que lo has cerrado (ver /legal/cookies). */
+.cookie-notice {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 60;
+  max-width: 560px; margin: 0 auto;
+  background: var(--color-surface); color: var(--color-text);
+  border: 2px solid var(--color-text);
+  padding: 18px 20px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(16px); opacity: 0;
+  transition: transform .5s cubic-bezier(.16,1,.3,1), opacity .4s ease;
+}
+.cookie-notice.is-in { transform: translateY(0); opacity: 1; }
+.cookie-notice p { margin: 0; font-size: 14px; line-height: 1.5; flex: 1 1 260px; }
+.cookie-notice a { color: var(--color-accent-700); }
+.cookie-notice .btn { flex: none; padding: 10px 18px; font-size: 14px; }
+@media (prefers-reduced-motion: reduce) {
+  .cookie-notice { transition: none; transform: none; }
+}
+@media (max-width: 480px) {
+  .cookie-notice { padding: 16px; }
+  .cookie-notice .btn { width: 100%; justify-content: center; }
 }

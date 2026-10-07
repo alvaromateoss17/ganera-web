@@ -32,7 +32,7 @@ def plan_card(p, cfg, i):
   <div class="plan-price">{swap('b', 'plan-amount', eur(p['mensual']), eur(p['anual']))}{swap('span', 'plan-per', '/ mes', '/ año')}</div>
   {swap('span', 'plan-save', '', f"{cfg['ahorro_anual']} · ahorras {eur(saving)}")}
   {swap('span', 'plan-note', 'IVA no incluido', f"{eur(p['anual'] / 12)}/mes · IVA no incluido")}
-  <a class="btn {'btn-primary' if featured else 'btn-secondary'}" href="/demo?plan={p['id']}">Probar {e(p['nombre'])}{ARROW}</a>
+  <a class="btn {'btn-primary' if featured else 'btn-secondary'}" href="/prueba-15-dias?plan={p['id']}">Probar {e(p['nombre'])}{ARROW}</a>
 </div>'''
 
 

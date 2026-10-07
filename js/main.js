@@ -338,6 +338,32 @@
     });
   }
 
+  /* ── Aviso de cookies ───────────────────────────────── */
+  // La web no instala cookies. Este aviso es solo informativo: al cerrarlo
+  // guardamos la decisión en localStorage (único dato que almacenamos).
+  function initCookieNotice() {
+    const KEY = 'ganera-cookie-notice';
+    let done = false;
+    try { done = localStorage.getItem(KEY) === 'ok'; } catch { done = false; }
+    if (done) return;
+
+    const el = document.createElement('aside');
+    el.className = 'cookie-notice';
+    el.setAttribute('role', 'region');
+    el.setAttribute('aria-label', 'Aviso de cookies');
+    el.innerHTML =
+      '<p>Esta web no usa cookies de seguimiento ni analítica. Solo guardamos que has cerrado este aviso. <a href="/legal/cookies">Política de cookies</a>.</p>' +
+      '<button class="btn btn-primary" type="button">Entendido</button>';
+    document.body.appendChild(el);
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('is-in')));
+
+    el.querySelector('button').addEventListener('click', () => {
+      try { localStorage.setItem(KEY, 'ok'); } catch {}
+      el.classList.remove('is-in');
+      setTimeout(() => el.remove(), 500);
+    });
+  }
+
   initReveal();
   initPricing();
   initAccordions();
@@ -345,6 +371,7 @@
   initMenu();
   initCurrent();
   initForms();
+  initCookieNotice();
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
   tick();

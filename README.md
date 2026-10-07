@@ -8,7 +8,7 @@ Es un sitio estático sin dependencias ni paso de build, más dos funciones serv
 
 ```
 index.html          Landing completa (hero, app, recorrido, trámites, comparativa, mapa, planes, servicios, FAQ, footer)
-demo.html           Formulario "Prueba 15 días" (destino de todos los botones Probar)
+prueba-15-dias.html           Formulario "Prueba 15 días" (destino de todos los botones Probar)
 contacto.html       Teléfonos, WhatsApp, email y formulario de contacto
 nosotros/index.html /nosotros ("Misión" en el menú): historia, misión y visión, valores, equipo
 blog/index.html     /blog — listado de artículos
@@ -30,7 +30,7 @@ assets/img/         Logos rojo/blanco y favicons
 api/demo.js         POST /api/demo        → solicitud de prueba
 api/newsletter.js   POST /api/newsletter  → suscripción del footer
 api/contact.js      POST /api/contact     → formulario de contacto
-vercel.json         URLs limpias (/demo), redirecciones legales, caché de assets, cabeceras
+vercel.json         URLs limpias (/prueba-15-dias), redirecciones legales, caché de assets, cabeceras
 ```
 
 El mapa de España se generó una vez a SVG estático con la misma proyección Mercator que usaba el diseño (d3 `fitExtent`), así la página no descarga el atlas mundial ni d3.
@@ -67,7 +67,8 @@ Sin ellas, los formularios responden OK y los datos se quedan en Vercel → Logs
 ## Ajustes rápidos
 
 - Intensidad de animación: añade `data-motion="Sutil"` o `data-motion="Sin animación"` a `<html>`.
-- Planes y servicios (nombres, ganaderos, precios mensual/anual, servicios adicionales): solo en `_partials/precios.json`. Después ejecuta `python3 scripts/sync-partials.py`, que regenera la sección Planes y Servicios de `index.html` y el selector de plan de `demo.html`.
+- Planes y servicios (nombres, ganaderos, precios mensual/anual, servicios adicionales): solo en `_partials/precios.json`. Después ejecuta `python3 scripts/sync-partials.py`, que regenera la sección Planes y Servicios de `index.html` y el selector de plan de `prueba-15-dias.html`.
+- Aviso de cookies: lo inyecta `js/main.js` (`initCookieNotice`) y se estiliza en `css/site.css` (`.cookie-notice`). La web no instala cookies; el aviso solo guarda en `localStorage` que lo has cerrado. Si algún día se añade analítica, hay que convertirlo en un banner de consentimiento real y actualizar `legal/cookies.html`.
 - Facturación anual marcada por defecto: atributo `checked` del radio `annual` en `index.html`.
 
 ## Publicar un artículo en el blog

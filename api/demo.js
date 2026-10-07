@@ -1,4 +1,4 @@
-// POST /api/demo — trial request from /demo.
+// POST /api/demo — trial request from /prueba-15-dias.
 const { notify, isEmail, clean, readBody } = require('./_lib/notify');
 
 module.exports = async (req, res) => {

@@ -1,5 +1,5 @@
 {
-  "_ayuda": "Fuente única de planes y servicios. Tras editar, ejecuta: python3 scripts/sync-partials.py (regenera la sección Planes y Servicios de index.html y el selector de plan de demo.html). Precios en euros, IVA no incluido.",
+  "_ayuda": "Fuente única de planes y servicios. Tras editar, ejecuta: python3 scripts/sync-partials.py (regenera la sección Planes y Servicios de index.html y el selector de plan de prueba-15-dias.html). Precios en euros, IVA no incluido.",
 
   "ahorro_anual": "2 meses gratis",
 
