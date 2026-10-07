@@ -1,0 +1,6 @@
+# ganera.es
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://ganera.es/sitemap.xml

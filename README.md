@@ -11,7 +11,14 @@ index.html          Landing completa (hero, app, recorrido, trámites, comparati
 demo.html           Formulario "Prueba 15 días" (destino de todos los botones Probar)
 contacto.html       Teléfonos, WhatsApp, email y formulario de contacto
 nosotros/index.html /nosotros ("Misión" en el menú): historia, misión y visión, valores, equipo
-_partials/          Cabecera y footer compartidos (fuente única)
+blog/index.html     /blog — listado de artículos
+blog/<slug>.html    Un artículo por fichero (la URL queda /blog/<slug>)
+legal/aviso-legal.html  /legal/aviso-legal
+legal/privacidad.html   /legal/privacidad
+legal/cookies.html      /legal/cookies
+robots.txt          Indexación + ruta del sitemap
+sitemap.xml         Lista de URLs (actualizar al publicar un artículo)
+_partials/          Cabecera, footer y navegación legal compartidos (fuente única)
 _partials/precios.json    Planes y servicios adicionales (fuente única de precios)
 scripts/sync-partials.py  Copia _partials/ a todas las páginas y genera planes/servicios
 scripts/precios.py        Plantillas HTML de planes y servicios
@@ -23,14 +30,14 @@ assets/img/         Logos rojo/blanco y favicons
 api/demo.js         POST /api/demo        → solicitud de prueba
 api/newsletter.js   POST /api/newsletter  → suscripción del footer
 api/contact.js      POST /api/contact     → formulario de contacto
-vercel.json         URLs limpias (/demo), caché de assets, cabeceras
+vercel.json         URLs limpias (/demo), redirecciones legales, caché de assets, cabeceras
 ```
 
 El mapa de España se generó una vez a SVG estático con la misma proyección Mercator que usaba el diseño (d3 `fitExtent`), así la página no descarga el atlas mundial ni d3.
 
-## Cabecera y footer
+## Cabecera, footer y navegación legal
 
-Se editan solo en `_partials/header.html` y `_partials/footer.html`. Después:
+Se editan solo en `_partials/header.html`, `_partials/footer.html` y `_partials/legalnav.html`. Después:
 
 ```bash
 python3 scripts/sync-partials.py
@@ -62,3 +69,25 @@ Sin ellas, los formularios responden OK y los datos se quedan en Vercel → Logs
 - Intensidad de animación: añade `data-motion="Sutil"` o `data-motion="Sin animación"` a `<html>`.
 - Planes y servicios (nombres, ganaderos, precios mensual/anual, servicios adicionales): solo en `_partials/precios.json`. Después ejecuta `python3 scripts/sync-partials.py`, que regenera la sección Planes y Servicios de `index.html` y el selector de plan de `demo.html`.
 - Facturación anual marcada por defecto: atributo `checked` del radio `annual` en `index.html`.
+
+## Publicar un artículo en el blog
+
+1. Copia `blog/no-perder-tramites-ganaderos-whatsapp.html` a `blog/<nuevo-slug>.html` y reescribe el contenido.
+2. Ajusta `<title>`, `<meta name="description">`, `<link rel="canonical">` y los bloques `application/ld+json`
+   (`BlogPosting` y, si el artículo tiene preguntas, `FAQPage`).
+3. Añade la tarjeta del artículo en `blog/index.html` dentro de `.post-list`.
+4. Añade la URL a `sitemap.xml`.
+5. Ejecuta `python3 scripts/sync-partials.py` para que la página nueva reciba cabecera y footer.
+
+La página nueva solo necesita los marcadores `<!-- partial:header -->` / `<!-- partial:footer -->` vacíos.
+
+## Datos legales
+
+Los tres documentos de `legal/` llevan la identificación de los titulares (nombre, DNI, domicilio,
+correo y teléfonos). Lo que queda pendiente está marcado en la propia página con la clase `.pending`:
+
+- El DNI de Antonio Menor, en `legal/aviso-legal.html` y `legal/privacidad.html`.
+- El nombre de la pasarela de pago, en el apartado 8 de `legal/privacidad.html`.
+
+Si se añade analítica o cualquier script de terceros, hay que actualizar `legal/cookies.html`
+y poner un banner de consentimiento: hoy el sitio no instala ninguna cookie.

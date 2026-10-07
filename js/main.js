@@ -179,7 +179,7 @@
         if (on && d.s !== 'p') lit++;
         if (on !== d.lit) { d.lit = on; d.el.classList.toggle('lit', on); }
       });
-      if (lit !== litCount) { litCount = lit; litCountEl.textContent = String(lit); }
+      if (litCountEl && lit !== litCount) { litCount = lit; litCountEl.textContent = String(lit); }
     }
 
     if (appScene) {

@@ -9,9 +9,15 @@
     },
     {
       "source": "/nosotros/valores",
-      "destination": "/nosotros#mision",
+      "destination": "/nosotros#valores",
       "permanent": true
-    }
+    },
+    { "source": "/privacidad", "destination": "/legal/privacidad", "permanent": true },
+    { "source": "/politica-de-privacidad", "destination": "/legal/privacidad", "permanent": true },
+    { "source": "/aviso-legal", "destination": "/legal/aviso-legal", "permanent": true },
+    { "source": "/cookies", "destination": "/legal/cookies", "permanent": true },
+    { "source": "/politica-de-cookies", "destination": "/legal/cookies", "permanent": true },
+    { "source": "/legal", "destination": "/legal/aviso-legal", "permanent": false }
   ],
   "headers": [
     {
