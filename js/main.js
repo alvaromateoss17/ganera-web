@@ -84,24 +84,15 @@
     words = $$('[data-w]', statement);
   }
 
-  /* App mock: 5 stages (0 idle, 1 WhatsApp arrives, 2 review, 3 approve, 4 submitted). */
+  /* App mock: 5 stages (0 idle, 1 WhatsApp arrives, 2 review, 3 approve, 4 sent to OVZ.net).
+     The views, states and toasts are styled from the mock's data-stage in site.css. */
   const app = appScene && {
     num: $('[data-app-num]', appScene),
     caps: $$('[data-cap]', appScene),
-    count: $('[data-app-count]', appScene),
-    row: $('[data-app-row]', appScene),
-    pill: $('[data-app-pill]', appScene),
-    mpill: $('[data-app-mpill]', appScene),
-    toast: $('[data-app-toast]', appScene),
-    overlay: $('[data-app-overlay]', appScene),
-    modal: $('[data-app-modal]', appScene),
-    btn: $('[data-app-btn]', appScene),
-    done: $('[data-app-done]', appScene),
-  };
-  const setPill = (el, ok, label) => {
-    el.textContent = label;
-    el.classList.toggle('pill-ok', ok);
-    el.classList.toggle('pill-pend', !ok);
+    mock: $('[data-app-mock]', appScene),
+    inbox: $('[data-app-c-inbox]', appScene),
+    tram: $('[data-app-c-tram]', appScene),
+    bell: $('[data-app-c-bell]', appScene),
   };
   let appStage = -1;
   function renderApp(as) {
@@ -113,21 +104,10 @@
       c.style.opacity = i === ci ? '1' : '0';
       c.style.transform = `translateY(${i === ci ? '0px' : (i < ci ? '-20px' : '20px')})`;
     });
-    app.count.textContent = as >= 1 ? '129 trámites' : '128 trámites';
-    app.row.style.height = as >= 1 ? '39px' : '0px';
-    app.row.style.background = as === 1 ? '#FFF4DE' : '#ffffff';
-    setPill(app.pill, as >= 4, as >= 4 ? 'Ejecutado' : 'Pendiente de revisión');
-    setPill(app.mpill, as >= 3, as >= 3 ? 'Aprobado' : 'Pendiente de revisión');
-    app.toast.style.opacity = as === 1 ? '1' : '0';
-    app.toast.style.transform = `translateY(${as === 1 ? '0px' : '-12px'})`;
-    const modalOn = as === 2 || as === 3;
-    app.overlay.style.opacity = modalOn ? '1' : '0';
-    app.modal.style.opacity = modalOn ? '1' : '0';
-    app.modal.style.transform = `translate(-50%, -50%) scale(${modalOn ? 1 : 0.94})`;
-    app.btn.style.transform = `scale(${as === 3 ? 0.94 : 1})`;
-    app.btn.style.boxShadow = as === 3 ? '0 0 0 4px rgba(31,61,43,.25)' : 'none';
-    app.done.style.opacity = as >= 4 ? '1' : '0';
-    app.done.style.transform = `translate(-50%, ${as >= 4 ? '0px' : '16px'})`;
+    app.mock.dataset.stage = String(as);
+    app.inbox.textContent = as >= 1 ? '4' : '3';
+    app.tram.textContent = as >= 1 && as < 3 ? '5' : '4';
+    app.bell.textContent = as >= 1 ? '5' : '4';
   }
 
   /* Recorrido: 5 steps, each with its own panel. */
