@@ -162,14 +162,33 @@ La lista completa de eventos y lo que debe hacer la app con cada uno está en
 
 ## 9. Cuando todo cuadre, pasar a producción
 
-1. Repite los pasos 2 y 3 **con la clave de producción** (`sk_live_…`). Los
-   Price ID de producción son **distintos** de los de prueba.
-2. Mete las variables en Vercel → Settings → Environment Variables → Production.
-3. Déjalo probado con `CHECKOUT_ENABLED=false` y repasa que los CTA siguen
-   llevando a `/prueba-15-dias`.
-4. Antes de poner `true`, pasa por [`LEGAL-PENDIENTE.md`](LEGAL-PENDIENTE.md):
+```bash
+npm run vercel:env     # imprime qué pegar en Vercel y en qué entorno
+```
+
+1. Activa la cuenta real de Stripe (verificación de identidad y cuenta bancaria).
+2. Pon la clave `sk_live_…` en `.env.local` y ejecuta `npm run stripe:setup`
+   otra vez. **Los Price ID de producción son distintos de los de prueba**:
+   los de prueba no existen en la cuenta real.
+3. Pega la clave y los Price ID nuevos en Vercel → Production.
+4. Cambia `CHECKOUT_ENABLED` a `true` y redespliega.
+5. Antes de ese paso 4, pasa por [`LEGAL-PENDIENTE.md`](LEGAL-PENDIENTE.md):
    datos societarios rellenos, revisión del abogado y emails de fin de prueba
    activados en Stripe.
+
+### Mientras tanto: probar en una URL real sin riesgo
+
+Pon las variables **de prueba** en el entorno **Preview** de Vercel, no en
+Production. Cada rama y cada pull request genera una URL `…vercel.app` con el
+cobro funcionando en modo prueba, mientras ganera.es sigue intacto.
+
+### La salvaguarda
+
+Si alguna vez acaban claves `sk_test_` sirviendo el dominio real, `/api/checkout`
+**bloquea el pago** y lo grita en los logs, en vez de mandar a un cliente a una
+pasarela marcada «Entorno de prueba» que le rechazaría la tarjeta. Preferimos no
+cobrar a cobrar mal. Se puede desactivar con `STRIPE_ALLOW_TEST_IN_PROD=true`,
+pero piénsalo dos veces. Los preview de Vercel no se ven afectados.
 
 ---
 

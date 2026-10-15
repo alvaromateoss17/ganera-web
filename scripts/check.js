@@ -44,7 +44,9 @@ for (const f of ['vercel.json', '_partials/precios.json', '_partials/legal.json'
 }
 
 console.log('\nSecretos fuera de las variables de entorno');
-const SECRETO = /(sk_live_|sk_test_[A-Za-z0-9]{10,}|whsec_|rk_live_|rk_test_)/;
+// Una clave de verdad lleva material detrás del prefijo. Exigirlo evita saltar
+// con los prefijos que aparecen en comentarios y en la salvaguarda de checkout.
+const SECRETO = /\b(sk|rk)_(live|test)_[A-Za-z0-9]{16,}|\bwhsec_[A-Za-z0-9]{16,}|\bre_[A-Za-z0-9]{20,}/;
 const fuentes = [...walk(path.join(ROOT, 'api'), '.js'), ...walk(path.join(ROOT, 'js'), '.js'), ...walk(ROOT, '.html')];
 const sucios = fuentes.filter((f) => SECRETO.test(fs.readFileSync(f, 'utf8')));
 sucios.length ? sucios.forEach((f) => fail(`clave en ${path.relative(ROOT, f)}`)) : ok('ninguna clave en el código');

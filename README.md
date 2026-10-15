@@ -74,6 +74,7 @@ npm run dev            # servidor local con las funciones de /api reales
 npm run check          # hace de build: sintaxis, JSON, secretos y enlaces
 npm run sync           # = python3 scripts/sync-partials.py
 npm run stripe:setup   # crea productos y precios en Stripe desde precios.json
+npm run vercel:env     # imprime las variables listas para pegar en Vercel
 ```
 
 `check` **no** se llama `build` a propósito: Vercel ejecutaría ese script en cada

@@ -8,7 +8,7 @@
 // El webhook de Stripe NO vive aquí: lo implementa la web app de Ganera, que es la
 // que tiene la base de datos. Ver docs/INTEGRACION-APP.md.
 const { readBody, clean, isEmail } = require('./_lib/notify');
-const { siteUrl, legalUrl, checkoutEnabled, trialDays } = require('./_lib/config');
+const { siteUrl, legalUrl, checkoutEnabled, trialDays, pagoInseguro } = require('./_lib/config');
 const { stripe, priceId, complementoPriceId, PLANES, PERIODOS } = require('./_lib/stripe');
 
 module.exports = async (req, res) => {
@@ -20,6 +20,17 @@ module.exports = async (req, res) => {
   if (!checkoutEnabled()) {
     return res.status(503).json({
       error: 'El pago con tarjeta todavía no está activo. Solicita la prueba en /prueba-15-dias y la activamos nosotros.',
+    });
+  }
+
+  if (pagoInseguro()) {
+    console.error(
+      'BLOQUEADO: hay una clave de PRUEBA de Stripe configurada en el dominio real. ' +
+      'Un cliente acabaría en una pasarela de prueba que rechaza su tarjeta. ' +
+      'Pon la clave sk_live_ en Vercel, o deja CHECKOUT_ENABLED=false hasta tenerla.'
+    );
+    return res.status(503).json({
+      error: 'El pago no está disponible en este momento. Escríbenos a agroganera@gmail.com y lo resolvemos.',
     });
   }
 
