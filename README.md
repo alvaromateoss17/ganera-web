@@ -2,7 +2,7 @@
 
 Landing de Ganera (trámites ganaderos automáticos para gestorías), implementada a partir del diseño de Claude Design `Ganera Landing.dc.html`.
 
-Es un sitio estático sin dependencias ni paso de build, más dos funciones serverless de Vercel.
+Es un sitio estático sin paso de build, más varias funciones serverless de Vercel. La única dependencia de npm es el SDK de `stripe`, que usan las funciones de pago.
 
 ## Estructura
 
@@ -13,15 +13,22 @@ contacto.html       Teléfonos, WhatsApp, email y formulario de contacto
 nosotros/index.html /nosotros ("Misión" en el menú): historia, misión y visión, valores, equipo
 blog/index.html     /blog — listado de artículos
 blog/<slug>.html    Un artículo por fichero (la URL queda /blog/<slug>)
-legal/aviso-legal.html  /legal/aviso-legal
-legal/privacidad.html   /legal/privacidad
-legal/cookies.html      /legal/cookies
+gracias.html        /gracias — vuelta de Stripe Checkout (noindex)
+legal/aviso-legal.html         /legal/aviso-legal
+legal/privacidad.html          /legal/privacidad
+legal/cookies.html             /legal/cookies
+legal/terminos.html            /legal/terminos — condiciones de contratación (B2B)
+legal/encargo-tratamiento.html /legal/encargo-tratamiento — art. 28 RGPD
+legal/subencargados.html       /legal/subencargados
+legal/uso-ia.html              /legal/uso-ia — transparencia AI Act
 robots.txt          Indexación + ruta del sitemap
 sitemap.xml         Lista de URLs (actualizar al publicar un artículo)
 _partials/          Cabecera, footer y navegación legal compartidos (fuente única)
 _partials/precios.json    Planes y servicios adicionales (fuente única de precios)
-scripts/sync-partials.py  Copia _partials/ a todas las páginas y genera planes/servicios
+_partials/legal.json      Datos societarios y subencargados (fuente única de la capa legal)
+scripts/sync-partials.py  Copia _partials/ a todas las páginas y genera los bloques
 scripts/precios.py        Plantillas HTML de planes y servicios
+scripts/legal.py          Bloques legales + helper pendiente() de los [PENDIENTE: …]
 css/tokens.css      Sistema de diseño: colores, tipografía Archivo, botones, tags, formularios
 css/site.css        Maquetación de cada sección
 js/main.js          Animaciones y scroll (reveals, escenas fijadas, marquee, mapa, precios, acordeones, newsletter)
@@ -30,6 +37,13 @@ assets/img/         Logos rojo/blanco y favicons
 api/demo.js         POST /api/demo        → solicitud de prueba
 api/newsletter.js   POST /api/newsletter  → suscripción del footer
 api/contact.js      POST /api/contact     → formulario de contacto
+api/checkout.js     POST /api/checkout    → crea la Checkout Session de Stripe
+api/checkout-session.js  GET /api/checkout-session → datos mínimos para /gracias
+api/config.js       GET  /api/config      → config pública (CHECKOUT_ENABLED, APP_LOGIN_URL)
+api/_lib/stripe.js  Cliente de Stripe y lista blanca de planes → Price ID
+api/_lib/config.js  Variables de entorno del servidor (URLs, interruptor, días de prueba)
+docs/INTEGRACION-APP.md  Para el equipo de la app: eventos de Stripe y aviso de IA
+docs/LEGAL-PENDIENTE.md  Todo lo que falta por rellenar antes de cobrar en real
 vercel.json         URLs limpias (/prueba-15-dias), redirecciones legales, caché de assets, cabeceras
 ```
 
@@ -37,13 +51,28 @@ El mapa de España se generó una vez a SVG estático con la misma proyección M
 
 ## Cabecera, footer y navegación legal
 
-Se editan solo en `_partials/header.html`, `_partials/footer.html` y `_partials/legalnav.html`. Después:
+Se editan solo en `_partials/header.html` y `_partials/footer.html`. La navegación legal y el bloque
+«Legal» del pie se generan desde `_partials/legal.json` (ver `scripts/legal.py`). Después:
 
 ```bash
 python3 scripts/sync-partials.py
 ```
 
-Copia su contenido entre los marcadores `<!-- partial:header -->` / `<!-- partial:footer -->` de cada página. Una página nueva solo necesita esos marcadores vacíos.
+Copia su contenido entre los marcadores `<!-- partial:header -->` / `<!-- partial:footer -->` de cada página. Una página nueva solo necesita esos marcadores vacíos. Los marcadores también se resuelven dentro de los
+propios parciales, así que `footer.html` puede incluir `<!-- partial:foot-legal -->`.
+
+## Comprobar el repo
+
+No hay paso de compilación, así que esto hace de `build`:
+
+```bash
+npm run check   # sintaxis de las funciones y de js/main.js, JSON válidos,
+                # ningún secreto en el código y enlaces internos que resuelven
+npm run sync    # = python3 scripts/sync-partials.py
+```
+
+`check` **no** se llama `build` a propósito: Vercel ejecutaría ese script en cada
+despliegue y este sitio no necesita compilarse.
 
 ## Probar en local
 
@@ -63,6 +92,57 @@ Sin ellas, los formularios responden OK y los datos se quedan en Vercel → Logs
 | `RESEND_API_KEY` | Clave de [Resend](https://resend.com) para enviar los avisos por email |
 | `LEADS_TO_EMAIL` | Dónde llegan los avisos (varios separados por coma) |
 | `LEADS_FROM_EMAIL` | Remitente verificado en Resend, p. ej. `Ganera <web@ganera.es>` |
+
+Para el cobro con Stripe (ver `.env.example`, que es la referencia completa):
+
+| Variable | Uso |
+|---|---|
+| `STRIPE_SECRET_KEY` | Clave secreta de Stripe. **Solo servidor**, nunca llega al navegador |
+| `STRIPE_PRICE_BASE_MENSUAL` · `_ANUAL` | Price ID del plan Base en cada periodo |
+| `STRIPE_PRICE_GESTION_MENSUAL` · `_ANUAL` | Price ID del plan Gestión |
+| `STRIPE_PRICE_PLUS_MENSUAL` · `_ANUAL` | Price ID del plan Plus |
+| `STRIPE_PRICE_GANERAI` | Price ID del complemento GaneraAI (opcional) |
+| `STRIPE_TAX_RATE_ID` | Tax Rate del IVA 21 % creado en Stripe (opcional) |
+| `STRIPE_TRIAL_DAYS` | Días de prueba. Por defecto `15` |
+| `CHECKOUT_ENABLED` | `true`/`false`. Por defecto `false` |
+| `PUBLIC_SITE_URL` | Por defecto `https://ganera.es` |
+| `APP_LOGIN_URL` | Login de la web app. Por defecto `https://app.ganera.es/login` |
+
+Los planes de la web son **Base, Gestión y Plus** (`_partials/precios.json`), cada uno con
+precio mensual y anual, de ahí que haya un Price ID por plan y periodo.
+
+La web es HTML estático sin paso de compilación, así que **no existe prefijo público**
+tipo `NEXT_PUBLIC_`/`VITE_`. `CHECKOUT_ENABLED` y `APP_LOGIN_URL` llegan al navegador a
+través de `GET /api/config`, que es el único canal público y no expone ningún secreto.
+`STRIPE_SECRET_KEY` jamás sale del servidor.
+
+## Cobro con Stripe
+
+El flujo es: CTA de un plan → `POST /api/checkout` → Stripe Checkout → `/gracias`.
+
+**El interruptor es `CHECKOUT_ENABLED`:**
+
+- **`false` (por defecto):** los CTA de los planes se quedan exactamente como están hoy,
+  enlaces a `/prueba-15-dias`. `POST /api/checkout` responde `503`. El embudo actual no
+  se toca.
+- **`true`:** `js/main.js` (`initCheckout`) consulta `/api/config`, convierte los CTA en
+  botones que abren Stripe Checkout con el plan y el periodo seleccionados en el selector
+  Mensual/Anual, y añade la nota de que la prueba sí pide tarjeta. Es mejora progresiva:
+  si `/api/config` falla, los enlaces siguen funcionando como antes.
+
+La prueba es de 15 días **con tarjeta**: `payment_method_collection: "always"` y
+`trial_settings.end_behavior.missing_payment_method: "cancel"`. No se cobra nada hasta el
+día 16. La landing recoge también el NIF/CIF (`tax_id_collection`) y la dirección de
+facturación, porque los clientes son gestorías.
+
+**El webhook de Stripe NO está aquí.** Vive en la web app, que es la que tiene Supabase:
+crea la cuenta, invita al usuario por email y gestiona cancelaciones. Lo que la app tiene
+que escuchar está en **`docs/INTEGRACION-APP.md`**. Landing y app deben usar la **misma
+cuenta de Stripe**.
+
+Lo que falta por configurar en el panel de Stripe (productos, Tax Rate, URL de condiciones
+para que funcione la casilla de aceptación, emails de fin de prueba) está en
+**`docs/LEGAL-PENDIENTE.md`**, apartado 4.
 
 ## Ajustes rápidos
 
@@ -84,11 +164,44 @@ La página nueva solo necesita los marcadores `<!-- partial:header -->` / `<!-- 
 
 ## Datos legales
 
-Los tres documentos de `legal/` llevan la identificación de los titulares (nombre, DNI, domicilio,
-correo y teléfonos). Lo que queda pendiente está marcado en la propia página con la clase `.pending`:
+> ⚠️ Los siete documentos de `legal/` son un **borrador** redactado a medida de Ganera.
+> **Deben ser revisados por un abogado antes de cobrar en real.**
 
-- El DNI de Antonio Menor, en `legal/aviso-legal.html` y `legal/privacidad.html`.
-- El nombre de la pasarela de pago, en el apartado 8 de `legal/privacidad.html`.
+**Los datos societarios salen de un único sitio: `_partials/legal.json`.** No los escribas
+en el HTML. La sociedad aún no está constituida, así que `razonSocial`, `nif` y
+`datosRegistrales` están vacíos y se publican como `[PENDIENTE: …]` resaltado en amarillo
+(helper `pendiente()` de `scripts/legal.py`, clase `.pending` en `css/site.css`). Es
+deliberado: así es imposible publicar en real sin rellenarlos.
+
+Después de editar el JSON:
+
+```bash
+python3 scripts/sync-partials.py
+```
+
+Las páginas y qué cubre cada una:
+
+| Página | Norma |
+|---|---|
+| `/legal/aviso-legal` | LSSI-CE (Ley 34/2002, art. 10) |
+| `/legal/privacidad` | RGPD + LOPDGDD. Distingue a Ganera **responsable** de Ganera **encargado** |
+| `/legal/cookies` | LSSI art. 22.2 + Guía de cookies de la AEPD |
+| `/legal/terminos` | Condiciones de contratación B2B + Ley 7/1998 |
+| `/legal/encargo-tratamiento` | Contrato de encargo, art. 28 RGPD |
+| `/legal/subencargados` | Proveedores, ubicación de los datos y garantías de transferencia |
+| `/legal/uso-ia` | Transparencia del Reglamento (UE) 2024/1689 (AI Act), art. 50 |
+
+**Todo lo que falta por rellenar o verificar está en `docs/LEGAL-PENDIENTE.md`**: datos
+societarios, región de Supabase, garantías de cada proveedor, condiciones de la API de
+Anthropic sobre uso de datos, revisión por abogado y configuración de Stripe.
+
+### Cookies
+
+Auditoría de octubre de 2026: el sitio **no instala ninguna cookie**, no carga scripts ni
+tipografías de terceros, y el único dato en almacenamiento local es la clave
+`ganera-cookie-notice`. Por eso hay aviso informativo y no banner de consentimiento.
 
 Si se añade analítica o cualquier script de terceros, hay que actualizar `legal/cookies.html`
-y poner un banner de consentimiento: hoy el sitio no instala ninguna cookie.
+y poner un banner de consentimiento real: «Aceptar» y «Rechazar» al mismo nivel y con la
+misma visibilidad, más «Configurar», sin casillas premarcadas y sin cargar nada antes del
+consentimiento.
