@@ -4,7 +4,7 @@
 // El webhook de Stripe NO vive aquí: lo implementa la web app de Ganera, que es la
 // que tiene la base de datos. Ver docs/INTEGRACION-APP.md.
 const { readBody, clean, isEmail } = require('./_lib/notify');
-const { siteUrl, checkoutEnabled, trialDays } = require('./_lib/config');
+const { siteUrl, legalUrl, checkoutEnabled, trialDays } = require('./_lib/config');
 const { stripe, priceId, complementoPriceId, PLANES, PERIODOS } = require('./_lib/stripe');
 
 module.exports = async (req, res) => {
@@ -43,7 +43,8 @@ module.exports = async (req, res) => {
     else console.error('Falta STRIPE_PRICE_GANERAI; se continúa sin el complemento.');
   }
 
-  const base = siteUrl();
+  const base = siteUrl();      // vuelta del Checkout: puede ser localhost en pruebas
+  const legal = legalUrl();    // documentos legales: siempre la URL pública
   const dias = trialDays();
   const taxRate = (process.env.STRIPE_TAX_RATE_ID || '').trim();
 
@@ -68,7 +69,7 @@ module.exports = async (req, res) => {
       consent_collection: { terms_of_service: 'required' },
       custom_text: {
         terms_of_service_acceptance: {
-          message: `Acepto las [Condiciones de contratación](${base}/terminos) y el [Contrato de encargo del tratamiento](${base}/encargo-tratamiento).`,
+          message: `Acepto las [Condiciones de contratación](${legal}/terminos) y el [Contrato de encargo del tratamiento](${legal}/encargo-tratamiento).`,
         },
         submit: {
           message: `Hoy no se te cobra nada. Al terminar los ${dias} días de prueba se cobrará automáticamente la suscripción salvo que la canceles antes.`,
@@ -80,8 +81,15 @@ module.exports = async (req, res) => {
     });
     return res.status(200).json({ url: session.url });
   } catch (err) {
-    // Nunca devolvemos el detalle de Stripe al navegador.
-    console.error('Stripe checkout error', { plan, periodo, type: err && err.type, code: err && err.code, message: err && err.message });
+    // Nunca devolvemos el detalle de Stripe al navegador; al log, todo.
+    const msg = (err && err.message) || '';
+    console.error('Stripe checkout error', { plan, periodo, type: err && err.type, code: err && err.code, message: msg });
+    if (/terms of service/i.test(msg)) {
+      console.error(
+        'PISTA: consent_collection exige la URL de las condiciones en el panel de Stripe. ' +
+        'Configuración → Público → "Terms of service URL" = ' + legal + '/terminos (también en modo prueba).'
+      );
+    }
     return res.status(502).json({ error: 'No se ha podido abrir el pago. Inténtalo de nuevo o escríbenos a agroganera@gmail.com.' });
   }
 };

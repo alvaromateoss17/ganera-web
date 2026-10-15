@@ -44,6 +44,10 @@ api/_lib/stripe.js  Cliente de Stripe y lista blanca de planes → Price ID
 api/_lib/config.js  Variables de entorno del servidor (URLs, interruptor, días de prueba)
 docs/INTEGRACION-APP.md  Para el equipo de la app: eventos de Stripe y aviso de IA
 docs/LEGAL-PENDIENTE.md  Todo lo que falta por rellenar antes de cobrar en real
+docs/PRUEBAS-STRIPE.md   Cómo probar el cobro de punta a punta sin dinero real
+scripts/dev.js           Servidor local con las funciones de /api
+scripts/stripe-setup.js  Crea productos y precios en Stripe desde precios.json
+scripts/env.js           Carga .env.local sin dependencias
 vercel.json         URLs limpias (/prueba-15-dias), redirecciones legales, caché de assets, cabeceras
 ```
 
@@ -61,14 +65,13 @@ python3 scripts/sync-partials.py
 Copia su contenido entre los marcadores `<!-- partial:header -->` / `<!-- partial:footer -->` de cada página. Una página nueva solo necesita esos marcadores vacíos. Los marcadores también se resuelven dentro de los
 propios parciales, así que `footer.html` puede incluir `<!-- partial:foot-legal -->`.
 
-## Comprobar el repo
-
-No hay paso de compilación, así que esto hace de `build`:
+## Comandos
 
 ```bash
-npm run check   # sintaxis de las funciones y de js/main.js, JSON válidos,
-                # ningún secreto en el código y enlaces internos que resuelven
-npm run sync    # = python3 scripts/sync-partials.py
+npm run dev            # servidor local con las funciones de /api reales
+npm run check          # hace de build: sintaxis, JSON, secretos y enlaces
+npm run sync           # = python3 scripts/sync-partials.py
+npm run stripe:setup   # crea productos y precios en Stripe desde precios.json
 ```
 
 `check` **no** se llama `build` a propósito: Vercel ejecutaría ese script en cada
@@ -77,11 +80,15 @@ despliegue y este sitio no necesita compilarse.
 ## Probar en local
 
 ```bash
-python3 -m http.server 8000
-# abre http://localhost:8000
+npm run dev     # http://localhost:3000
 ```
 
-Los formularios necesitan las funciones de Vercel; en local con `python` mostrarán el mensaje de error. Para probarlos en local: `npx vercel dev`.
+`scripts/dev.js` sirve el sitio y **ejecuta las funciones reales de `/api`**, con
+las URLs limpias y las redirecciones de `vercel.json`, así que los formularios y
+el cobro funcionan igual que en producción. Lee la configuración de `.env.local`
+(que está en `.gitignore`).
+
+Para servir solo los estáticos, sin funciones, vale `python3 -m http.server 8000`.
 
 ## Variables de entorno (Vercel → Settings → Environment Variables)
 
@@ -140,9 +147,16 @@ crea la cuenta, invita al usuario por email y gestiona cancelaciones. Lo que la 
 que escuchar está en **`docs/INTEGRACION-APP.md`**. Landing y app deben usar la **misma
 cuenta de Stripe**.
 
-Lo que falta por configurar en el panel de Stripe (productos, Tax Rate, URL de condiciones
-para que funcione la casilla de aceptación, emails de fin de prueba) está en
-**`docs/LEGAL-PENDIENTE.md`**, apartado 4.
+### Probarlo sin dinero real
+
+**`docs/PRUEBAS-STRIPE.md`** tiene el recorrido completo en el entorno de prueba:
+clave en `.env.local`, `npm run stripe:setup` para crear productos y precios,
+tarjetas de prueba, cómo adelantar los 15 días con los relojes de prueba y cómo
+disparar los eventos del webhook con el Stripe CLI.
+
+Lo que falta por configurar en el panel de Stripe (productos, Tax Rate, URL de
+condiciones para que funcione la casilla de aceptación, emails de fin de prueba)
+está en **`docs/LEGAL-PENDIENTE.md`**, apartado 4.
 
 ## Ajustes rápidos
 

@@ -6,6 +6,15 @@
 // revisar un abogado antes de cobrar en real. Ver docs/LEGAL-PENDIENTE.md.
 
 const siteUrl = () => (process.env.PUBLIC_SITE_URL || 'https://ganera.es').replace(/\/+$/, '');
+
+/** Base para los enlaces a los documentos legales que Stripe muestra en el
+ *  Checkout. Siempre pública: en local PUBLIC_SITE_URL es http://localhost y
+ *  Stripe no acepta enlaces que no sean https, además de que las condiciones
+ *  que acepta el cliente deben ser las publicadas, no las de tu portátil. */
+const legalUrl = () => {
+  const s = siteUrl();
+  return s.startsWith('https://') ? s : 'https://ganera.es';
+};
 const appLoginUrl = () => process.env.APP_LOGIN_URL || 'https://app.ganera.es/login';
 const checkoutEnabled = () => process.env.CHECKOUT_ENABLED === 'true';
 
@@ -15,4 +24,4 @@ const trialDays = () => {
   return Number.isFinite(n) && n > 0 && n <= 90 ? n : 15;
 };
 
-module.exports = { siteUrl, appLoginUrl, checkoutEnabled, trialDays };
+module.exports = { siteUrl, legalUrl, appLoginUrl, checkoutEnabled, trialDays };

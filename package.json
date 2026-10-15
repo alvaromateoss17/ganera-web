@@ -10,7 +10,9 @@
     "stripe": "^23.0.0"
   },
   "scripts": {
+    "dev": "node scripts/dev.js",
     "check": "node scripts/check.js",
-    "sync": "python3 scripts/sync-partials.py"
+    "sync": "python3 scripts/sync-partials.py",
+    "stripe:setup": "node scripts/stripe-setup.js"
   }
 }
