@@ -302,12 +302,18 @@
         form.email.focus();
         return;
       }
+      // El consentimiento es obligatorio y nunca viene premarcado (LOPDGDD art. 6).
+      if (form.consent && !form.consent.checked) {
+        status.textContent = 'Marca la casilla para aceptar recibir el boletín.';
+        form.consent.focus();
+        return;
+      }
       status.textContent = 'Enviando…';
       try {
         const res = await fetch('/api/newsletter', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, consent: form.consent ? form.consent.checked : undefined }),
         });
         if (!res.ok) throw new Error(String(res.status));
         status.textContent = 'Listo. Te escribiremos una vez al mes.';
@@ -344,6 +350,134 @@
     });
   }
 
+  /* ── Checkout de Stripe ─────────────────────────────── */
+  // Mejora progresiva: los CTA de los planes son enlaces normales a
+  // /prueba-15-dias. Solo si /api/config responde checkoutEnabled:true los
+  // convertimos en botones que abren el pago. Con CHECKOUT_ENABLED=false (o si
+  // la petición falla) el embudo actual se queda exactamente como está.
+  let configPromise = null;
+  const publicConfig = () => {
+    if (!configPromise) {
+      configPromise = fetch('/api/config')
+        .then((r) => (r.ok ? r.json() : null))
+        .catch(() => null);
+    }
+    return configPromise;
+  };
+
+  function initCheckout() {
+    const plans = $('[data-plans]');
+    if (!plans) return;
+    const ctas = $$('a[href*="/prueba-15-dias?plan="]', plans);
+    if (!ctas.length) return;
+
+    publicConfig().then((cfg) => {
+      if (!cfg || !cfg.checkoutEnabled) return;
+
+      const dias = cfg.trialDays || 15;
+
+      // Aviso sobre los botones: la prueba sí pide tarjeta.
+      const note = document.createElement('p');
+      note.className = 'plans-card-note';
+      note.dataset.checkoutNote = '1';
+      note.textContent = `${dias} días de prueba. Se solicita tarjeta, pero no se cobra nada hasta el día ${dias + 1}. Cancela cuando quieras. Precios sin IVA.`;
+      plans.parentNode.insertBefore(note, plans);
+
+      // Los errores van en una línea compartida encima de la tabla: cada .plan
+      // es un subgrid de 6 filas y meterle un hijo más descuadraría las tarjetas.
+      const err = document.createElement('p');
+      err.className = 'checkout-err';
+      err.setAttribute('role', 'status');
+      err.hidden = true;
+      plans.parentNode.insertBefore(err, plans);
+      const showErr = (msg) => {
+        err.textContent = msg;
+        err.hidden = false;
+        err.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+      };
+
+      const billing = () => {
+        const checked = $('input[name="billing"]:checked');
+        return !checked || checked.value === 'annual' ? 'anual' : 'mensual';
+      };
+
+      ctas.forEach((cta) => {
+        const plan = new URL(cta.href, location.href).searchParams.get('plan');
+        if (!plan) return;
+        const label = cta.innerHTML;
+        cta.addEventListener('click', async (e) => {
+          e.preventDefault();
+          if (cta.dataset.busy) return;
+          cta.dataset.busy = '1';
+          err.hidden = true;
+          cta.setAttribute('aria-busy', 'true');
+          cta.innerHTML = 'Abriendo el pago…';
+          try {
+            const res = await fetch('/api/checkout', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ plan, periodo: billing() }),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok || !data.url) throw new Error(data.error || 'error');
+            location.href = data.url;
+            return;
+          } catch (e) {
+            showErr((e && e.message !== 'error' && e.message)
+              || 'No se ha podido abrir el pago. Inténtalo de nuevo o escríbenos a agroganera@gmail.com.');
+          }
+          cta.innerHTML = label;
+          cta.removeAttribute('aria-busy');
+          delete cta.dataset.busy;
+        });
+      });
+    });
+  }
+
+  /* ── Página /gracias ────────────────────────────────── */
+  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+    'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const fechaLarga = (iso) => {
+    const d = new Date(iso);
+    if (isNaN(d)) return null;
+    return `${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`;
+  };
+
+  function initGracias() {
+    const root = $('[data-gracias]');
+    if (!root) return;
+    const view = (name) => $$('[data-view]', root).forEach((el) => { el.hidden = el.dataset.view !== name; });
+    const sid = new URLSearchParams(location.search).get('session_id');
+
+    // El botón «Entrar en Ganera» apunta a APP_LOGIN_URL en las dos vistas,
+    // así que se fija en cuanto llega la configuración, haya sesión o no.
+    const setLogin = (url, email) => $$('[data-login]', root).forEach((el) => {
+      el.href = email ? `${url}?email=${encodeURIComponent(email)}` : url;
+    });
+    const loginUrl = (cfg) => (cfg && cfg.appLoginUrl) || 'https://app.ganera.es/login';
+    publicConfig().then((cfg) => setLogin(loginUrl(cfg)));
+
+    if (!sid) { view('error'); return; }
+    view('loading');
+
+    Promise.all([
+      fetch(`/api/checkout-session?session_id=${encodeURIComponent(sid)}`).then((r) => (r.ok ? r.json() : Promise.reject(r))),
+      publicConfig(),
+    ]).then(([data, cfg]) => {
+      const set = (key, value) => $$(`[data-field="${key}"]`, root).forEach((el) => { el.textContent = value; });
+      set('plan', data.planNombre || 'tu plan');
+      set('email', data.email || 'tu correo');
+      set('periodo', data.periodo === 'mensual' ? 'Facturación mensual' : 'Facturación anual');
+      const fin = data.trialEnd && fechaLarga(data.trialEnd);
+      $$('[data-trial-end]', root).forEach((el) => {
+        el.hidden = !fin;
+        if (fin) $('[data-field="trialEnd"]', el).textContent = fin;
+      });
+      setLogin(loginUrl(cfg), data.email);
+      view('ok');
+    }).catch(() => view('error'));
+  }
+
   initReveal();
   initPricing();
   initAccordions();
@@ -352,6 +486,8 @@
   initCurrent();
   initForms();
   initCookieNotice();
+  initCheckout();
+  initGracias();
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
   tick();

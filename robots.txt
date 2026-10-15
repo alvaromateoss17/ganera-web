@@ -2,5 +2,6 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /gracias
 
 Sitemap: https://ganera.es/sitemap.xml

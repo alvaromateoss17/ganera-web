@@ -43,6 +43,31 @@
       "permanent": true
     },
     {
+      "source": "/terminos",
+      "destination": "/legal/terminos",
+      "permanent": true
+    },
+    {
+      "source": "/condiciones",
+      "destination": "/legal/terminos",
+      "permanent": true
+    },
+    {
+      "source": "/encargo-tratamiento",
+      "destination": "/legal/encargo-tratamiento",
+      "permanent": true
+    },
+    {
+      "source": "/subencargados",
+      "destination": "/legal/subencargados",
+      "permanent": true
+    },
+    {
+      "source": "/uso-ia",
+      "destination": "/legal/uso-ia",
+      "permanent": true
+    },
+    {
       "source": "/legal",
       "destination": "/legal/aviso-legal",
       "permanent": false
@@ -59,6 +84,15 @@
     }
   ],
   "headers": [
+    {
+      "source": "/gracias",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
     {
       "source": "/assets/(.*)",
       "headers": [

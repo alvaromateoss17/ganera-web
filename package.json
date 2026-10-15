@@ -3,5 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "description": "Landing de Ganera: trámites ganaderos automáticos para gestorías.",
-  "engines": { "node": ">=18" }
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "stripe": "^23.0.0"
+  },
+  "scripts": {
+    "check": "node scripts/check.js",
+    "sync": "python3 scripts/sync-partials.py"
+  }
 }
