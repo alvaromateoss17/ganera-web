@@ -14,6 +14,7 @@
     "check": "node scripts/check.js",
     "sync": "python3 scripts/sync-partials.py",
     "stripe:setup": "node scripts/stripe-setup.js",
-    "vercel:env": "node scripts/vercel-env.js"
+    "vercel:env": "node scripts/vercel-env.js",
+    "correo:prueba": "node scripts/correo-prueba.js"
   }
 }
