@@ -113,9 +113,29 @@ async function iva() {
   env.push(['STRIPE_TAX_RATE_ID', tax.id]);
 
   console.log('\n──────────────────────────────────────────────────────────────');
-  console.log('  Variables para .env.local y para Vercel:\n');
+  console.log('  Variables para Vercel:\n');
   for (const [k, v] of env) console.log(`${k}=${v}`);
-  console.log('\n──────────────────────────────────────────────────────────────');
+  console.log('──────────────────────────────────────────────────────────────');
+
+  // Escribe los valores en .env.local para ahorrar el copia y pega, que es
+  // donde más fácil se cuela un error. Sólo toca las claves que genera este
+  // script: no pisa STRIPE_SECRET_KEY ni el resto de tu configuración.
+  const envFile = path.join(ROOT, '.env.local');
+  if (fs.existsSync(envFile)) {
+    let txt = fs.readFileSync(envFile, 'utf8');
+    let tocadas = 0;
+    for (const [k, v] of env) {
+      const re = new RegExp(`^${k}=.*$`, 'm');
+      if (re.test(txt)) txt = txt.replace(re, `${k}=${v}`);
+      else txt += `${txt.endsWith('\n') ? '' : '\n'}${k}=${v}\n`;
+      tocadas++;
+    }
+    fs.writeFileSync(envFile, txt);
+    console.log(`\n  ✓ Escritas ${tocadas} variables en .env.local — no tienes que copiar nada.`);
+    console.log('    Reinicia el servidor para que las cargue:  Ctrl+C  y  npm run dev');
+  } else {
+    console.log('\n  No hay .env.local: copia las variables de arriba a mano.');
+  }
   console.log(`
   Falta un paso que SOLO se hace en el panel, no por API:
 

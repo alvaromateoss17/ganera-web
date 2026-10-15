@@ -41,7 +41,10 @@ Lee `_partials/precios.json` y crea en tu cuenta de prueba:
 Más el tipo de IVA del 21 %. **Es idempotente**: los productos llevan id fijo y
 los precios una `lookup_key`, así que puedes ejecutarlo mil veces sin duplicar.
 
-Al terminar imprime las variables. Pégalas en `.env.local`:
+**Al terminar escribe los valores en `.env.local` por ti**, así que no tienes
+que copiar nada: sólo toca las claves que genera y no pisa tu
+`STRIPE_SECRET_KEY` ni el resto del archivo. También las imprime, para que
+puedas pegarlas en Vercel cuando toque:
 
 ```bash
 STRIPE_PRICE_BASE_MENSUAL=price_…
@@ -53,6 +56,9 @@ STRIPE_PRICE_PLUS_ANUAL=price_…
 STRIPE_PRICE_GANERAI=price_…
 STRIPE_TAX_RATE_ID=txr_…
 ```
+
+Después **reinicia el servidor** para que cargue las variables nuevas:
+`Ctrl+C` y `npm run dev`.
 
 ## 3. Configura la URL de las condiciones (esto va a mano)
 
