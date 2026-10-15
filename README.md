@@ -45,6 +45,9 @@ api/_lib/config.js  Variables de entorno del servidor (URLs, interruptor, días 
 docs/INTEGRACION-APP.md  Para el equipo de la app: eventos de Stripe y aviso de IA
 docs/LEGAL-PENDIENTE.md  Todo lo que falta por rellenar antes de cobrar en real
 docs/PRUEBAS-STRIPE.md   Cómo probar el cobro de punta a punta sin dinero real
+docs/SEGURIDAD.md        Cabeceras, CSP, defensas de la API y lo pendiente a mano
+api/_lib/guard.js        Escudo común de /api: origen, tamaño y límite de envíos
+404.html                 Página de error propia (Vercel la sirve sola)
 docs/CORREO-PRUEBA.md    El correo automático al pedir la prueba y cómo activarlo
 api/_lib/emails.js       Plantilla de esa auto-respuesta (edita aquí el texto)
 scripts/dev.js           Servidor local con las funciones de /api
@@ -71,7 +74,8 @@ propios parciales, así que `footer.html` puede incluir `<!-- partial:foot-legal
 
 ```bash
 npm run dev            # servidor local con las funciones de /api reales
-npm run check          # hace de build: sintaxis, JSON, secretos y enlaces
+npm run check          # hace de build: sintaxis, JSON, secretos, enlaces,
+                       # recursos que faltan y estructura de cada página
 npm run sync           # = python3 scripts/sync-partials.py
 npm run stripe:setup   # crea productos y precios en Stripe desde precios.json
 npm run vercel:env     # imprime las variables listas para pegar en Vercel
@@ -131,6 +135,20 @@ La web es HTML estático sin paso de compilación, así que **no existe prefijo 
 tipo `NEXT_PUBLIC_`/`VITE_`. `CHECKOUT_ENABLED` y `APP_LOGIN_URL` llegan al navegador a
 través de `GET /api/config`, que es el único canal público y no expone ningún secreto.
 `STRIPE_SECRET_KEY` jamás sale del servidor.
+
+## Seguridad
+
+La web sale con una **Content Security Policy estricta** (sólo se ejecuta
+JavaScript propio), protección contra iframes, y todas las funciones de `/api`
+comprueban el origen, el tamaño y el ritmo de las peticiones. El detalle, y lo
+que queda por hacer a mano, en **`docs/SEGURIDAD.md`**.
+
+Dos reglas para no romper nada:
+
+- **Nada de `<script>` en línea ni `onclick=""`**: la CSP los bloquea. Todo el
+  JavaScript va en `js/main.js`. `npm run check` lo vigila.
+- **Si añades un servicio de terceros** (analítica, chat, vídeo), amplía la CSP
+  en `vercel.json` con su dominio.
 
 ## Cobro con Stripe
 

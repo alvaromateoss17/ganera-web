@@ -64,8 +64,7 @@
   const marquee = $('[data-marquee]');
   const statement = $('[data-statement]');
   const mapSection = $('[data-map-section]');
-  const litCountEl = $('[data-lit-count]');
-  const dots = $$('[data-dot]').map((el) => ({ el, s: el.dataset.dot, lit: false }));
+  const dots = $$('[data-dot]').map((el) => ({ el, lit: false }));
   const appScene = $('[data-app]');
   const appBar = $('[data-app-bar]');
   const rec = $('[data-rec]');
@@ -132,7 +131,7 @@
     });
   }
 
-  let litCount = -1;
+  let litWords = -1;
   function tick() {
     const vh = innerHeight;
     const max = document.documentElement.scrollHeight - vh;
@@ -145,21 +144,22 @@
     if (statement && words.length) {
       const r = statement.getBoundingClientRect();
       const p = reduce ? 1 : clamp((vh * 0.8 - r.top) / (r.height + vh * 0.25));
-      const n = Math.round(p * words.length * 1.08);
-      words.forEach((w, i) => { w.style.color = i < n ? 'var(--color-text)' : 'var(--color-neutral-400)'; });
+      const n = Math.min(words.length, Math.round(p * words.length * 1.08));
+      // Sólo se repinta cuando cambia el número de palabras encendidas, no en cada fotograma.
+      if (n !== litWords) {
+        litWords = n;
+        words.forEach((w, i) => { w.style.color = i < n ? 'var(--color-text)' : 'var(--color-neutral-400)'; });
+      }
     }
 
     if (mapSection && dots.length) {
       const r = mapSection.getBoundingClientRect();
       const p = reduce ? 1 : clamp((vh * 0.85 - r.top) / (r.height * 0.6));
       const n = Math.round(p * dots.length);
-      let lit = 0;
       dots.forEach((d, i) => {
         const on = i < n;
-        if (on && d.s !== 'p') lit++;
         if (on !== d.lit) { d.lit = on; d.el.classList.toggle('lit', on); }
       });
-      if (litCountEl && lit !== litCount) { litCount = lit; litCountEl.textContent = String(lit); }
     }
 
     if (appScene) {
@@ -227,9 +227,20 @@
       btn.setAttribute('aria-expanded', String(open));
       btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
     };
-    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    const abierto = () => btn.getAttribute('aria-expanded') === 'true';
+    btn.addEventListener('click', () => {
+      const abrir = !abierto();
+      set(abrir);
+      // Con teclado, el foco entra en el menú al abrirlo (el menú es visibility:hidden
+      // cerrado, así que hay que esperar a la transición para poder enfocarlo).
+      if (abrir) setTimeout(() => { const a = $('a', menu); if (a) a.focus({ preventScroll: true }); }, 60);
+    });
     $$('a', menu).forEach((a) => a.addEventListener('click', () => set(false)));
-    addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+    addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !abierto()) return;
+      set(false);
+      btn.focus();
+    });
     matchMedia('(min-width: 861px)').addEventListener('change', (e) => { if (e.matches) set(false); });
   }
 
@@ -275,13 +286,18 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(new FormData(form))),
           });
-          if (!res.ok) throw new Error(String(res.status));
+          if (!res.ok) {
+            // El servidor explica en español qué ha pasado (datos que faltan, demasiados envíos…).
+            const data = await res.json().catch(() => ({}));
+            throw new Error(data.error || '');
+          }
           form.reset();
           status.classList.add('ok');
           status.textContent = form.dataset.success;
-        } catch {
+        } catch (err) {
           status.classList.add('err');
-          status.textContent = 'No se ha podido enviar. Escríbenos a agroganera@gmail.com o llámanos al 645 56 29 42.';
+          status.textContent = (err && err.message)
+            || 'No se ha podido enviar. Escríbenos a agroganera@gmail.com o llámanos al 645 56 29 42.';
         } finally {
           btn.disabled = false;
         }
@@ -315,11 +331,15 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, consent: form.consent ? form.consent.checked : undefined }),
         });
-        if (!res.ok) throw new Error(String(res.status));
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || '');
+        }
         status.textContent = 'Listo. Te escribiremos una vez al mes.';
         form.reset();
-      } catch {
-        status.textContent = 'No se ha podido enviar. Prueba de nuevo o escríbenos a agroganera@gmail.com.';
+      } catch (err) {
+        status.textContent = (err && err.message)
+          || 'No se ha podido enviar. Prueba de nuevo o escríbenos a agroganera@gmail.com.';
       }
     });
   }

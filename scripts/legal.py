@@ -62,18 +62,19 @@ def render_fecha(cfg):
 def render_subencargados(cfg):
     rows = []
     for s in cfg['subencargados']:
+        # data-label: en móvil cada fila se apila como ficha y la celda muestra su columna
         rows.append(
             '<tr>'
-            f'<td><strong>{e(s["proveedor"])}</strong>'
+            f'<td data-label="Proveedor"><strong>{e(s["proveedor"])}</strong>'
             + ('<br><small>Responsable independiente</small>' if s.get('responsableIndependiente') else '')
             + '</td>'
-            f'<td>{e(s["servicio"])}</td>'
-            f'<td>{pendiente(s["ubicacion"], "ubicación de los datos")}</td>'
-            f'<td>{e(s["garantia"])}</td>'
+            f'<td data-label="Servicio">{e(s["servicio"])}</td>'
+            f'<td data-label="Ubicación de los datos">{pendiente(s["ubicacion"], "ubicación de los datos")}</td>'
+            f'<td data-label="Garantía de transferencia">{e(s["garantia"])}</td>'
             '</tr>'
         )
     return f'''<div class="table-wrap">
-  <table>
+  <table class="tabla-apilable">
     <thead><tr><th>Proveedor</th><th>Servicio</th><th>Ubicación de los datos</th><th>Garantía de transferencia</th></tr></thead>
     <tbody>
 {chr(10).join('      ' + r for r in rows)}
