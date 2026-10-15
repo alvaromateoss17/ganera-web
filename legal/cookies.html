@@ -61,10 +61,14 @@
 
 <section class="wrap" style="padding-bottom: clamp(48px, 7vw, 96px);">
 <!-- partial:legalnav -->
-<nav class="subnav" data-reveal="up" aria-label="Páginas legales">
+<nav class="subnav subnav-legal" data-reveal="up" aria-label="Páginas legales">
   <a href="/legal/aviso-legal">Aviso legal</a>
-  <a href="/legal/privacidad">Política de privacidad</a>
-  <a href="/legal/cookies">Política de cookies</a>
+  <a href="/legal/privacidad">Privacidad</a>
+  <a href="/legal/cookies">Cookies</a>
+  <a href="/legal/terminos">Condiciones</a>
+  <a href="/legal/encargo-tratamiento">Encargo del tratamiento</a>
+  <a href="/legal/subencargados">Subencargados</a>
+  <a href="/legal/uso-ia">Uso de IA</a>
 </nav>
 <!-- /partial:legalnav -->
 </section>
@@ -83,7 +87,9 @@
     </nav>
 
     <div class="prose" data-reveal="up">
-      <p class="doc-date">Última actualización: 7 de octubre de 2026</p>
+<!-- partial:legal-fecha -->
+<p class="doc-date">Última actualización: 15 de octubre de 2026</p>
+<!-- /partial:legal-fecha -->
 
       <h2 id="resumen">1. Resumen</h2>
       <div class="note">
@@ -105,7 +111,7 @@
             <tr><td>Cookies de preferencias o personalización</td><td>No.</td></tr>
             <tr><td>Cookies de analítica o medición</td><td>No. No medimos visitas con cookies.</td></tr>
             <tr><td>Cookies de publicidad o <i>retargeting</i></td><td>No.</td></tr>
-            <tr><td>localStorage, sessionStorage, IndexedDB</td><td>Solo un dato en localStorage: que cerraste el aviso de cookies. No te identifica ni se envía a nadie.</td></tr>
+            <tr><td>localStorage, sessionStorage, IndexedDB</td><td>Solo un dato en localStorage, con la clave <code>ganera-cookie-notice</code>: que cerraste el aviso de cookies. No te identifica ni se envía a nadie.</td></tr>
             <tr><td>Píxeles, balizas web o huella digital del dispositivo</td><td>No.</td></tr>
           </tbody>
         </table>
@@ -122,6 +128,8 @@
       <ul>
         <li><strong>WhatsApp (Meta):</strong> los botones «Hablar por WhatsApp» abren wa.me. Allí se aplican las políticas de WhatsApp y Meta.</li>
         <li><strong>Sedes electrónicas y plataformas oficiales:</strong> los enlaces a las administraciones competentes se rigen por sus propias políticas.</li>
+        <li><strong>Stripe:</strong> si contratas un plan, el pago se realiza en la pasarela de Stripe (checkout.stripe.com), que sí instala sus propias cookies, necesarias para procesar el pago y prevenir el fraude. Ocurre ya fuera de ganera.es y se rige por la <a href="https://stripe.com/es/privacy" target="_blank" rel="noopener">política de privacidad de Stripe</a><span class="visually-hidden"> (se abre en una pestaña nueva)</span>. Lo detallamos en el apartado 8 de la <a href="/legal/privacidad">Política de privacidad</a>.</li>
+        <li><strong>Tu cuenta de Ganera:</strong> la aplicación en la que trabaja tu gestoría es un servicio distinto de esta web y sí necesita cookies técnicas de sesión para mantenerte identificado. Esta política cubre únicamente ganera.es.</li>
       </ul>
       <p>Nosotros no instalamos nada a través de esos enlaces y no recibimos información de lo que hagas en esos servicios.</p>
       <p>Cuando rellenas un formulario de este sitio, los datos se envían a nuestro propio servidor y se nos avisan por correo. Eso tampoco crea cookies: se explica en la <a href="/legal/privacidad">Política de privacidad</a>.</p>
@@ -165,12 +173,19 @@
     <div class="newsletter" data-reveal="up">
       <strong>Novedades para gestorías ganaderas</strong>
       <p>Cambios en OVZ.net, plazos de censo y lo nuevo de Ganera. Un correo al mes.</p>
-      <form class="nl-form" data-newsletter novalidate>
-        <label class="visually-hidden" for="nl-email">Email</label>
-        <input id="nl-email" type="email" name="email" placeholder="Email" autocomplete="email" required>
-        <button type="submit" aria-label="Suscribirme"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <form class="nl" data-newsletter novalidate>
+        <div class="nl-form">
+          <label class="visually-hidden" for="nl-email">Email</label>
+          <input id="nl-email" type="email" name="email" placeholder="Email" autocomplete="email" required>
+          <button type="submit" aria-label="Suscribirme"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <label class="nl-consent">
+          <input type="checkbox" name="consent" value="si">
+          <span>Acepto recibir el boletín mensual de Ganera por correo electrónico.</span>
+        </label>
+        <p class="nl-status" data-nl-status role="status"></p>
       </form>
-      <p class="nl-status" data-nl-status role="status"></p>
+      <small class="nl-legal">Responsable: Ganera (<a href="/legal/aviso-legal">datos del titular</a>). Finalidad: enviarte el boletín mensual. Base jurídica: tu consentimiento. Destinatarios: nuestro proveedor de correo; no cedemos tus datos a nadie más. Derechos: acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a <a href="mailto:agroganera@gmail.com">agroganera@gmail.com</a>. Más detalle en la <a href="/legal/privacidad">Política de privacidad</a>.</small>
     </div>
     <div class="foot-contact" data-reveal="up" data-delay="100">
       <div><strong>Escríbenos</strong><a href="mailto:agroganera@gmail.com">agroganera@gmail.com</a></div>
@@ -193,12 +208,19 @@
   <div class="wordmark" aria-hidden="true">
     <span data-reveal="rise"><img src="/assets/img/ganera-logo-blanco.png" alt="">GANERA</span>
   </div>
-  <div class="legal">
-    <a href="/legal/privacidad">Política de privacidad</a>
-    <a href="/legal/aviso-legal">Aviso legal</a>
-    <a href="/legal/cookies">Cookies</a>
-    <span>© 2026 Ganera · Hecho en Extremadura</span>
-  </div>
+  <nav class="legal" aria-label="Legal">
+<!-- partial:foot-legal -->
+<strong>Legal</strong>
+      <a href="/legal/aviso-legal">Aviso legal</a>
+      <a href="/legal/privacidad">Privacidad</a>
+      <a href="/legal/cookies">Cookies</a>
+      <a href="/legal/terminos">Condiciones</a>
+      <a href="/legal/encargo-tratamiento">Encargo del tratamiento</a>
+      <a href="/legal/subencargados">Subencargados</a>
+      <a href="/legal/uso-ia">Uso de IA</a>
+      <span class="foot-copy">© 2026 Ganera · Hecho en Extremadura</span>
+<!-- /partial:foot-legal -->
+  </nav>
 </footer>
 <!-- /partial:footer -->
 </div>

@@ -136,12 +136,19 @@
     <div class="newsletter" data-reveal="up">
       <strong>Novedades para gestorías ganaderas</strong>
       <p>Cambios en OVZ.net, plazos de censo y lo nuevo de Ganera. Un correo al mes.</p>
-      <form class="nl-form" data-newsletter novalidate>
-        <label class="visually-hidden" for="nl-email">Email</label>
-        <input id="nl-email" type="email" name="email" placeholder="Email" autocomplete="email" required>
-        <button type="submit" aria-label="Suscribirme"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <form class="nl" data-newsletter novalidate>
+        <div class="nl-form">
+          <label class="visually-hidden" for="nl-email">Email</label>
+          <input id="nl-email" type="email" name="email" placeholder="Email" autocomplete="email" required>
+          <button type="submit" aria-label="Suscribirme"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <label class="nl-consent">
+          <input type="checkbox" name="consent" value="si">
+          <span>Acepto recibir el boletín mensual de Ganera por correo electrónico.</span>
+        </label>
+        <p class="nl-status" data-nl-status role="status"></p>
       </form>
-      <p class="nl-status" data-nl-status role="status"></p>
+      <small class="nl-legal">Responsable: Ganera (<a href="/legal/aviso-legal">datos del titular</a>). Finalidad: enviarte el boletín mensual. Base jurídica: tu consentimiento. Destinatarios: nuestro proveedor de correo; no cedemos tus datos a nadie más. Derechos: acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a <a href="mailto:agroganera@gmail.com">agroganera@gmail.com</a>. Más detalle en la <a href="/legal/privacidad">Política de privacidad</a>.</small>
     </div>
     <div class="foot-contact" data-reveal="up" data-delay="100">
       <div><strong>Escríbenos</strong><a href="mailto:agroganera@gmail.com">agroganera@gmail.com</a></div>
@@ -164,12 +171,19 @@
   <div class="wordmark" aria-hidden="true">
     <span data-reveal="rise"><img src="/assets/img/ganera-logo-blanco.png" alt="">GANERA</span>
   </div>
-  <div class="legal">
-    <a href="/legal/privacidad">Política de privacidad</a>
-    <a href="/legal/aviso-legal">Aviso legal</a>
-    <a href="/legal/cookies">Cookies</a>
-    <span>© 2026 Ganera · Hecho en Extremadura</span>
-  </div>
+  <nav class="legal" aria-label="Legal">
+<!-- partial:foot-legal -->
+<strong>Legal</strong>
+      <a href="/legal/aviso-legal">Aviso legal</a>
+      <a href="/legal/privacidad">Privacidad</a>
+      <a href="/legal/cookies">Cookies</a>
+      <a href="/legal/terminos">Condiciones</a>
+      <a href="/legal/encargo-tratamiento">Encargo del tratamiento</a>
+      <a href="/legal/subencargados">Subencargados</a>
+      <a href="/legal/uso-ia">Uso de IA</a>
+      <span class="foot-copy">© 2026 Ganera · Hecho en Extremadura</span>
+<!-- /partial:foot-legal -->
+  </nav>
 </footer>
 <!-- /partial:footer -->
 </div>

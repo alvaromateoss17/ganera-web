@@ -1,0 +1,66 @@
+{
+  "_ayuda": "FUENTE ÚNICA de los datos societarios y de la capa legal. Lo consumen scripts/legal.py (genera los bloques HTML) y api/_lib/legal.js (endpoints). Tras editar, ejecuta: python3 scripts/sync-partials.py",
+  "_aviso": "BORRADOR. Los textos legales de /legal son un borrador redactado a medida de Ganera, no una plantilla, pero DEBEN ser revisados por un abogado antes de cobrar en real. Ver docs/LEGAL-PENDIENTE.md.",
+
+  "razonSocial": "",
+  "nif": "",
+  "domicilio": "Polígono Ganadero, Calle A · 10004 Cáceres (España)",
+  "datosRegistrales": "",
+  "emailContacto": "agroganera@gmail.com",
+  "emailPrivacidad": "",
+  "dominio": "ganera.es",
+  "fechaUltimaActualizacion": "15 de octubre de 2026",
+
+  "telefonos": ["+34645562942", "+34695381496"],
+  "fuero": "Cáceres",
+
+  "titularidadActual": "La sociedad está en constitución. Hasta que quede inscrita, el sitio y el servicio son titularidad conjunta de Álvaro Mateos González (DNI 76057148N) y Antonio Menor (DNI pendiente de incorporar), cofundadores de Ganera, que actúan como personas físicas.",
+
+  "prueba": { "dias": 15, "ivaIncluido": false },
+
+  "subencargados": [
+    {
+      "proveedor": "Supabase, Inc.",
+      "servicio": "Base de datos, almacenamiento de documentos y autenticación de las cuentas de la gestoría.",
+      "ubicacion": "",
+      "garantia": "Cláusulas Contractuales Tipo (CCT) de la Comisión Europea. Si los datos se alojan en región de la UE, no hay transferencia internacional para el almacenamiento principal."
+    },
+    {
+      "proveedor": "Vercel, Inc.",
+      "servicio": "Alojamiento del sitio web ganera.es y ejecución de sus funciones de servidor.",
+      "ubicacion": "Red global con despliegue de funciones en región de la UE para ganera.es.",
+      "garantia": "Cláusulas Contractuales Tipo y, cuando el proveedor esté adherido, Marco de Privacidad de Datos UE-EE. UU."
+    },
+    {
+      "proveedor": "Anthropic PBC",
+      "servicio": "Modelo de inteligencia artificial (Claude) que lee los mensajes y documentos y extrae los datos del trámite.",
+      "ubicacion": "",
+      "garantia": "Cláusulas Contractuales Tipo y, cuando el proveedor esté adherido, Marco de Privacidad de Datos UE-EE. UU."
+    },
+    {
+      "proveedor": "Twilio Inc.",
+      "servicio": "Pasarela técnica de los mensajes de WhatsApp entre el ganadero y Ganera.",
+      "ubicacion": "",
+      "garantia": "Cláusulas Contractuales Tipo y, cuando el proveedor esté adherido, Marco de Privacidad de Datos UE-EE. UU."
+    },
+    {
+      "proveedor": "WhatsApp Ireland Ltd. (Meta)",
+      "servicio": "Canal de mensajería WhatsApp Business por el que el ganadero envía mensajes, fotos y documentos.",
+      "ubicacion": "Irlanda (UE), con posible tratamiento por entidades del grupo Meta fuera del EEE.",
+      "garantia": "Condiciones de WhatsApp Business y Cláusulas Contractuales Tipo del proveedor."
+    },
+    {
+      "proveedor": "Stripe Payments Europe, Ltd.",
+      "servicio": "Cobro de la suscripción, datos de la tarjeta y facturación.",
+      "ubicacion": "Irlanda (UE), con tratamiento por Stripe, Inc. (EE. UU.) en lo necesario para el servicio de pago.",
+      "garantia": "Stripe actúa en gran parte como RESPONSABLE INDEPENDIENTE de los datos de pago, no como subencargado de Ganera. Para el resto, Cláusulas Contractuales Tipo.",
+      "responsableIndependiente": true
+    },
+    {
+      "proveedor": "Resend (Plus Five Five, Inc.)",
+      "servicio": "Envío de los correos del servicio y de los avisos de los formularios de la web.",
+      "ubicacion": "",
+      "garantia": "Cláusulas Contractuales Tipo y, cuando el proveedor esté adherido, Marco de Privacidad de Datos UE-EE. UU."
+    }
+  ]
+}
