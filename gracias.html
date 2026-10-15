@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bienvenido a Ganera</title>
+<meta name="description" content="Tu prueba de 15 días de Ganera ya está activa.">
+<meta name="theme-color" content="#ec3013">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/site.css">
+<script src="/js/main.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+<!-- partial:header -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/#top"><img src="/assets/img/ganera-logo-rojo.png" alt="" width="30" height="30">GANERA</a>
+    <nav class="main-nav" aria-label="Principal">
+      <a href="/#app">La app</a>
+      <a href="/#recorrido">Cómo funciona</a>
+      <a href="/#comunidades">Comunidades</a>
+      <a href="/#planes">Precios</a>
+      <a href="/nosotros">Misión</a>
+      <a href="/contacto">Contacto</a>
+    </nav>
+    <a class="btn btn-primary header-cta" href="/prueba-15-dias">Probar 15 días</a>
+    <button class="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mnav" data-menu-btn><span></span><span></span></button>
+  </div>
+  <div class="progress" data-progress></div>
+</header>
+<div class="mnav" id="mnav" data-menu>
+  <nav aria-label="Menú móvil">
+    <a href="/#app" style="--i:0">La app</a>
+    <a href="/#recorrido" style="--i:1">Cómo funciona</a>
+    <a href="/#comunidades" style="--i:2">Comunidades</a>
+    <a href="/#planes" style="--i:3">Precios</a>
+    <a href="/nosotros" style="--i:4">Misión</a>
+    <a href="/contacto" style="--i:5">Contacto</a>
+  </nav>
+  <a class="btn btn-primary btn-lg btn-split" href="/prueba-15-dias" style="--i:6">Empezar los 15 días de prueba<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+<!-- /partial:header -->
+
+<main data-gracias>
+
+<!-- Cargando -->
+<section class="wrap page-hero" data-view="loading" hidden>
+  <h1 class="sr-h1">Comprobando tu suscripción</h1>
+  <div class="skel skel-title" aria-hidden="true"></div>
+  <div class="skel skel-line" aria-hidden="true"></div>
+  <div class="skel skel-line skel-short" aria-hidden="true"></div>
+  <p class="lead" role="status">Comprobando tu suscripción…</p>
+</section>
+
+<!-- Éxito -->
+<div data-view="ok" hidden>
+  <section class="wrap page-hero">
+    <div data-intro><h1><span class="line-mask"><span data-reveal="rise">Bienvenido a</span></span><span class="line-mask"><span data-reveal="rise" data-delay="90" class="accent">Ganera.</span></span></h1></div>
+    <p class="lead" data-reveal="up" style="max-width: 44ch;">Tu prueba de 15 días ya está activa.</p>
+  </section>
+
+  <section class="wrap" style="padding-bottom: clamp(48px, 7vw, 96px);">
+    <dl class="datalist" data-reveal="up" style="max-width: 760px;">
+      <dt>Plan contratado</dt><dd data-field="plan">—</dd>
+      <dt>Facturación</dt><dd data-field="periodo">—</dd>
+      <dt>Email de la cuenta</dt><dd data-field="email">—</dd>
+    </dl>
+    <p class="trial-end" data-trial-end data-reveal="up" hidden>La prueba termina el <strong data-field="trialEnd"></strong>.</p>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div data-reveal="up" style="display: flex; flex-direction: column; gap: 20px; align-self: start;">
+        <h2 class="h-section" style="max-width: 16ch;">Activa tu cuenta</h2>
+        <p class="lead" style="max-width: 42ch;">Te hemos enviado un email a <strong data-field="email">tu correo</strong> para activar tu cuenta y crear tu contraseña. Si no lo ves en unos minutos, revisa la carpeta de spam.</p>
+        <a class="btn btn-primary btn-lg btn-split" data-login href="https://app.ganera.es/login" style="align-self: flex-start; min-width: 260px;">Entrar en Ganera<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <ol class="next-steps" data-reveal="up" data-delay="100">
+        <li><span class="step-num">01</span><div><strong>Activa tu cuenta desde el email</strong><p>Abre el correo que acabamos de enviarte y crea tu contraseña.</p></div></li>
+        <li><span class="step-num">02</span><div><strong>Da de alta tus explotaciones y ganaderos</strong><p>Carga tu inventario: códigos REGA, explotaciones y los ganaderos que gestionas.</p></div></li>
+        <li><span class="step-num">03</span><div><strong>Conecta el WhatsApp</strong><p>Tus ganaderos empiezan a escribir al número de Ganera y los trámites llegan preparados.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-top: clamp(40px, 6vw, 72px); padding-bottom: clamp(48px, 7vw, 96px); display: flex; flex-direction: column; gap: 16px;">
+    <div class="note" data-reveal="up" style="max-width: 760px;">
+      <p><strong>¿Dudas?</strong> Escríbenos a <a href="mailto:agroganera@gmail.com">agroganera@gmail.com</a> o llámanos al <a href="tel:+34645562942">645 56 29 42</a>. Te atienden directamente los cofundadores.</p>
+    </div>
+    <small class="text-muted" data-reveal="up" style="max-width: 70ch;">Puedes cancelar antes de que termine la prueba y no se te cobrará nada. Las condiciones del servicio están en las <a href="/legal/terminos">Condiciones de contratación</a> y el tratamiento de los datos de tus ganaderos, en el <a href="/legal/encargo-tratamiento">Contrato de encargo del tratamiento</a>.</small>
+  </section>
+</div>
+
+<!-- Error o sesión inválida -->
+<div data-view="error" hidden>
+  <section class="wrap page-hero">
+    <div data-intro><h1><span class="line-mask"><span data-reveal="rise">No encontramos</span></span><span class="line-mask"><span data-reveal="rise" data-delay="90" class="accent">esta suscripción.</span></span></h1></div>
+    <p class="lead" data-reveal="up" style="max-width: 52ch;">El enlace puede haber caducado o estar incompleto. Si acabas de pagar, revisa tu correo: si has recibido el email de activación, tu cuenta está creada y puedes entrar sin más.</p>
+  </section>
+  <section class="wrap" style="padding-bottom: clamp(64px, 9vw, 120px); display: flex; flex-wrap: wrap; gap: 12px;">
+    <a class="btn btn-primary btn-lg btn-split" data-login href="https://app.ganera.es/login" style="min-width: 220px;">Entrar en Ganera<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="btn btn-secondary btn-lg" href="/contacto">Contactar</a>
+    <a class="btn btn-secondary btn-lg" href="https://wa.me/34645562942?text=Hola%2C%20he%20contratado%20Ganera%20y%20necesito%20ayuda%20con%20mi%20cuenta." target="_blank" rel="noopener">Escribir por WhatsApp<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>
+  </section>
+</div>
+
+</main>
+
+<!-- partial:footer -->
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <div class="newsletter" data-reveal="up">
+      <strong>Novedades para gestorías ganaderas</strong>
+      <p>Cambios en OVZ.net, plazos de censo y lo nuevo de Ganera. Un correo al mes.</p>
+      <form class="nl" data-newsletter novalidate>
+        <div class="nl-form">
+          <label class="visually-hidden" for="nl-email">Email</label>
+          <input id="nl-email" type="email" name="email" placeholder="Email" autocomplete="email" required>
+          <button type="submit" aria-label="Suscribirme"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <label class="nl-consent">
+          <input type="checkbox" name="consent" value="si">
+          <span>Acepto recibir el boletín mensual de Ganera por correo electrónico.</span>
+        </label>
+        <p class="nl-status" data-nl-status role="status"></p>
+      </form>
+      <small class="nl-legal">Responsable: Ganera (<a href="/legal/aviso-legal">datos del titular</a>). Finalidad: enviarte el boletín mensual. Base jurídica: tu consentimiento. Destinatarios: nuestro proveedor de correo; no cedemos tus datos a nadie más. Derechos: acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a <a href="mailto:agroganera@gmail.com">agroganera@gmail.com</a>. Más detalle en la <a href="/legal/privacidad">Política de privacidad</a>.</small>
+    </div>
+    <div class="foot-contact" data-reveal="up" data-delay="100">
+      <div><strong>Escríbenos</strong><a href="mailto:agroganera@gmail.com">agroganera@gmail.com</a></div>
+      <div><strong>Llámanos o escríbenos por WhatsApp</strong><a href="tel:+34645562942">645 56 29 42</a></div>
+      <div><strong>Dónde estamos</strong><span>Polígono Ganadero, Calle A<br>10004 Cáceres</span></div>
+      <a class="btn btn-ink" href="/contacto">Contacto</a>
+    </div>
+    <nav class="foot-links" data-reveal="up" data-delay="200" aria-label="Páginas">
+      <strong>Páginas</strong>
+      <a href="/">Inicio</a>
+      <a href="/#recorrido">Cómo funciona</a>
+      <a href="/#planes">Precios</a>
+      <a href="/blog">Blog</a>
+      <a href="/nosotros">Misión</a>
+      <a href="/contacto">Contacto</a>
+      <a href="/#faq">Preguntas frecuentes</a>
+      <a href="/prueba-15-dias">Prueba de 15 días</a>
+    </nav>
+  </div>
+  <div class="wordmark" aria-hidden="true">
+    <span data-reveal="rise"><img src="/assets/img/ganera-logo-blanco.png" alt="">GANERA</span>
+  </div>
+  <nav class="legal" aria-label="Legal">
+<!-- partial:foot-legal -->
+<strong>Legal</strong>
+      <a href="/legal/aviso-legal">Aviso legal</a>
+      <a href="/legal/privacidad">Privacidad</a>
+      <a href="/legal/cookies">Cookies</a>
+      <a href="/legal/terminos">Condiciones</a>
+      <a href="/legal/encargo-tratamiento">Encargo del tratamiento</a>
+      <a href="/legal/subencargados">Subencargados</a>
+      <a href="/legal/uso-ia">Uso de IA</a>
+      <span class="foot-copy">© 2026 Ganera · Hecho en Extremadura</span>
+<!-- /partial:foot-legal -->
+  </nav>
+</footer>
+<!-- /partial:footer -->
+</div>
+</body>
+</html>

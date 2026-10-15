@@ -1,5 +1,7 @@
 _partials
 scripts
 reference
+docs
 README.md
+.env.example
 *.mp4
