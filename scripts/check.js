@@ -73,5 +73,44 @@ for (const f of walk(ROOT, '.html')) {
 }
 if (!rotos) ok('todos los enlaces internos resuelven');
 
+console.log('\nRecursos referenciados (imágenes, fuentes, CSS, JS)');
+let faltan = 0;
+const recursos = new Set();
+for (const f of [...walk(ROOT, '.html'), ...walk(path.join(ROOT, 'css'), '.css')]) {
+  if (f.includes('_partials')) continue;
+  const txt = fs.readFileSync(f, 'utf8');
+  for (const m of txt.matchAll(/(?:src|href)="(\/(?:assets|css|js)\/[^"#?]+)"/g)) recursos.add(m[1]);
+  // url(...) en CSS es relativa al propio archivo CSS
+  for (const m of txt.matchAll(/url\(['"]?([^'")]+)['"]?\)/g)) {
+    if (/^(data:|https?:|#)/.test(m[1])) continue;
+    recursos.add('/' + path.relative(ROOT, path.resolve(path.dirname(f), m[1])));
+  }
+}
+for (const r of recursos) {
+  if (!fs.existsSync(path.join(ROOT, r))) { fail(`falta ${r}`); faltan++; }
+}
+if (!faltan) ok(`${recursos.size} recursos, todos existen`);
+
+console.log('\nEstructura de cada página');
+let mal = 0;
+for (const f of walk(ROOT, '.html')) {
+  if (f.includes('_partials')) continue;
+  const h = fs.readFileSync(f, 'utf8');
+  const rel = path.relative(ROOT, f);
+  const problemas = [];
+  if (!/<html[^>]+lang="es"/.test(h)) problemas.push('sin lang="es"');
+  if (!/<main id="contenido"/.test(h)) problemas.push('sin <main id="contenido">');
+  if (!/class="skip-link"/.test(h)) problemas.push('sin enlace "saltar al contenido"');
+  // Sólo el <title> del <head>: los <title> dentro de un SVG son el nombre accesible de cada figura.
+  const head = (h.match(/<head>[\s\S]*?<\/head>/) || [''])[0];
+  if ((head.match(/<title>/g) || []).length !== 1) problemas.push('título ausente o duplicado');
+  if (/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>/.test(h)) problemas.push('script inline (lo bloquearía la CSP)');
+  if (/\son[a-z]+="/.test(h)) problemas.push('manejador inline onX= (lo bloquearía la CSP)');
+  const og = h.match(/property="og:image" content="([^"]+)"/);
+  if (og && !og[1].startsWith('https://')) problemas.push('og:image relativa');
+  if (problemas.length) { fail(`${rel}: ${problemas.join(', ')}`); mal++; }
+}
+if (!mal) ok('todas las páginas cumplen');
+
 console.log(fallos ? `\n${fallos} problema(s).\n` : '\nTodo correcto.\n');
 process.exit(fallos ? 1 : 0);
