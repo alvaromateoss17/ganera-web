@@ -7,15 +7,14 @@
 //
 // El webhook de Stripe NO vive aquí: lo implementa la web app de Ganera, que es la
 // que tiene la base de datos. Ver docs/INTEGRACION-APP.md.
-const { readBody, clean, isEmail } = require('./_lib/notify');
+const { readBody, isEmail } = require('./_lib/notify');
+const { proteger, linea } = require('./_lib/guard');
 const { siteUrl, legalUrl, checkoutEnabled, trialDays, pagoInseguro } = require('./_lib/config');
 const { stripe, priceId, complementoPriceId, PLANES, PERIODOS } = require('./_lib/stripe');
 
 module.exports = async (req, res) => {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  // Crear sesiones es gratis pero consume cuota de la API de Stripe: 20 cada 10 min por IP sobra.
+  if (!proteger(req, res, { nombre: 'checkout', max: 20, ventanaMs: 10 * 60_000 })) return;
 
   if (!checkoutEnabled()) {
     return res.status(503).json({
@@ -35,9 +34,9 @@ module.exports = async (req, res) => {
   }
 
   const b = readBody(req);
-  const plan = clean(b.plan, 20).toLowerCase();
-  const periodo = (clean(b.periodo, 10).toLowerCase() || 'anual');
-  const email = clean(b.email, 254);
+  const plan = linea(b.plan, 20).toLowerCase();
+  const periodo = (linea(b.periodo, 10).toLowerCase() || 'anual');
+  const email = linea(b.email, 254);
   const conPrueba = b.prueba !== false; // sólo un false explícito salta la prueba
 
   if (!PLANES[plan]) {

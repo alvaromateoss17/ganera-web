@@ -13,8 +13,31 @@ require('./env').cargar();
 
 const ROOT = path.join(__dirname, '..');
 const PUERTO = Number(process.env.PORT || 3000);
+const API_DIR = path.join(ROOT, 'api');
 const vercel = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
 const REDIRECTS = Object.fromEntries((vercel.redirects || []).map((r) => [r.source, r.destination]));
+
+// Las mismas cabeceras que pone Vercel (CSP incluida), para que lo que falle por
+// seguridad falle también aquí y no se descubra en producción.
+const REGLAS = (vercel.headers || []).map((h) => ({ re: patron(h.source), headers: h.headers }));
+
+/** '/api/(.*)' → /^\/api\/.*$/ : se escapa lo literal y cada (.*) pasa a ser comodín. */
+function patron(source) {
+  const escapar = (t) => t.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
+  return new RegExp('^' + source.split('(.*)').map(escapar).join('.*') + '$');
+}
+function aplicarCabeceras(res, ruta) {
+  for (const r of REGLAS) if (r.re.test(ruta)) for (const { key, value } of r.headers) res.setHeader(key, value);
+  // En local no hay HTTPS: upgrade-insecure-requests rompería las peticiones.
+  const csp = res.getHeader('Content-Security-Policy');
+  if (csp) res.setHeader('Content-Security-Policy', String(csp).replace(/;\s*upgrade-insecure-requests/, ''));
+}
+
+/** ¿Está la ruta dentro de la carpeta indicada? (sin trampas con ../ ni prefijos) */
+const dentroDe = (dir, archivo) => {
+  const rel = path.relative(dir, path.resolve(archivo));
+  return rel && !rel.startsWith('..') && !path.isAbsolute(rel);
+};
 
 const TIPOS = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
@@ -38,10 +61,15 @@ const servidor = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PUERTO}`);
   let ruta = decodeURIComponent(url.pathname);
 
+  aplicarCabeceras(res, ruta);
+
   // ── Funciones de /api ──
   if (ruta.startsWith('/api/')) {
     const archivo = path.join(ROOT, `${ruta.slice(1)}.js`);
-    if (!fs.existsSync(archivo)) {
+    // Sólo funciones de primer nivel de api/: ni ../ para salir de la carpeta
+    // ni api/_lib/, que Vercel tampoco expone.
+    const valida = dentroDe(API_DIR, archivo) && path.dirname(path.resolve(archivo)) === API_DIR;
+    if (!valida || !fs.existsSync(archivo)) {
       res.writeHead(404, { 'Content-Type': 'application/json' });
       return res.end('{"error":"No existe esa función"}');
     }
@@ -73,9 +101,11 @@ const servidor = http.createServer(async (req, res) => {
   if (!fs.existsSync(archivo) && fs.existsSync(`${archivo}.html`)) archivo = `${archivo}.html`;
   else if (fs.existsSync(archivo) && fs.statSync(archivo).isDirectory()) archivo = path.join(archivo, 'index.html');
 
-  if (!path.resolve(archivo).startsWith(ROOT) || !fs.existsSync(archivo)) {
+  const privado = /(^|\/)(\.|_partials|scripts|docs|node_modules|reference)/.test(path.relative(ROOT, archivo));
+  if (!dentroDe(ROOT, archivo) || privado || !fs.existsSync(archivo)) {
+    // Igual que Vercel: la página 404 propia, con su código 404.
     res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
-    return res.end('<!doctype html><meta charset="utf-8"><title>404</title><h1>404</h1><p>No existe esa página.</p>');
+    return fs.createReadStream(path.join(ROOT, '404.html')).pipe(res);
   }
   res.writeHead(200, { 'Content-Type': TIPOS[path.extname(archivo)] || 'application/octet-stream' });
   fs.createReadStream(archivo).pipe(res);

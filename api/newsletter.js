@@ -1,13 +1,11 @@
-// POST /api/newsletter — footer subscription form.
-const { notify, isEmail, clean, readBody } = require('./_lib/notify');
+// POST /api/newsletter — suscripción del pie de página.
+const { notify, isEmail, readBody } = require('./_lib/notify');
+const { proteger, linea } = require('./_lib/guard');
 
 module.exports = async (req, res) => {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  if (!proteger(req, res, { nombre: 'newsletter', max: 5, ventanaMs: 10 * 60_000 })) return;
   const b = readBody(req);
-  const email = clean(b.email, 254);
+  const email = linea(b.email, 254);
   if (!isEmail(email)) return res.status(400).json({ error: 'Email no válido' });
   // Sin consentimiento expreso no hay suscripción: es la base jurídica (art. 6.1.a RGPD).
   if (b.consent !== true && b.consent !== 'si' && b.consent !== 'on') {

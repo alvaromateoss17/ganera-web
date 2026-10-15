@@ -2,6 +2,7 @@
 // Devuelve SOLO: estado, email de la cuenta, plan y fin de la prueba.
 // Ni identificadores internos completos, ni nada relativo al medio de pago.
 const { clean } = require('./_lib/notify');
+const { limitar, ipDe } = require('./_lib/guard');
 const { checkoutEnabled } = require('./_lib/config');
 const { stripe, nombrePlan } = require('./_lib/stripe');
 
@@ -11,6 +12,14 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
   res.setHeader('Cache-Control', 'no-store');
+
+  // Los session_id son aleatorios y largos, así que adivinarlos no es viable;
+  // aun así, frenamos a quien lo intente a lo bruto.
+  const espera = limitar(`checkout-session:${ipDe(req)}`, 30, 10 * 60_000);
+  if (espera) {
+    res.setHeader('Retry-After', String(espera));
+    return res.status(429).json({ error: 'Demasiadas consultas seguidas.' });
+  }
 
   if (!checkoutEnabled()) {
     return res.status(503).json({ error: 'El pago con tarjeta todavía no está activo.' });
