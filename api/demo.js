@@ -1,5 +1,6 @@
 // POST /api/demo — trial request from /prueba-15-dias.
-const { notify, isEmail, clean, readBody } = require('./_lib/notify');
+const { notify, enviar, isEmail, clean, readBody } = require('./_lib/notify');
+const emails = require('./_lib/emails');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -22,10 +23,26 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Faltan datos obligatorios' });
   }
   try {
+    // 1. El aviso para nosotros. Si esto falla, la solicitud se ha perdido.
     await notify(`Nueva prueba Ganera · ${lead.company}`, { ...lead, received: new Date().toISOString() });
-    return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error(err);
+    console.error('Aviso interno fallido', err);
     return res.status(502).json({ error: 'No se ha podido registrar la solicitud' });
   }
+
+  // 2. La respuesta automática al interesado. Si falla, la solicitud ya está
+  //    registrada: lo anotamos y seguimos, nunca devolvemos error por esto.
+  try {
+    await enviar({
+      to: lead.email,
+      subject: emails.asunto(lead),
+      html: emails.html(lead),
+      text: emails.texto(lead),
+      replyTo: emails.CONTACTO,
+    });
+  } catch (err) {
+    console.error('Auto-respuesta fallida para', lead.email, err.message);
+  }
+
+  return res.status(200).json({ ok: true });
 };

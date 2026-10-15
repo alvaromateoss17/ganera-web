@@ -45,6 +45,8 @@ api/_lib/config.js  Variables de entorno del servidor (URLs, interruptor, días 
 docs/INTEGRACION-APP.md  Para el equipo de la app: eventos de Stripe y aviso de IA
 docs/LEGAL-PENDIENTE.md  Todo lo que falta por rellenar antes de cobrar en real
 docs/PRUEBAS-STRIPE.md   Cómo probar el cobro de punta a punta sin dinero real
+docs/CORREO-PRUEBA.md    El correo automático al pedir la prueba y cómo activarlo
+api/_lib/emails.js       Plantilla de esa auto-respuesta (edita aquí el texto)
 scripts/dev.js           Servidor local con las funciones de /api
 scripts/stripe-setup.js  Crea productos y precios en Stripe desde precios.json
 scripts/env.js           Carga .env.local sin dependencias
@@ -98,7 +100,13 @@ Sin ellas, los formularios responden OK y los datos se quedan en Vercel → Logs
 |---|---|
 | `RESEND_API_KEY` | Clave de [Resend](https://resend.com) para enviar los avisos por email |
 | `LEADS_TO_EMAIL` | Dónde llegan los avisos (varios separados por coma) |
-| `LEADS_FROM_EMAIL` | Remitente verificado en Resend, p. ej. `Ganera <web@ganera.es>` |
+| `LEADS_FROM_EMAIL` | Remitente verificado en Resend, p. ej. `Ganera <hola@ganera.es>` |
+| `DEMO_URL`, `MEETING_URL`, `DEMO_LOGIN_URL`… | Bloques opcionales de la auto-respuesta |
+
+Al rellenar el formulario de la prueba salen dos correos: el aviso para vosotros y
+una **auto-respuesta al interesado**. Si la segunda falla, la solicitud ya está
+registrada y el formulario responde `ok`. Cómo activarla y qué puede (y qué no
+puede) incluir, en **`docs/CORREO-PRUEBA.md`**.
 
 Para el cobro con Stripe (ver `.env.example`, que es la referencia completa):
 

@@ -22,6 +22,31 @@ async function notify(subject, fields) {
   if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
 }
 
+/** Envía un correo al interesado (no a nosotros). Requiere RESEND_API_KEY.
+ *  Devuelve false si no está configurado, en vez de fallar: el formulario no
+ *  puede romperse porque el correo de cortesía no salga. */
+async function enviar({ to, subject, html, text, replyTo }) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key || !to) {
+    console.log('Auto-respuesta no enviada (falta RESEND_API_KEY):', to, '|', subject);
+    return false;
+  }
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: process.env.LEADS_FROM_EMAIL || 'Ganera <onboarding@resend.dev>',
+      to: [to],
+      reply_to: replyTo || process.env.LEADS_TO_EMAIL || undefined,
+      subject,
+      html,
+      text,
+    }),
+  });
+  if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
+  return true;
+}
+
 const isEmail = (v) => typeof v === 'string' && v.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 const clean = (v, max = 500) => String(v ?? '').trim().slice(0, max);
 
@@ -30,4 +55,4 @@ function readBody(req) {
   try { return JSON.parse(req.body || '{}'); } catch { return {}; }
 }
 
-module.exports = { notify, isEmail, clean, readBody };
+module.exports = { notify, enviar, isEmail, clean, readBody };
