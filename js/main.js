@@ -368,19 +368,20 @@
   function initCheckout() {
     const plans = $('[data-plans]');
     if (!plans) return;
-    const ctas = $$('a[href*="/prueba-15-dias?plan="]', plans);
-    if (!ctas.length) return;
+    const ctasPrueba = $$('a[href*="/prueba-15-dias?plan="]', plans);
+    const ctasCompra = $$('[data-comprar]', plans);
+    if (!ctasPrueba.length && !ctasCompra.length) return;
 
     publicConfig().then((cfg) => {
       if (!cfg || !cfg.checkoutEnabled) return;
-
       const dias = cfg.trialDays || 15;
 
       // Aviso sobre los botones: la prueba sí pide tarjeta.
       const note = document.createElement('p');
       note.className = 'plans-card-note';
       note.dataset.checkoutNote = '1';
-      note.textContent = `${dias} días de prueba. Se solicita tarjeta, pero no se cobra nada hasta el día ${dias + 1}. Cancela cuando quieras. Precios sin IVA.`;
+      note.textContent = `${dias} días de prueba. Se solicita tarjeta, pero no se cobra nada hasta el día ${dias + 1}. `
+        + 'Cancela cuando quieras. Si ya conoces Ganera, puedes contratar directamente y empezar hoy. Precios sin IVA.';
       plans.parentNode.insertBefore(note, plans);
 
       // Los errores van en una línea compartida encima de la tabla: cada .plan
@@ -396,40 +397,50 @@
         err.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
       };
 
-      const billing = () => {
+      const periodo = () => {
         const checked = $('input[name="billing"]:checked');
         return !checked || checked.value === 'annual' ? 'anual' : 'mensual';
       };
 
-      ctas.forEach((cta) => {
-        const plan = new URL(cta.href, location.href).searchParams.get('plan');
-        if (!plan) return;
-        const label = cta.innerHTML;
-        cta.addEventListener('click', async (e) => {
+      /** Pide la sesión de pago y redirige. conPrueba=false es compra directa. */
+      const abrirPago = (btn, plan, conPrueba) => {
+        const etiqueta = btn.innerHTML;
+        btn.addEventListener('click', async (e) => {
           e.preventDefault();
-          if (cta.dataset.busy) return;
-          cta.dataset.busy = '1';
+          if (btn.dataset.busy) return;
+          btn.dataset.busy = '1';
           err.hidden = true;
-          cta.setAttribute('aria-busy', 'true');
-          cta.innerHTML = 'Abriendo el pago…';
+          btn.setAttribute('aria-busy', 'true');
+          btn.innerHTML = 'Abriendo el pago…';
           try {
             const res = await fetch('/api/checkout', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ plan, periodo: billing() }),
+              body: JSON.stringify({ plan, periodo: periodo(), prueba: conPrueba }),
             });
             const data = await res.json().catch(() => ({}));
             if (!res.ok || !data.url) throw new Error(data.error || 'error');
             location.href = data.url;
             return;
-          } catch (e) {
-            showErr((e && e.message !== 'error' && e.message)
+          } catch (e2) {
+            showErr((e2 && e2.message !== 'error' && e2.message)
               || 'No se ha podido abrir el pago. Inténtalo de nuevo o escríbenos a agroganera@gmail.com.');
           }
-          cta.innerHTML = label;
-          cta.removeAttribute('aria-busy');
-          delete cta.dataset.busy;
+          btn.innerHTML = etiqueta;
+          btn.removeAttribute('aria-busy');
+          delete btn.dataset.busy;
         });
+      };
+
+      ctasPrueba.forEach((cta) => {
+        const plan = new URL(cta.href, location.href).searchParams.get('plan');
+        if (plan) abrirPago(cta, plan, true);
+      });
+
+      // La compra directa sólo existe si se puede cobrar: hasta aquí iba oculta.
+      ctasCompra.forEach((btn) => {
+        btn.hidden = false;
+        abrirPago(btn, btn.dataset.comprar, false);
       });
     });
   }
@@ -469,6 +480,11 @@
       set('email', data.email || 'tu correo');
       set('periodo', data.periodo === 'mensual' ? 'Facturación mensual' : 'Facturación anual');
       const fin = data.trialEnd && fechaLarga(data.trialEnd);
+      // Sin trialEnd es una contratación directa: el texto no puede hablar de prueba.
+      set('estado', fin ? 'Tu prueba de 15 días ya está activa.' : 'Tu suscripción ya está activa.');
+      set('recordatorio', fin
+        ? 'Puedes cancelar antes de que termine la prueba y no se te cobrará nada.'
+        : 'Puedes cancelar cuando quieras; el servicio sigue activo hasta el final del periodo que has pagado.');
       $$('[data-trial-end]', root).forEach((el) => {
         el.hidden = !fin;
         if (fin) $('[data-field="trialEnd"]', el).textContent = fin;

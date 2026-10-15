@@ -23,6 +23,10 @@ def swap(tag, cls, monthly, annual):
 
 
 def plan_card(p, cfg, i):
+    """Tarjeta de plan: CTA de prueba siempre, y compra directa cuando el
+    checkout está activo (js/main.js le quita el hidden). Las dos van dentro de
+    .plan-actions para que la tarjeta conserve sus 6 hijos: .plan es un subgrid
+    de 6 filas y un hijo de más descuadraría todas las columnas."""
     saving = p['mensual'] * 12 - p['anual']
     featured = 'destacado' in p
     tag = f'<span class="tag tag-accent">{e(p["destacado"])}</span>' if featured else ''
@@ -32,7 +36,10 @@ def plan_card(p, cfg, i):
   <div class="plan-price">{swap('b', 'plan-amount', eur(p['mensual']), eur(p['anual']))}{swap('span', 'plan-per', '/ mes', '/ año')}</div>
   {swap('span', 'plan-save', '', f"{cfg['ahorro_anual']} · ahorras {eur(saving)}")}
   {swap('span', 'plan-note', 'IVA no incluido', f"{eur(p['anual'] / 12)}/mes · IVA no incluido")}
-  <a class="btn {'btn-primary' if featured else 'btn-secondary'}" href="/prueba-15-dias?plan={p['id']}">Probar {e(p['nombre'])}{ARROW}</a>
+  <div class="plan-actions">
+    <a class="btn {'btn-primary' if featured else 'btn-secondary'}" href="/prueba-15-dias?plan={p['id']}">Probar {e(p['nombre'])}{ARROW}</a>
+    <button class="btn btn-buy" type="button" data-comprar="{p['id']}" hidden>Contratar ahora{ARROW}</button>
+  </div>
 </div>'''
 
 

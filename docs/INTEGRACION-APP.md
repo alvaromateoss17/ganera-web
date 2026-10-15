@@ -44,6 +44,7 @@ en todos los eventos posteriores:
 {
   "plan": "base" | "gestion" | "plus",
   "periodo": "mensual" | "anual",
+  "prueba": "true" | "false",
   "source": "ganera-web"
 }
 ```
@@ -51,14 +52,27 @@ en todos los eventos posteriores:
 `source: "ganera-web"` sirve para distinguir las altas que vienen de la landing de
 las que se creen desde el panel de administración o a mano en Stripe.
 
+> ⚠️ **`prueba` puede ser `"false"`.** Los planes tienen dos botones: «Probar»,
+> que abre la suscripción con 15 días de prueba, y «Contratar ahora», para quien
+> ya conoce Ganera y no quiere esperar. En ese segundo caso **no hay
+> `trial_period_days`**: la suscripción nace en `active`, no en `trialing`, y se
+> cobra el primer periodo al confirmar.
+>
+> La app no debe asumir que toda alta viene con prueba. En concreto:
+> no esperes un `customer.subscription.trial_will_end` que nunca llegará, y
+> si cuentas los días de prueba para la secuencia de seguimiento, mira
+> `metadata.prueba` o `subscription.status` antes.
+>
+> Es un string, no un booleano: los metadata de Stripe solo admiten texto.
+
 ### Eventos que la app DEBE escuchar
 
 | Evento | Qué tiene que hacer la app |
 |---|---|
-| `checkout.session.completed` | **Alta completa.** Crear la gestoría con los datos de `customer_details` (nombre, email, dirección de facturación, `tax_ids`) y el plan de `metadata.plan`. Crear el usuario e invitarlo por email con Supabase Auth `inviteUserByEmail`, con `redirectTo` apuntando a `APP_LOGIN_URL`. Guardar `customer`, `subscription` y `metadata`. |
+| `checkout.session.completed` | **Alta completa.** Crear la gestoría con los datos de `customer_details` (nombre, email, dirección de facturación, `tax_ids`) y el plan de `metadata.plan`. Crear el usuario e invitarlo por email con Supabase Auth `inviteUserByEmail`, con `redirectTo` apuntando a `APP_LOGIN_URL`. Guardar `customer`, `subscription` y `metadata`. Llega igual con prueba y sin ella. |
 | `customer.subscription.updated` | Cambios de plan, de periodo o de estado (`trialing` → `active`, `past_due`, `paused`). Sincronizar el plan y los límites de la cuenta. |
 | `customer.subscription.deleted` | Baja. Cerrar el acceso según las Condiciones: 30 días para exportar y después supresión. Ver `/legal/terminos`, apartado 7. |
-| `customer.subscription.trial_will_end` | Llega **3 días antes** del fin de la prueba. Avisar a la gestoría por email con la fecha y el importe del primer cargo. **Las Condiciones publicadas prometen este aviso: es obligatorio.** |
+| `customer.subscription.trial_will_end` | Llega **3 días antes** del fin de la prueba. Avisar a la gestoría por email con la fecha y el importe del primer cargo. **Las Condiciones publicadas prometen este aviso: es obligatorio.** No llega en las altas con `metadata.prueba = "false"`. |
 | `invoice.payment_failed` | Impago. Avisar por email. Según `/legal/terminos` apartado 6: suspensión a los 15 días, resolución a los 60. |
 | `invoice.paid` | Cobro correcto. Guardar la factura y, si estaba suspendida, reactivar la cuenta. |
 
@@ -121,7 +135,16 @@ documento. Lo que se publica y lo que se envía tienen que coincidir.
 
 ---
 
-## 3. Lo que NO hace la landing
+## 3. El correo de la solicitud de prueba
+
+Quien rellena el formulario de `/prueba-15-dias` **no entra por Stripe**: es un
+lead, no un cliente. La landing le manda una auto-respuesta y el alta la hacéis
+vosotros a mano, o entra él solo por el checkout.
+
+Si la app acaba creando cuentas de prueba sin pasar por Stripe, el correo de
+invitación de Supabase debe seguir saliendo igual. Ver `docs/CORREO-PRUEBA.md`.
+
+## 4. Lo que NO hace la landing
 
 Para que no se dupliquen responsabilidades:
 

@@ -835,6 +835,22 @@ a:hover { color: var(--color-accent-600); }
   .cookie-notice .btn { width: 100%; justify-content: center; }
 }
 
+/* ── Contratar sin prueba ─────────────────────────────── */
+/* Segunda vía para quien ya conoce Ganera: enlace discreto bajo el CTA
+   principal, para no competir con él. js/main.js le quita el hidden sólo
+   cuando el checkout está activo. */
+.btn-buy {
+  align-self: flex-start;            /* que no se estire: el texto y la flecha juntos */
+  width: auto; padding: 2px 0; font-size: 13px; gap: 5px;
+  color: var(--color-neutral-700); background: none; border: 0;
+  text-decoration: underline; text-underline-offset: 3px;
+  white-space: nowrap;
+}
+.btn-buy:hover { color: var(--color-accent-700); }
+.btn-buy svg { width: 13px; height: 13px; }
+.btn-buy[hidden] { display: none; }
+.plan .plan-actions { gap: 8px; }
+
 /* ── Nota honesta sobre la IA en la home ──────────────── */
 .ia-line { padding-top: clamp(32px, 4vw, 56px); padding-bottom: clamp(32px, 4vw, 56px); }
 .ia-line p {
