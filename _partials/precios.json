@@ -19,7 +19,7 @@
 
   "incluido": [
     "Trámites desde el WhatsApp de tus ganaderos: altas, bajas, crotales y guías de circulación",
-    "Integración con OVZnet/Cañada, REGA y SIMOGAN",
+    "La ficha lista para OVZ.net: cada dato en el orden del formulario oficial, con un botón de copiar",
     "Nada se presenta sin la aprobación de tu equipo",
     "15 días de prueba en todos los planes: tarjeta al activar la cuenta, primer cargo el día 16 y sin permanencia"
   ],
@@ -35,7 +35,7 @@
     {
       "nombre": "GaneraAI",
       "precio": "49 € / mes",
-      "detalle": "Modelo de IA entrenado para simplificar el trabajo de las gestorías ganaderas. Se contrata aparte de la suscripción, con cualquier plan."
+      "detalle": "Una IA lee cada mensaje de WhatsApp y propone el trámite ya rellenado; una persona de tu equipo siempre lo revisa y lo aprueba antes de nada. Se contrata aparte de la suscripción, con cualquier plan."
     },
     {
       "nombre": "Formación del equipo",
