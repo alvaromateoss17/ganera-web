@@ -89,7 +89,6 @@
     num: $('[data-app-num]', appScene),
     caps: $$('[data-cap]', appScene),
     mock: $('[data-app-mock]', appScene),
-    inbox: $('[data-app-c-inbox]', appScene),
     tram: $('[data-app-c-tram]', appScene),
     bell: $('[data-app-c-bell]', appScene),
   };
@@ -104,7 +103,6 @@
       c.style.transform = `translateY(${i === ci ? '0px' : (i < ci ? '-20px' : '20px')})`;
     });
     app.mock.dataset.stage = String(as);
-    app.inbox.textContent = as >= 1 ? '4' : '3';
     app.tram.textContent = as >= 1 && as < 3 ? '5' : '4';
     app.bell.textContent = as >= 1 ? '5' : '4';
   }
@@ -358,7 +356,7 @@
     el.setAttribute('role', 'region');
     el.setAttribute('aria-label', 'Aviso de cookies');
     el.innerHTML =
-      '<p>Esta web no usa cookies de seguimiento ni analítica. Solo guardamos que has cerrado este aviso. <a href="/legal/cookies">Política de cookies</a>.</p>' +
+      '<p>Esta web no usa ninguna cookie ni rastrea tu navegación. Lo único que guardamos es, en tu propio navegador, que has cerrado este aviso. <a href="/legal/cookies">Política de cookies</a>.</p>' +
       '<button class="btn btn-primary" type="button">Entendido</button>';
     document.body.appendChild(el);
     requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('is-in')));

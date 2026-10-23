@@ -42,6 +42,9 @@ Reflejar el resultado en `_partials/legal.json` → `subencargados` y volver a s
       El compromiso ya está publicado en `/legal/privacidad`, `/legal/subencargados` y
       `/legal/uso-ia`: **si el contrato no lo respalda, hay que corregir los textos.**
 - [ ] **Ubicación de los datos de Anthropic** (región de proceso de la API).
+- [ ] Confirmar con el abogado el proveedor de IA (hoy Anthropic, en evaluación Mistral) y
+      actualizar la tabla de subencargados y uso-ia antes de publicar y de firmar los contratos de
+      encargo.
 - [ ] **Ubicación de los datos de Twilio** y su configuración de región.
 - [ ] **Ubicación de los datos de Resend.**
 - [ ] **Adhesión al Marco de Privacidad de Datos UE-EE. UU.** de cada proveedor
@@ -67,6 +70,8 @@ Reflejar el resultado en `_partials/legal.json` → `subencargados` y volver a s
       El texto sostiene que es un sistema de asistencia con supervisión humana que no
       produce efectos jurídicos automáticos, y que por eso no hay decisión del art. 22
       RGPD. Confirmar esa calificación y si procede algún deber adicional.
+- [ ] El abogado debe revisar las frases corregidas del aviso legal (líneas 125, 163, 165), que son
+      descripción de producto redactada por nosotros.
 - [ ] Confirmar que **no hay derecho de desistimiento** por ser contratación entre
       profesionales, y que el proceso de alta deja constancia de que el cliente actúa
       como profesional.
