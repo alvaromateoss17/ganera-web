@@ -2,7 +2,7 @@
   "name": "ganera-web",
   "version": "1.0.0",
   "private": true,
-  "description": "Landing de Ganera: trámites ganaderos para gestorías, de WhatsApp a OVZ.net.",
+  "description": "Landing de Ganera: trámites ganaderos, de WhatsApp a la plataforma oficial.",
   "engines": {
     "node": ">=18"
   },
