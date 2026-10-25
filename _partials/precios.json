@@ -14,12 +14,12 @@
     "nombre": "A medida",
     "desde_ganaderos": 200,
     "whatsapp": "34645562942",
-    "whatsapp_texto": "Hola, me interesa el plan A medida de Ganera para mi gestoría."
+    "whatsapp_texto": "Hola, me interesa el plan A medida de Ganera."
   },
 
   "incluido": [
     "Trámites desde el WhatsApp de tus ganaderos: altas, bajas, crotales y guías de circulación",
-    "La ficha lista para OVZ.net: cada dato en el orden del formulario oficial, con un botón de copiar",
+    "La ficha lista para la plataforma oficial: cada dato en el orden del formulario oficial, con un botón de copiar",
     "Nada se presenta sin la aprobación de tu equipo",
     "15 días de prueba en todos los planes: tarjeta al activar la cuenta, primer cargo el día 16 y sin permanencia"
   ],
@@ -29,7 +29,7 @@
       "nombre": "Implantación + Onboarding",
       "precio": "De 349 € a 590 €",
       "etiqueta": "Gratis con plan anual",
-      "detalle": "Ponemos Ganera en marcha en tu gestoría: configuramos la cuenta, cargamos tus datos y acompañamos a tu equipo en el arranque. El precio depende del plan (Base, Gestión o Plus) y es gratis si contratas la suscripción anual.",
+      "detalle": "Ponemos Ganera en marcha en tu equipo: configuramos la cuenta, cargamos tus datos y acompañamos a tu equipo en el arranque. El precio depende del plan (Base, Gestión o Plus) y es gratis si contratas la suscripción anual.",
       "provisional": true
     },
     {
@@ -50,12 +50,12 @@
     {
       "nombre": "Mantenimiento y soporte prioritario",
       "precio": "Consultar",
-      "detalle": "Soporte con prioridad alta para tu gestoría."
+      "detalle": "Soporte con prioridad alta para tu negocio."
     },
     {
       "nombre": "Desarrollo a medida",
       "precio": "Consultar",
-      "detalle": "Funcionalidad específica para tu gestoría, desarrollada bajo petición."
+      "detalle": "Funcionalidad específica para tu negocio, desarrollada bajo petición."
     }
   ]
 }

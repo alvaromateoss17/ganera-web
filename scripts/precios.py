@@ -50,7 +50,7 @@ def custom_card(c, i):
   <span class="plan-limit">Más de {c['desde_ganaderos']} ganaderos gestionados</span>
   <div class="plan-price"><b class="plan-amount">Consultar</b></div>
   <span class="plan-save"></span>
-  <span class="plan-note">Precio según el volumen y las necesidades de tu gestoría</span>
+  <span class="plan-note">Precio según el volumen y las necesidades de tu negocio</span>
   <div class="plan-actions">
     <a class="btn btn-primary" href="/contacto">Pedir presupuesto{ARROW}</a>
     <a class="btn btn-secondary" href="{e(wa)}" target="_blank" rel="noopener">Hablar por WhatsApp<span class="visually-hidden"> (se abre en una pestaña nueva)</span>{ARROW}</a>
