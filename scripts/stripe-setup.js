@@ -100,14 +100,6 @@ async function iva() {
     env.push([`STRIPE_PRICE_${N}_MENSUAL`, m.id], [`STRIPE_PRICE_${N}_ANUAL`, a.id]);
   }
 
-  console.log('\n  Complemento');
-  const ia = cfg.servicios.find((s) => s.nombre === 'GaneraAI');
-  if (ia) {
-    const prod = await producto('ganera_ganerai', 'GaneraAI', `${ia.detalle} Precio sin IVA.`);
-    const p = await precio('ganera_ganerai_mensual', prod.id, 49, 'month');
-    env.push(['STRIPE_PRICE_GANERAI', p.id]);
-  }
-
   console.log('\n  Impuestos');
   const tax = await iva();
   env.push(['STRIPE_TAX_RATE_ID', tax.id]);

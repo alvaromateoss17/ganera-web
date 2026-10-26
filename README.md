@@ -121,7 +121,6 @@ Para el cobro con Stripe (ver `.env.example`, que es la referencia completa):
 | `STRIPE_PRICE_BASE_MENSUAL` · `_ANUAL` | Price ID del plan Base en cada periodo |
 | `STRIPE_PRICE_GESTION_MENSUAL` · `_ANUAL` | Price ID del plan Gestión |
 | `STRIPE_PRICE_PLUS_MENSUAL` · `_ANUAL` | Price ID del plan Plus |
-| `STRIPE_PRICE_GANERAI` | Price ID del complemento GaneraAI (opcional) |
 | `STRIPE_TAX_RATE_ID` | Tax Rate del IVA 21 % creado en Stripe (opcional) |
 | `STRIPE_TRIAL_DAYS` | Días de prueba. Por defecto `15` |
 | `CHECKOUT_ENABLED` | `true`/`false`. Por defecto `false` |

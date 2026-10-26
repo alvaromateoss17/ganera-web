@@ -87,7 +87,7 @@ Reflejar el resultado en `_partials/legal.json` → `subencargados` y volver a s
 
 - [ ] **Crear los productos y precios** de Base, Gestión y Plus, en mensual y anual,
       con los importes de `_partials/precios.json` (69/690, 169/1690, 329/3290 €),
-      **sin IVA incluido**. Y el precio de GaneraAI (49 €/mes) si se va a ofrecer.
+      **sin IVA incluido**.
 - [ ] **Crear el Tax Rate del IVA 21 %** y poner su ID en `STRIPE_TAX_RATE_ID`.
       Alternativa: activar Stripe Tax y quitar esa variable.
 - [ ] **Configurar la URL de las condiciones del servicio** en

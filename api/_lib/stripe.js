@@ -12,9 +12,6 @@ const PLANES = {
 /** Periodos de facturación del selector Mensual/Anual. */
 const PERIODOS = { mensual: 'MENSUAL', anual: 'ANUAL' };
 
-/** Servicio GaneraAI: complemento mensual opcional que se suma a cualquier plan. */
-const COMPLEMENTOS = { ganerai: { nombre: 'GaneraAI', env: 'STRIPE_PRICE_GANERAI' } };
-
 let client = null;
 function stripe() {
   const key = process.env.STRIPE_SECRET_KEY;
@@ -30,12 +27,6 @@ function priceId(plan, periodo) {
   return (process.env[`${p.env}_${PERIODOS[periodo]}`] || '').trim() || null;
 }
 
-function complementoPriceId(id) {
-  const c = COMPLEMENTOS[id];
-  if (!c) return null;
-  return (process.env[c.env] || '').trim() || null;
-}
-
 const nombrePlan = (plan) => (PLANES[plan] ? PLANES[plan].nombre : plan);
 
-module.exports = { stripe, priceId, complementoPriceId, nombrePlan, PLANES, PERIODOS, COMPLEMENTOS };
+module.exports = { stripe, priceId, nombrePlan, PLANES, PERIODOS };
