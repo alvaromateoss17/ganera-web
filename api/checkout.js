@@ -1,5 +1,5 @@
 // POST /api/checkout — crea la Checkout Session de la suscripción.
-// Recibe { plan, periodo?, email?, ganerai?, prueba? } y devuelve { url }.
+// Recibe { plan, periodo?, email?, prueba? } y devuelve { url }.
 //
 // prueba (por defecto true): abre la suscripción con los 15 días de prueba.
 // prueba:false es la compra directa, para quien ya conoce el producto y no
@@ -10,7 +10,7 @@
 const { readBody, isEmail } = require('./_lib/notify');
 const { proteger, linea } = require('./_lib/guard');
 const { siteUrl, legalUrl, checkoutEnabled, trialDays, pagoInseguro } = require('./_lib/config');
-const { stripe, priceId, complementoPriceId, PLANES, PERIODOS } = require('./_lib/stripe');
+const { stripe, priceId, PLANES, PERIODOS } = require('./_lib/stripe');
 
 module.exports = async (req, res) => {
   // Crear sesiones es gratis pero consume cuota de la API de Stripe: 20 cada 10 min por IP sobra.
@@ -52,11 +52,6 @@ module.exports = async (req, res) => {
   }
 
   const line_items = [{ price, quantity: 1 }];
-  if (b.ganerai) {
-    const extra = complementoPriceId('ganerai');
-    if (extra) line_items.push({ price: extra, quantity: 1 });
-    else console.error('Falta STRIPE_PRICE_GANERAI; se continúa sin el complemento.');
-  }
 
   const base = siteUrl();      // vuelta del Checkout: puede ser localhost en pruebas
   const legal = legalUrl();    // documentos legales: siempre la URL pública

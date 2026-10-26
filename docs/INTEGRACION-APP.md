@@ -23,7 +23,7 @@ Configuración de la sesión:
 | Campo | Valor |
 |---|---|
 | `mode` | `subscription` |
-| `line_items` | el Price del plan y periodo elegidos (+ el de GaneraAI si se pide) |
+| `line_items` | el Price del plan y periodo elegidos |
 | `subscription_data.trial_period_days` | `STRIPE_TRIAL_DAYS` (15) |
 | `subscription_data.trial_settings.end_behavior.missing_payment_method` | `cancel` |
 | `payment_method_collection` | `always` → **la tarjeta se pide sí o sí al empezar la prueba** |
