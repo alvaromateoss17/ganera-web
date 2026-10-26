@@ -69,7 +69,7 @@ las que se creen desde el panel de administración o a mano en Stripe.
 
 | Evento | Qué tiene que hacer la app |
 |---|---|
-| `checkout.session.completed` | **Alta completa.** Crear la gestoría con los datos de `customer_details` (nombre, email, dirección de facturación, `tax_ids`) y el plan de `metadata.plan`. Crear el usuario e invitarlo por email con Supabase Auth `inviteUserByEmail`, con `redirectTo` apuntando a `APP_LOGIN_URL`. Guardar `customer`, `subscription` y `metadata`. Llega igual con prueba y sin ella. |
+| `checkout.session.completed` | **Alta completa.** Crear la gestoría con los datos de `customer_details` (nombre, email, dirección de facturación, `tax_ids`) y el plan de `metadata.plan`. Crear el usuario y darle acceso con el sistema de login propio de la app (**JWT propio; la app no usa Supabase Auth**). Guardar `customer`, `subscription` y `metadata`. Llega igual con prueba y sin ella. **En el piloto este alta se hace a mano** (ver «Activación de la cuenta» más abajo). |
 | `customer.subscription.updated` | Cambios de plan, de periodo o de estado (`trialing` → `active`, `past_due`, `paused`). Sincronizar el plan y los límites de la cuenta. |
 | `customer.subscription.deleted` | Baja. Cerrar el acceso según las Condiciones: 30 días para exportar y después supresión. Ver `/legal/terminos`, apartado 7. |
 | `customer.subscription.trial_will_end` | Llega **3 días antes** del fin de la prueba. Avisar a la gestoría por email con la fecha y el importe del primer cargo. **Las Condiciones publicadas prometen este aviso: es obligatorio.** No llega en las altas con `metadata.prueba = "false"`. |
@@ -87,15 +87,23 @@ las que se creen desde el panel de administración o a mano en Stripe.
 - Los eventos pueden llegar **desordenados**: usar siempre el estado que trae el objeto
   del evento, no asumir una secuencia.
 
-### Email de activación
+### Activación de la cuenta (en el piloto, a mano)
 
-El flujo que la página `/gracias` le promete al usuario es:
+En el piloto el alta **se hace manualmente**: no hay email automático de
+activación. La página `/gracias` ya no promete ningún correo; dice:
 
-> «Te hemos enviado un email a **{email}** para activar tu cuenta y crear tu contraseña.»
+> «Hemos recibido tu pago. Te contactamos en menos de 24 h laborables para activar tu cuenta.»
 
-Es decir, **la app debe enviar la invitación al recibir `checkout.session.completed`**.
-La landing no envía nada. El botón «Entrar en Ganera» de `/gracias` apunta a
-`APP_LOGIN_URL` con `?email=` precargado.
+Es decir, al llegar `checkout.session.completed` (o avisados por Stripe) damos de
+alta la cuenta a mano y contactamos al cliente para darle acceso. La app usa su
+**propio sistema de login (JWT propio), no Supabase Auth**, así que no hay
+`inviteUserByEmail` ni enlace mágico de Supabase: el acceso se entrega por el
+cauce que use la app. La landing no envía nada. Como en el piloto el login aún no
+sirve para un cliente recién pagado, `/gracias` ya no muestra el botón «Entrar en
+Ganera» en la pantalla de éxito: en su lugar ofrece **«Volver a ganera.es»**. El
+botón de acceso (a `APP_LOGIN_URL` con `?email=` precargado) queda guardado en un
+comentario HTML en `gracias.html`, listo para recuperarlo cuando exista el alta
+automática.
 
 ### Para comprobar desde /gracias
 
@@ -141,8 +149,9 @@ Quien rellena el formulario de `/prueba-15-dias` **no entra por Stripe**: es un
 lead, no un cliente. La landing le manda una auto-respuesta y el alta la hacéis
 vosotros a mano, o entra él solo por el checkout.
 
-Si la app acaba creando cuentas de prueba sin pasar por Stripe, el correo de
-invitación de Supabase debe seguir saliendo igual. Ver `docs/CORREO-PRUEBA.md`.
+Si la app acaba creando cuentas de prueba sin pasar por Stripe, el alta y la
+entrega del acceso se hacen igual que en el resto del piloto: a mano, con el
+login propio de la app. Ver `docs/CORREO-PRUEBA.md`.
 
 ## 4. Lo que NO hace la landing
 

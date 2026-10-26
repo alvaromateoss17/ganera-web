@@ -13,32 +13,37 @@ una solicitud **nunca se pierde** porque el correo de cortesía no salga.
 
 ## El problema de fondo, dicho claro
 
-**La landing no puede crear cuentas de la app.** No tiene base de datos ni acceso
-a Supabase: es HTML estático con cuatro funciones. Quien crea usuarios es la web
-app. Así que un correo automático **no puede mandar «las claves de la prueba»**,
-porque esas claves no existen todavía cuando el formulario se envía.
+**La landing no puede crear cuentas de la app.** No tiene base de datos ni sistema
+de usuarios: es HTML estático con cuatro funciones. Quien crea usuarios es la web
+app, que tiene su **propio login (JWT propio)**. Así que un correo automático **no
+puede mandar «las claves de la prueba»**, porque esas claves no existen todavía
+cuando el formulario se envía.
 
 Hay tres formas de resolverlo. Puedes combinarlas.
 
 ### Opción A — Aviso + llamada (lo que está implementado)
 
 El correo confirma la solicitud y dice que llamáis en 24 h laborables. Vosotros
-creáis la cuenta a mano y la app envía la invitación.
+creáis la cuenta a mano y le dais acceso con el login propio de la app (JWT
+propio). **Es el flujo del piloto: el alta es manual.**
 
 - ✅ Funciona hoy, sin depender de la app.
 - ✅ Cualifica al cliente: hablas con él antes de darle acceso.
 - ✅ Es lo normal en SaaS B2B con onboarding, que es vuestro caso.
 - ❌ No es instantáneo.
 
-### Opción B — Autoservicio con tarjeta (ya construido)
+### Opción B — Autoservicio con tarjeta (checkout ya construido)
 
 El correo incluye un botón **«Empezar la prueba ahora»** que lleva a los planes.
-El cliente paga con tarjeta, no se le cobra nada, y **el webhook de la app le
-manda la invitación de Supabase automáticamente**.
+El cliente paga con tarjeta, no se le cobra nada, y entra por el checkout de
+Stripe. **En el piloto, el alta y la entrega del acceso siguen siendo manuales**:
+cuando llega el pago, dais de alta la cuenta y le dais acceso con el login propio
+de la app (JWT propio). No hay invitación automática ni enlace mágico.
 
-- ✅ **Es el único camino 100 % automático que da credenciales reales.**
-- ✅ Ya está hecho: sólo falta activar `CHECKOUT_ENABLED` y el webhook en la app.
-- ❌ Pedir tarjeta filtra: entran menos, pero los que entran valen más.
+- ✅ El checkout ya está hecho: sólo falta activar `CHECKOUT_ENABLED`.
+- ✅ Pedir tarjeta filtra: entran menos, pero los que entran valen más.
+- ❌ **Todavía no es automático**: el acceso lo dais a mano hasta que la app cree
+  la cuenta y entregue el acceso sola al recibir el webhook.
 
 ### Opción C — Cuenta de demostración compartida
 
