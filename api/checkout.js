@@ -80,6 +80,10 @@ module.exports = async (req, res) => {
       mode: 'subscription',
       line_items,
       subscription_data,
+      // La cuenta trae Managed Payments activado por defecto y con él Stripe
+      // rechaza custom_text (error 400). Lo desactivamos aquí para no depender
+      // de ese ajuste de la cuenta.
+      managed_payments: { enabled: false },
       payment_method_collection: 'always',
       tax_id_collection: { enabled: true },
       billing_address_collection: 'required',
