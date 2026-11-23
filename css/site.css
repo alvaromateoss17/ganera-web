@@ -379,8 +379,25 @@ a:hover { color: var(--color-accent-600); }
 .plan:last-child { border-right: 0; }
 .plan-limit { font-size: 15px; color: var(--color-neutral-800); }
 .plan-price { flex-wrap: wrap; column-gap: 8px; row-gap: 0; }
-.plan-price b { font-family: var(--font-heading); font-weight: 800; font-size: clamp(40px, 3.4vw, 52px); letter-spacing: -0.03em; line-height: 1; white-space: nowrap; }
-.plan-custom .plan-price b { font-size: clamp(32px, 2.6vw, 40px); }
+/* Precios: tipografía ligera y tabular — no el Archivo 800 de los titulares */
+.plan-price b {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(34px, 2.8vw, 44px);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+.plan-custom .plan-price b { font-size: clamp(28px, 2.2vw, 36px); font-weight: 400; }
+.plan-price span {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-neutral-800);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
 .plan-save { align-self: flex-start; justify-self: start; min-height: 26px; padding: 4px 10px; font-size: 13px; font-weight: 700; background: var(--color-accent-100); color: var(--color-accent-800); }
 .plan-save:empty { visibility: hidden; }
 .plan-actions { display: flex; flex-direction: column; gap: 10px; }
@@ -396,8 +413,7 @@ a:hover { color: var(--color-accent-600); }
   .plan:nth-child(2n) { border-right: 0; }
   .plan:nth-child(-n+2) { border-bottom: 2px solid var(--color-divider); }
 }
-.plan-price span { font-size: 15px; color: var(--color-neutral-800); }
-.plan-note { font-size: 13px; color: var(--color-neutral-700); min-height: 20px; }
+.plan-note { font-size: 13px; color: var(--color-neutral-700); min-height: 20px; font-variant-numeric: tabular-nums; }
 .plan .btn { justify-content: space-between; padding: 13px 16px; font-size: 15px; }
 
 /* ── Acordeones (servicios / faq) ─────────────────────── */
@@ -682,8 +698,8 @@ a:hover { color: var(--color-accent-600); }
   .plans { grid-template-columns: 1fr; }
   .plan { padding: 28px 20px 32px; border-right: 0; border-bottom: 2px solid var(--color-divider); gap: 16px; }
   .plan:last-child { border-bottom: 0; }
-  .plan-price b { font-size: 48px; }
-  .plan-custom .plan-price b { font-size: 36px; }
+  .plan-price b { font-size: 40px; font-weight: 400; }
+  .plan-custom .plan-price b { font-size: 32px; }
   .plans-incl { grid-template-columns: 1fr; padding-top: 24px; }
   .acc-btn .price small { display: inline; margin: 0 0 0 8px; }
   .plan { display: flex; grid-row: auto; align-items: stretch; }
