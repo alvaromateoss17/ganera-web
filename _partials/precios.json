@@ -1,13 +1,18 @@
 {
-  "_ayuda": "Fuente única de planes y servicios. Tras editar, ejecuta: python3 scripts/sync-partials.py (regenera la sección Planes y Servicios de index.html y el selector de plan de prueba-15-dias.html). Precios en euros, IVA no incluido.",
+  "_ayuda": "Fuente única de planes y servicios. Tras editar, ejecuta: python3 scripts/sync-partials.py (regenera la sección Planes y Servicios de index.html y el selector de plan de prueba-15-dias.html). Precios en euros, IVA incluido (21 %).",
 
+  "iva_incluido": true,
   "ahorro_anual": "2 meses gratis",
 
   "planes": [
-    { "id": "base",    "nombre": "Base",    "ganaderos": 25,  "mensual": 69,  "anual": 690 },
-    { "id": "gestion", "nombre": "Gestión", "ganaderos": 75,  "mensual": 169, "anual": 1690, "destacado": "Recomendado" },
-    { "id": "plus",    "nombre": "Plus",    "ganaderos": 200, "mensual": 329, "anual": 3290 }
+    { "id": "base",    "nombre": "Base",    "ganaderos": 25,  "mensual": 84,  "anual": 840 },
+    { "id": "gestion", "nombre": "Gestión", "ganaderos": 75,  "mensual": 204, "anual": 2040, "destacado": "Recomendado" },
+    { "id": "plus",    "nombre": "Plus",    "ganaderos": 200, "mensual": 396, "anual": 3960 }
   ],
+
+  "complementos": {
+    "ganerai": { "id": "ganerai", "nombre": "GaneraAI", "mensual": 60 }
+  },
 
   "a_medida": {
     "id": "a-medida",
@@ -34,8 +39,8 @@
     },
     {
       "nombre": "GaneraAI",
-      "precio": "49 € / mes",
-      "detalle": "Una IA lee cada mensaje de WhatsApp y propone el trámite ya rellenado; una persona de tu equipo siempre lo revisa y lo aprueba antes de nada. Se contrata aparte de la suscripción, con cualquier plan."
+      "precio": "60 € / mes",
+      "detalle": "Una IA lee cada mensaje de WhatsApp y propone el trámite ya rellenado; una persona de tu equipo siempre lo revisa y lo aprueba antes de nada. Se contrata aparte de la suscripción, con cualquier plan. Precio con IVA incluido."
     },
     {
       "nombre": "Formación del equipo",

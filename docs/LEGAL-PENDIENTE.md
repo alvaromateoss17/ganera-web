@@ -85,11 +85,11 @@ Reflejar el resultado en `_partials/legal.json` → `subencargados` y volver a s
 
 ## 4. Configuración en el panel de Stripe
 
-- [ ] **Crear los productos y precios** de Base, Gestión y Plus, en mensual y anual,
-      con los importes de `_partials/precios.json` (69/690, 169/1690, 329/3290 €),
-      **sin IVA incluido**. Y el precio de GaneraAI (49 €/mes) si se va a ofrecer.
-- [ ] **Crear el Tax Rate del IVA 21 %** y poner su ID en `STRIPE_TAX_RATE_ID`.
-      Alternativa: activar Stripe Tax y quitar esa variable.
+- [ ] **Crear los productos y precios** con `npm run stripe:setup` (84/840, 204/2040,
+      396/3960 € y GaneraAI 60 €/mes), **IVA incluido**. El script archiva el
+      catálogo antiguo y escribe los Price ID en `.env.local`.
+- [ ] **Copiar `STRIPE_TAX_RATE_ID`** (IVA 21 % incluido) a Vercel junto con los
+      Price ID nuevos.
 - [ ] **Configurar la URL de las condiciones del servicio** en
       Stripe → Configuración → Público → *Terms of service URL* →
       `https://ganera.es/terminos`. **Sin esto, `consent_collection` no funciona** y

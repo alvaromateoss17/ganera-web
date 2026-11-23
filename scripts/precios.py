@@ -35,7 +35,7 @@ def plan_card(p, cfg, i):
   <span class="plan-limit">Hasta {p['ganaderos']} ganaderos gestionados</span>
   <div class="plan-price">{swap('b', 'plan-amount', eur(p['mensual']), eur(p['anual']))}{swap('span', 'plan-per', '/ mes', '/ año')}</div>
   {swap('span', 'plan-save', '', f"{cfg['ahorro_anual']} · ahorras {eur(saving)}")}
-  {swap('span', 'plan-note', 'IVA no incluido', f"{eur(p['anual'] / 12)}/mes · IVA no incluido")}
+  {swap('span', 'plan-note', 'IVA incluido', f"{eur(p['anual'] / 12)}/mes · IVA incluido")}
   <div class="plan-actions">
     <a class="btn {'btn-primary' if featured else 'btn-secondary'}" href="/prueba-15-dias?plan={p['id']}">Probar {e(p['nombre'])}{ARROW}</a>
     <button class="btn btn-buy" type="button" data-comprar="{p['id']}" hidden>Contratar ahora{ARROW}</button>

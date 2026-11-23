@@ -399,7 +399,7 @@
       note.className = 'plans-card-note';
       note.dataset.checkoutNote = '1';
       note.textContent = `${dias} días de prueba. Se solicita tarjeta, pero no se cobra nada hasta el día ${dias + 1}. `
-        + 'Cancela cuando quieras. Si ya conoces Ganera, puedes contratar directamente y empezar hoy. Precios sin IVA.';
+        + 'Cancela cuando quieras. Si ya conoces Ganera, puedes contratar directamente y empezar hoy. Precios con IVA incluido.';
       plans.parentNode.insertBefore(note, plans);
 
       // Los errores van en una línea compartida encima de la tabla: cada .plan

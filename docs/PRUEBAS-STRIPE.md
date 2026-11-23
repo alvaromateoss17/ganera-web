@@ -31,15 +31,16 @@ npm run stripe:setup
 
 Lee `_partials/precios.json` y crea en tu cuenta de prueba:
 
-| Producto | Precios |
+| Producto | Precios (IVA incluido) |
 |---|---|
-| Ganera Base | 69 €/mes · 690 €/año |
-| Ganera Gestión | 169 €/mes · 1.690 €/año |
-| Ganera Plus | 329 €/mes · 3.290 €/año |
-| GaneraAI | 49 €/mes |
+| Ganera Base | 84 €/mes · 840 €/año |
+| Ganera Gestión | 204 €/mes · 2.040 €/año |
+| Ganera Plus | 396 €/mes · 3.960 €/año |
+| GaneraAI | 60 €/mes |
 
-Más el tipo de IVA del 21 %. **Es idempotente**: los productos llevan id fijo y
-los precios una `lookup_key`, así que puedes ejecutarlo mil veces sin duplicar.
+Más el Tax Rate de IVA 21 % **incluido** en el precio. Archiva el catálogo
+antiguo (sin IVA). **Es idempotente**: productos con id `…_inc` y precios con
+`lookup_key` `…_inc`.
 
 **Al terminar escribe los valores en `.env.local` por ti**, así que no tienes
 que copiar nada: sólo toca las claves que genera y no pisa tu
@@ -93,7 +94,7 @@ Abre `http://localhost:3000/#planes` y comprueba, por este orden:
 
 En el Checkout verifica que se ve:
 
-- El precio correcto y el IVA del 21 % aparte.
+- El precio correcto con IVA incluido (desglose base + IVA en el total).
 - **«15 días de prueba»** y que hoy se cobran **0,00 €**.
 - La casilla de aceptación de las Condiciones y el Encargo del tratamiento.
 - Los campos de NIF/CIF y dirección de facturación.
