@@ -9,7 +9,7 @@
 // que tiene la base de datos. Ver docs/INTEGRACION-APP.md.
 const { readBody, isEmail } = require('./_lib/notify');
 const { proteger, linea } = require('./_lib/guard');
-const { siteUrl, legalUrl, checkoutEnabled, trialDays, pagoInseguro } = require('./_lib/config');
+const { siteUrl, legalUrl, checkoutEnabled, trialDays, pagoInseguro, diagnosticoClave } = require('./_lib/config');
 const { stripe, priceId, complementoPriceId, PLANES, PERIODOS } = require('./_lib/stripe');
 
 module.exports = async (req, res) => {
@@ -106,6 +106,15 @@ module.exports = async (req, res) => {
     // Nunca devolvemos el detalle de Stripe al navegador; al log, todo.
     const msg = (err && err.message) || '';
     console.error('Stripe checkout error', { plan, periodo, conPrueba, type: err && err.type, code: err && err.code, message: msg });
+    if (err && err.type === 'StripeAuthenticationError') {
+      console.error(
+        'PISTA: Stripe rechaza STRIPE_SECRET_KEY. En Vercel → ganera-web → Settings → Environment Variables (Production) ' +
+        'sustituye el valor por la clave secreta vigente del modo real (sk_live_…) o por una clave restringida rk_live_ ' +
+        'sin restricción de IP y con permiso de escritura en Checkout Sessions, Customers y Subscriptions. Después, Redeploy. ' +
+        'Una clave revocada, incompleta o de otra cuenta produce este mismo error.',
+        diagnosticoClave()
+      );
+    }
     if (/terms of service/i.test(msg)) {
       console.error(
         'PISTA: consent_collection exige la URL de las condiciones en el panel de Stripe. ' +

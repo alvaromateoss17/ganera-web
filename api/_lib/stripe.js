@@ -1,6 +1,7 @@
 // Cliente de Stripe y mapa de planes → Price ID.
 // La clave secreta sólo vive en process.env y jamás llega al navegador.
 const Stripe = require('stripe');
+const { claveStripe } = require('./config');
 
 /** Planes reales de la web (_partials/precios.json). Lista blanca: nada fuera de aquí se cobra. */
 const PLANES = {
@@ -17,7 +18,7 @@ const COMPLEMENTOS = { ganerai: { nombre: 'GaneraAI', env: 'STRIPE_PRICE_GANERAI
 
 let client = null;
 function stripe() {
-  const key = process.env.STRIPE_SECRET_KEY;
+  const key = claveStripe();
   if (!key) throw new Error('STRIPE_SECRET_KEY no configurada');
   if (!client) client = new Stripe(key);
   return client;
