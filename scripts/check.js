@@ -112,5 +112,23 @@ for (const f of walk(ROOT, '.html')) {
 }
 if (!mal) ok('todas las páginas cumplen');
 
+console.log('\nLimpieza de la clave de Stripe');
+{
+  const { normalizarClave } = require(path.join(ROOT, 'api/_lib/config'));
+  const casos = [
+    ['  rk_live_abc \n', 'rk_live_abc'],
+    ['"sk_live_abc"', 'sk_live_abc'],
+    ["'sk_test_abc'", 'sk_test_abc'],
+    ['Bearer rk_test_abc', 'rk_test_abc'],
+    ['rk_live_ab\ncd', 'rk_live_abcd'],
+    ['rk_live_ab\u200bcd', 'rk_live_abcd'],
+  ];
+  for (const [entrada, esperado] of casos) {
+    const got = normalizarClave(entrada);
+    if (got === esperado) ok(JSON.stringify(esperado));
+    else fail(`normalizarClave → ${JSON.stringify(got)} (esperado ${JSON.stringify(esperado)})`);
+  }
+}
+
 console.log(fallos ? `\n${fallos} problema(s).\n` : '\nTodo correcto.\n');
 process.exit(fallos ? 1 : 0);

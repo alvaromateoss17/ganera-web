@@ -18,11 +18,46 @@ const legalUrl = () => {
 const appLoginUrl = () => process.env.APP_LOGIN_URL || 'https://app.ganera.es/login';
 const checkoutEnabled = () => process.env.CHECKOUT_ENABLED === 'true';
 
+/**
+ * La clave se pega a mano en Vercel. Un salto de línea, unas comillas o un
+ * "Bearer " delante hacen que Stripe responda «Invalid API Key» y el botón
+ * de contratar falle sin abrir el pago. Las claves reales solo llevan letras,
+ * números y guiones bajos.
+ */
+function normalizarClave(raw) {
+  let key = String(raw ?? '').trim();
+  if ((key.startsWith('"') && key.endsWith('"')) || (key.startsWith("'") && key.endsWith("'"))) {
+    key = key.slice(1, -1).trim();
+  }
+  key = key.replace(/^Bearer\s+/i, '');
+  key = key.replace(/[\s\u200b\u200c\u200d\ufeff]+/g, '');
+  return key;
+}
+
+const claveStripe = () => normalizarClave(process.env.STRIPE_SECRET_KEY);
+
+/** Datos seguros para el log: nunca incluye la clave. */
+function diagnosticoClave() {
+  const raw = String(process.env.STRIPE_SECRET_KEY || '');
+  const key = normalizarClave(raw);
+  let tipo = 'otro';
+  if (key.startsWith('sk_live_')) tipo = 'sk_live';
+  else if (key.startsWith('rk_live_')) tipo = 'rk_live';
+  else if (key.startsWith('sk_test_')) tipo = 'sk_test';
+  else if (key.startsWith('rk_test_')) tipo = 'rk_test';
+  return {
+    tipo,
+    longitud: key.length,
+    formato: /^(sk|rk)_(live|test)_[A-Za-z0-9]+$/.test(key),
+    habiaEspaciosOComillas: raw !== key,
+  };
+}
+
 /** ¿Estamos sirviendo el dominio público y no un entorno local o de preview? */
 const esProduccion = () => /^https:\/\/(www\.)?ganera\.es/.test(siteUrl());
 
 /** Clave de Stripe del entorno de prueba (sk_test_ / rk_test_). */
-const claveDePrueba = () => /^(sk|rk)_test_/.test((process.env.STRIPE_SECRET_KEY || '').trim());
+const claveDePrueba = () => /^(sk|rk)_test_/.test(claveStripe());
 
 /**
  * Salvaguarda: con claves de PRUEBA en el dominio real, un cliente acabaría en
@@ -39,4 +74,7 @@ const trialDays = () => {
   return Number.isFinite(n) && n > 0 && n <= 90 ? n : 15;
 };
 
-module.exports = { siteUrl, legalUrl, appLoginUrl, checkoutEnabled, trialDays, esProduccion, claveDePrueba, pagoInseguro };
+module.exports = {
+  siteUrl, legalUrl, appLoginUrl, checkoutEnabled, trialDays, esProduccion,
+  claveStripe, normalizarClave, diagnosticoClave, claveDePrueba, pagoInseguro,
+};

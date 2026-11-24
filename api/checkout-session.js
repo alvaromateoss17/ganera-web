@@ -3,7 +3,7 @@
 // Ni identificadores internos completos, ni nada relativo al medio de pago.
 const { clean } = require('./_lib/notify');
 const { limitar, ipDe } = require('./_lib/guard');
-const { checkoutEnabled } = require('./_lib/config');
+const { checkoutEnabled, diagnosticoClave } = require('./_lib/config');
 const { stripe, nombrePlan } = require('./_lib/stripe');
 
 module.exports = async (req, res) => {
@@ -58,6 +58,12 @@ module.exports = async (req, res) => {
       return res.status(404).json({ error: 'Sesión no encontrada o sin completar.' });
     }
     console.error('Stripe session error', { type: err && err.type, code: err && err.code, message: err && err.message });
+    if (err && err.type === 'StripeAuthenticationError') {
+      console.error(
+        'PISTA: Stripe rechaza STRIPE_SECRET_KEY. Sustitúyela en Vercel (Production) por la clave vigente y redespliega.',
+        diagnosticoClave()
+      );
+    }
     return res.status(502).json({ error: 'No se han podido recuperar los datos de la suscripción.' });
   }
 };
